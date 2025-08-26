@@ -8,9 +8,7 @@ const PageShell = () => {
       <AppHeader />
       <AppSidebar />
       <main className="ml-60 pt-16 min-h-screen">
-        <div className="p-6">
-          <Outlet />
-        </div>
+        <Outlet />
       </main>
     </div>
   );

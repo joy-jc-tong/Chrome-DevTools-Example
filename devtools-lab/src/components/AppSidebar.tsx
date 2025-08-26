@@ -1,10 +1,32 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
-const sidebarItems = [
+// 定義側邊欄項目結構
+interface SidebarChild {
+  path: string;
+  name: string;
+}
+
+interface SidebarItem {
+  path: string;
+  label: string;
+  description: string;
+  children?: SidebarChild[];
+}
+
+const sidebarItems: SidebarItem[] = [
   {
     path: '/elements',
     label: 'Elements',
     description: '檢視與調整 DOM、CSS、排版、可存取性資訊',
+    children: [
+      { path: '/elements/dom-breakpoints', name: 'DOM Breakpoints' },
+      { path: '/elements/event-listeners', name: 'Event Listeners' },
+      { path: '/elements/layout', name: 'Layout Pane' },
+      { path: '/elements/css-overview', name: 'CSS Overview' },
+      { path: '/elements/changes', name: 'Changes' },
+      { path: '/elements/accessibility', name: 'Accessibility' },
+    ],
   },
   {
     path: '/console',
@@ -44,27 +66,108 @@ const sidebarItems = [
 ];
 
 const AppSidebar = () => {
+  const location = useLocation();
+  const [expandedItems, setExpandedItems] = useState<Set<string>>(new Set());
+
+  // 根據當前路徑自動展開對應的父項
+  useEffect(() => {
+    const currentPath = location.pathname;
+    const newExpandedItems = new Set(expandedItems);
+    
+    // 檢查當前路徑是否屬於某個父項
+    for (const item of sidebarItems) {
+      if (item.children) {
+        const hasActiveChild = item.children.some(child => 
+          currentPath === child.path || currentPath.startsWith(item.path + '/')
+        );
+        if (hasActiveChild) {
+          newExpandedItems.add(item.path);
+        }
+      }
+    }
+    
+    setExpandedItems(newExpandedItems);
+  }, [location.pathname]);
+
+  const toggleExpanded = (path: string) => {
+    const newExpandedItems = new Set(expandedItems);
+    if (newExpandedItems.has(path)) {
+      newExpandedItems.delete(path);
+    } else {
+      newExpandedItems.add(path);
+    }
+    setExpandedItems(newExpandedItems);
+  };
+
+  const isParentActive = (item: SidebarItem) => {
+    if (!item.children) return false;
+    return item.children.some((child: SidebarChild) => 
+      location.pathname === child.path || location.pathname.startsWith(item.path + '/')
+    );
+  };
+
+
+
   return (
     <aside className="fixed left-0 top-16 w-60 h-[calc(100vh-4rem)] bg-gray-100 border-r border-gray-200 overflow-y-auto">
       <nav className="p-4">
         <ul className="space-y-2">
           {sidebarItems.map((item) => (
             <li key={item.path}>
-              <NavLink
-                to={item.path}
-                className={({ isActive }) =>
-                  `block p-3 rounded-lg transition-colors duration-200 hover:bg-blue-100 hover:text-blue-700 ${
-                    isActive
+              {/* 父項 */}
+              <div className="mb-1">
+                <button
+                  onClick={() => item.children ? toggleExpanded(item.path) : undefined}
+                  className={`w-full text-left p-3 rounded-lg transition-colors duration-200 hover:bg-blue-100 hover:text-blue-700 ${
+                    isParentActive(item)
                       ? 'bg-blue-500 text-white hover:bg-blue-600'
                       : 'text-gray-700 hover:bg-blue-50'
-                  }`
-                }
-              >
-                <div className="font-medium">{item.label}</div>
-                <div className="text-sm mt-1 opacity-80">
-                  {item.description}
-                </div>
-              </NavLink>
+                  }`}
+                >
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <div className="font-medium">{item.label}</div>
+                      <div className="text-sm mt-1 opacity-80">
+                        {item.description}
+                      </div>
+                    </div>
+                    {item.children && (
+                      <svg
+                        className={`w-4 h-4 transition-transform duration-200 ${
+                          expandedItems.has(item.path) ? 'rotate-90' : ''
+                        }`}
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    )}
+                  </div>
+                </button>
+              </div>
+
+              {/* 子項 */}
+              {item.children && expandedItems.has(item.path) && (
+                <ul className="ml-4 space-y-1">
+                  {item.children.map((child) => (
+                    <li key={child.path}>
+                      <NavLink
+                        to={child.path}
+                        className={({ isActive }) =>
+                          `block px-3 py-2 rounded-lg text-sm transition-colors duration-200 hover:bg-blue-50 hover:text-blue-700 ${
+                            isActive
+                              ? 'bg-blue-100 text-blue-700 border-l-2 border-blue-500'
+                              : 'text-gray-600 hover:bg-blue-50'
+                          }`
+                        }
+                      >
+                        {child.name}
+                      </NavLink>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </li>
           ))}
         </ul>
