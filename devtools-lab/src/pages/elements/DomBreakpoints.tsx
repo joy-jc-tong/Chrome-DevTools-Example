@@ -78,7 +78,6 @@ export default function DomBreakpoints() {
         <h2 className="text-xl font-semibold mb-2">使用小技巧</h2>
         <ul className="list-disc list-inside text-gray-700 space-y-1">
           <li>與 <b>Event Listener Breakpoints</b> 搭配：若不知道由事件或計時器觸發，可同時勾選 <em>Timer</em> 或 <em>Mouse</em> 類別。</li>
-          <li>善用 <b>Blackbox</b>：忽略第三方套件檔案，讓呼叫堆疊更乾淨。</li>
           <li>暫停時可在 Console 觀察 <code>$0</code>（目前選取節點）與變動前後的屬性差異。</li>
         </ul>
       </section>
