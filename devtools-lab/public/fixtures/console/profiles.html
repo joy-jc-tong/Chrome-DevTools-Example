@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <title>Profiles via Console Demo</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    body { font-family: ui-sans-serif, system-ui, -apple-system; background:#f8fafc; padding:24px; }
+    .card { background:#fff; border:1px solid #e5e7eb; border-radius:12px; padding:16px; max-width:600px; }
+    button { padding:8px 12px; border:1px solid #cbd5e1; border-radius:8px; cursor:pointer; margin-top:12px; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Profiles via Console 範例</h1>
+    <p>在 Console 用 <code>console.profile()</code> / <code>console.profileEnd()</code> 包住下方 heavy work。</p>
+    <button id="runHeavy">執行 heavy work</button>
+    <p id="status"></p>
+  </div>
+
+  <script>
+    function heavyWork() {
+      // 模擬 CPU 密集任務
+      let sum = 0;
+      for (let i = 0; i < 5e6; i++) {
+        sum += Math.sqrt(i) * Math.random();
+      }
+      return sum;
+    }
+
+    document.getElementById('runHeavy').addEventListener('click', () => {
+      const t0 = performance.now();
+      const result = heavyWork();
+      const t1 = performance.now();
+      document.getElementById('status').textContent =
+        `heavy work done, result=${result.toFixed(2)}, time=${(t1-t0).toFixed(1)}ms`;
+      console.log("heavy work done", {result, time: t1-t0});
+    });
+  </script>
+</body>
+</html>

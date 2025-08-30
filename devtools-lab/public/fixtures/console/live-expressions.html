@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <title>Live Expressions Demo</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    body { font-family: sans-serif; background:#f8fafc; padding:24px; }
+    .card { background:#fff; border:1px solid #e5e7eb; border-radius:12px; padding:16px; max-width:600px; }
+    button { padding:8px 12px; border:1px solid #ccc; border-radius:6px; margin-right:8px; cursor:pointer; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Live Expressions 範例</h1>
+    <p>打開 Console → 建立 Live Expression 來監看以下變數：</p>
+    <ul>
+      <li><code>performance.now() - window.t0</code>（頁面載入至今的經過時間）</li>
+      <li><code>window.appState.count</code>（每秒增加的計數器）</li>
+      <li><code>document.title</code>（可被下方按鈕修改）</li>
+    </ul>
+    <div style="margin-top:12px;">
+      <button id="changeTitle">改標題</button>
+      <button id="incCount">手動 +1</button>
+    </div>
+  </div>
+
+  <script>
+    window.t0 = performance.now();
+    window.appState = { count: 0 };
+
+    // 自動每秒增加
+    setInterval(() => {
+      window.appState.count++;
+    }, 1000);
+
+    document.getElementById('changeTitle').addEventListener('click', () => {
+      document.title = "新標題 " + Math.floor(Math.random()*100);
+    });
+
+    document.getElementById('incCount').addEventListener('click', () => {
+      window.appState.count++;
+    });
+  </script>
+</body>
+</html>

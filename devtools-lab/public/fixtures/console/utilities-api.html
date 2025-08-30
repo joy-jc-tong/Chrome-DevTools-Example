@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <title>Console Utilities API Demo</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    body { font-family: ui-sans-serif, system-ui, -apple-system; margin: 0; padding: 24px; background: #f8fafc; }
+    .wrap { max-width: 960px; margin: 0 auto; }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+    .card { background:#fff; border:1px solid #e5e7eb; border-radius:12px; padding:16px; }
+    button { padding:8px 12px; border:1px solid #cbd5e1; border-radius:8px; background:#f1f5f9; cursor:pointer; }
+    button:hover { background:#e2e8f0; }
+    table { width:100%; border-collapse: collapse; }
+    th, td { border: 1px solid #e5e7eb; padding:8px; text-align:left; }
+    th { background:#f1f5f9; }
+    .muted { color:#64748b; font-size: 14px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Console Utilities API 範例</h1>
+
+    <div class="row">
+      <section class="card">
+        <h2>按鈕區（事件示範）</h2>
+        <p class="muted">選取下方「按鈕 A」後，在 Console 輸入 <code>getEventListeners($0)</code>。</p>
+        <button id="btnA">按鈕 A</button>
+        <button id="btnB">按鈕 B</button>
+      </section>
+
+      <section class="card" id="hoverCard">
+        <h2>卡片（hover 事件）</h2>
+        <p class="muted">在 Elements 選取本卡片，回 Console 用 <code>$1</code> 取得上一個選取。</p>
+        <p class="muted">本卡片綁定 <code>mouseenter</code> / <code>mouseleave</code>。</p>
+      </section>
+    </div>
+
+    <section class="card">
+      <h2>表格（可導出 JSON）</h2>
+      <p class="muted">資料也掛在 <code>window.sampleRows</code>；在 Console 輸入 <code>copy(window.sampleRows)</code>。</p>
+      <table id="tbl">
+        <thead>
+          <tr><th>id</th><th>name</th><th>score</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>Alice</td><td>88</td></tr>
+          <tr><td>2</td><td>Bob</td><td>92</td></tr>
+          <tr><td>3</td><td>Carol</td><td>77</td></tr>
+        </tbody>
+      </table>
+      <div style="margin-top:8px;">
+        <button id="toJson">把表格轉 JSON（示例）</button>
+        <span id="jsonOut" class="muted"></span>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    // ---- 事件示範：按鈕 A 綁兩個 click（不同階段） ----
+    const btnA = document.getElementById('btnA');
+    const btnB = document.getElementById('btnB');
+
+    function onClickA_Capture(e){ console.log('A capture'); }
+    function onClickA_Bubble(e){ console.log('A bubble'); }
+    btnA.addEventListener('click', onClickA_Capture, { capture: true });
+    btnA.addEventListener('click', onClickA_Bubble);
+
+    btnB.addEventListener('click', () => console.log('B clicked'));
+
+    // ---- hoverCard 綁 mouseenter/leave ----
+    const hoverCard = document.getElementById('hoverCard');
+    hoverCard.addEventListener('mouseenter', () => console.log('hover in'));
+    hoverCard.addEventListener('mouseleave', () => console.log('hover out'));
+
+    // ---- 表格資料：同步掛到 window 方便 copy() ----
+    const sampleRows = [
+      { id: 1, name: 'Alice', score: 88 },
+      { id: 2, name: 'Bob', score: 92 },
+      { id: 3, name: 'Carol', score: 77 },
+    ];
+    window.sampleRows = sampleRows;
+
+    // 把當前表格 DOM 轉 JSON 的示例（方便對照 copy(window.sampleRows)）
+    document.getElementById('toJson').addEventListener('click', () => {
+      const rows = Array.from(document.querySelectorAll('#tbl tbody tr'));
+      const data = rows.map(tr => {
+        const [id, name, score] = Array.from(tr.children).map(td => td.textContent?.trim());
+        return { id: Number(id), name, score: Number(score) };
+      });
+      document.getElementById('jsonOut').textContent = ' → ' + JSON.stringify(data);
+      console.log('DOM→JSON', data);
+    });
+  </script>
+</body>
+</html>

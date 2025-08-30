@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <title>monitor / monitorEvents Demo</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    body { font-family: ui-sans-serif, system-ui, -apple-system; margin: 0; padding: 24px; background: #f8fafc; }
+    .card { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 16px; max-width: 900px; }
+    .row { display: flex; gap: 8px; flex-wrap: wrap; }
+    .btn { padding: 8px 12px; border: 1px solid #cbd5e1; border-radius: 8px; background: #f1f5f9; cursor: pointer; }
+    .btn.active { background: #e2e8f0; }
+    .scrollbox { height: 260px; overflow: auto; border: 1px dashed #cbd5e1; border-radius: 8px; padding: 8px; background: #fff; margin-top: 12px; }
+    .spacer { height: 1200px; background: linear-gradient(#fff, #f1f5f9); }
+    .muted { color:#64748b; font-size:14px; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>monitor / monitorEvents 範例</h1>
+    <p class="muted">在 Console 使用 <code>monitor()</code> 與 <code>monitorEvents()</code> 觀察觸發密度。</p>
+
+    <div class="row" id="modeBar">
+      <button data-mode="raw" class="btn active">原始 raw</button>
+      <button data-mode="throttle" class="btn">throttle(200ms)</button>
+      <button data-mode="debounce" class="btn">debounce(200ms)</button>
+      <button id="clear" class="btn">清空 Console</button>
+    </div>
+
+    <div id="scrollbox" class="scrollbox" tabindex="0" aria-label="可滾動容器">
+      <div class="spacer"></div>
+    </div>
+
+    <p class="muted" style="margin-top:8px;">
+      提示：在 Elements 選取上方「可滾動容器」，回 Console 執行
+      <code>monitorEvents($0, ['scroll','wheel'])</code>。
+    </p>
+  </div>
+
+  <script>
+    // ---- 簡單 throttle / debounce ----
+    function throttle(fn, wait){
+      let last = 0;
+      return function(...args){
+        const now = Date.now();
+        if (now - last >= wait) {
+          last = now;
+          return fn.apply(this, args);
+        }
+      }
+    }
+    function debounce(fn, wait){
+      let t = null;
+      return function(...args){
+        clearTimeout(t);
+        t = setTimeout(() => fn.apply(this, args), wait);
+      }
+    }
+
+    const box = document.getElementById('scrollbox');
+    const modeBar = document.getElementById('modeBar');
+    const modeBtns = Array.from(modeBar.querySelectorAll('button[data-mode]'));
+    const clearBtn = document.getElementById('clear');
+
+    // 重的 handler：故意做一點計算，並印出呼叫次數
+    let calls = 0;
+    function heavyScrollHandler(e){
+      // 模擬重工作：計算一堆東西
+      let sum = 0;
+      for (let i=0;i<5000;i++){ sum += Math.sqrt(i); }
+      calls++;
+      console.log('[heavyScrollHandler]', calls, 'mode=', currentMode);
+      // 回傳值讓 monitor(fn) 顯示
+      return { calls, mode: currentMode, sum: Math.round(sum) };
+    }
+    window.heavyScrollHandler = heavyScrollHandler; // 讓 Console 可 monitor()
+
+    let currentMode = 'raw';
+    let boundHandler = heavyScrollHandler;
+
+    function bind(mode){
+      // 先移除所有
+      box.removeEventListener('scroll', boundHandler);
+      // 設定模式
+      currentMode = mode;
+      calls = 0;
+
+      if (mode === 'raw') boundHandler = heavyScrollHandler;
+      if (mode === 'throttle') boundHandler = throttle(heavyScrollHandler, 200);
+      if (mode === 'debounce') boundHandler = debounce(heavyScrollHandler, 200);
+
+      box.addEventListener('scroll', boundHandler, { passive: true });
+      modeBtns.forEach(b => b.classList.toggle('active', b.dataset.mode === mode));
+      console.log('[bind]', mode);
+    }
+
+    modeBtns.forEach(btn => {
+      btn.addEventListener('click', () => bind(btn.dataset.mode));
+    });
+    clearBtn.addEventListener('click', () => console.clear());
+
+    // 預設 raw 綁定
+    bind('raw');
+  </script>
+</body>
+</html>
