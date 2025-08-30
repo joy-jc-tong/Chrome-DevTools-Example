@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <title>CSS Overview Demo</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    :root {
+      --primary: #1f6feb;
+      --primary-2: #1e6fea; /* 相近色 */
+      --neutral-1: #999999;
+      --neutral-2: #9a9a9a; /* 相近色 */
+      --neutral-3: #a0a0a0; /* 相近色 */
+      --ok-contrast: #0f172a; /* 深色文字 */
+    }
+
+    @media (max-width: 768px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+    @media (min-width: 769px) {
+      .grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans", sans-serif; background:#f8fafc; margin:0; padding:24px; }
+    .card { background:#fff; border:1px solid #e5e7eb; border-radius:12px; padding:16px; max-width: 1100px; margin: 0 auto; }
+    .grid { display:grid; gap:16px; }
+
+    /* 對比不足：淺灰文字 */
+    .low-contrast { color: #9a9a9a; }             /* 與白底對比偏低 */
+    .low-contrast-small { color: #aaa; font-size: 12px; } /* 小字 + 淺灰 */
+
+    /* 正確對比 */
+    .good-contrast { color: var(--ok-contrast); }
+
+    /* 相近色/重複色 */
+    .badge { background: var(--primary); color: #fff; border-radius: 9999px; padding: 4px 10px; display:inline-block; font-size:12px; }
+    .badge-alt { background: var(--primary-2); color:#fff; border-radius: 9999px; padding: 4px 10px; display:inline-block; font-size:12px; }
+    .muted { color: var(--neutral-1); }
+    .muted-2 { color: var(--neutral-2); }
+    .muted-3 { color: var(--neutral-3); }
+
+    /* 無用宣告（可能被偵測到，也可能不會視版本/情境） */
+    .unused-class { letter-spacing: 0.5px; }
+    .another-unused { border: 0; }
+
+    .btn { border:1px solid #e5e7eb; padding:8px 12px; border-radius:8px; cursor:pointer; background:#fff; }
+    .btn-primary { background: var(--primary); color:#fff; }
+    .btn-weak { background:#fff; color:#9a9a9a; border-color:#ddd; } /* 按鈕文字對比不足 */
+
+    a.link-weak { color:#9a9a9a; text-decoration:underline; } /* 連結文字對比不足 */
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1 class="good-contrast">CSS Overview 稽核範例</h1>
+    <p class="low-contrast">
+      這段為低對比示範文字，顏色接近背景，容易影響可讀性。
+    </p>
+
+    <div class="grid">
+      <section>
+        <h2 class="good-contrast">色彩與標籤</h2>
+        <p>
+          <span class="badge">Primary</span>
+          <span class="badge-alt">Primary-Alt</span>
+          <span class="muted">#999999</span>,
+          <span class="muted-2">#9a9a9a</span>,
+          <span class="muted-3">#a0a0a0</span>
+        </p>
+        <p class="low-contrast-small">
+          這行是小字體＋低對比的組合，應該會在 Contrast issues 看到。
+        </p>
+      </section>
+
+      <section>
+        <h2 class="good-contrast">按鈕與連結</h2>
+        <p style="display:flex; gap:8px; flex-wrap:wrap;">
+          <button class="btn btn-primary">主要行動</button>
+          <button class="btn btn-weak">弱對比按鈕</button>
+          <a href="#" class="link-weak">弱對比連結</a>
+        </p>
+      </section>
+
+      <section style="grid-column: 1 / -1;">
+        <h2 class="good-contrast">字體與媒體查詢</h2>
+        <p>此頁使用系統字體族，並包含一組 ≤768 與 ≥769 的媒體查詢，方便在 CSS Overview 的統計中觀察。</p>
+      </section>
+    </div>
+  </div>
+</body>
+</html>
