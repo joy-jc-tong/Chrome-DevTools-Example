@@ -48,6 +48,14 @@ const sidebarItems: SidebarItem[] = [
     path: '/network',
     label: 'Network',
     description: '監控網路請求、回應時間、資源載入',
+    children: [
+      { path: '/network/initiator', name: 'Initiator / Dependencies' },
+      { path: '/network/protocol-priority', name: 'Protocol / Priority' },
+      { path: '/network/websocket', name: 'WebSocket / Events' },
+      { path: '/network/blocking-overrides', name: 'Blocking / Overrides' },
+      { path: '/network/throttling', name: 'Throttling（自訂網路）' },
+      { path: '/network/har', name: 'HAR 匯出 / 匯入' },
+    ],
   },
   {
     path: '/performance',

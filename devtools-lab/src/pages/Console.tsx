@@ -2,7 +2,7 @@ import { Outlet } from 'react-router-dom';
 
 const Console = () => {
   return (
-    <div className="max-w-4xl p-6">
+    <div className="flex-1 p-6">
       <Outlet />
     </div>
   );

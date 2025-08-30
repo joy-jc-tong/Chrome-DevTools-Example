@@ -19,6 +19,12 @@ import LiveExpressions from '../pages/console/LiveExpressions';
 import UtilitiesApi from '../pages/console/UtilitiesApi';
 import Monitor from '../pages/console/Monitor';
 import Profiles from '../pages/console/Profiles';
+import Initiator from '../pages/network/Initiator';
+import ProtocolPriority from '../pages/network/ProtocolPriority';
+import WebSocket from '../pages/network/WebSocket';
+import BlockingOverrides from '../pages/network/BlockingOverrides';
+import Throttling from '../pages/network/Throttling';
+import HAR from '../pages/network/HAR';
 
 export const router = createBrowserRouter([
   {
@@ -96,6 +102,36 @@ export const router = createBrowserRouter([
       {
         path: 'network',
         element: <Network />,
+        children: [
+          {
+            index: true,
+            element: <Initiator />,
+          },
+          {
+            path: 'initiator',
+            element: <Initiator />,
+          },
+          {
+            path: 'protocol-priority',
+            element: <ProtocolPriority />,
+          },
+          {
+            path: 'websocket',
+            element: <WebSocket />,
+          },
+          {
+            path: 'blocking-overrides',
+            element: <BlockingOverrides />,
+          },
+          {
+            path: 'throttling',
+            element: <Throttling />,
+          },
+          {
+            path: 'har',
+            element: <HAR />,
+          },
+        ],
       },
       {
         path: 'performance',
