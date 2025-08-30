@@ -32,6 +32,12 @@ const sidebarItems: SidebarItem[] = [
     path: '/console',
     label: 'Console',
     description: '檢視 JavaScript 錯誤、警告、日誌訊息',
+    children: [
+      { path: '/console/live-expressions', name: 'Live Expressions' },
+      { path: '/console/utilities-api', name: 'Utilities API' },
+      { path: '/console/monitor', name: 'Monitor' },
+      { path: '/console/profiles', name: 'Profiles' },
+    ],
   },
   {
     path: '/sources',
@@ -105,8 +111,6 @@ const AppSidebar = () => {
       location.pathname === child.path || location.pathname.startsWith(item.path + '/')
     );
   };
-
-
 
   return (
     <aside className="fixed left-0 top-16 w-60 h-[calc(100vh-4rem)] bg-gray-100 border-r border-gray-200 overflow-y-auto">

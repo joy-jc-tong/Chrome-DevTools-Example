@@ -15,6 +15,10 @@ import Layout from '../pages/elements/Layout';
 import CssOverview from '../pages/elements/CssOverview';
 import Changes from '../pages/elements/Changes';
 import Accessibility from '../pages/elements/Accessibility';
+import LiveExpressions from '../pages/console/LiveExpressions';
+import UtilitiesApi from '../pages/console/UtilitiesApi';
+import Monitor from '../pages/console/Monitor';
+import Profiles from '../pages/console/Profiles';
 
 export const router = createBrowserRouter([
   {
@@ -62,6 +66,28 @@ export const router = createBrowserRouter([
       {
         path: 'console',
         element: <Console />,
+        children: [
+          {
+            index: true,
+            element: <LiveExpressions />,
+          },
+          {
+            path: 'live-expressions',
+            element: <LiveExpressions />,
+          },
+          {
+            path: 'utilities-api',
+            element: <UtilitiesApi />,
+          },
+          {
+            path: 'monitor',
+            element: <Monitor />,
+          },
+          {
+            path: 'profiles',
+            element: <Profiles />,
+          },
+        ],
       },
       {
         path: 'sources',
