@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <title>Initiator / Dependencies Demo</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    body { font-family: sans-serif; background:#f8fafc; padding:24px; }
+    .card { background:#fff; border:1px solid #e5e7eb; border-radius:12px; padding:16px; max-width:600px; }
+    button { padding:8px 12px; border:1px solid #ccc; border-radius:6px; cursor:pointer; margin-top:12px; }
+    img { display:block; margin-top:12px; max-width:100%; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Initiator / Dependencies 範例</h1>
+    <p>點按鈕 → fetch JSON → 載入圖片。</p>
+    <button id="loadBtn">載入資料</button>
+    <div id="output"></div>
+  </div>
+
+  <script>
+    document.getElementById('loadBtn').addEventListener('click', async () => {
+      const res = await fetch('/fixtures/network/sample.json');
+      const data = await res.json();
+      document.getElementById('output').innerHTML = `
+        <p>已載入 JSON：${JSON.stringify(data)}</p>
+        <img src="/fixtures/network/sample.png" alt="依賴圖片"/>
+      `;
+    });
+  </script>
+</body>
+</html>

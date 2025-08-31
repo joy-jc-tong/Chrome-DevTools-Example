@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <title>Throttling / Round-trip Demo</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="preload" as="image" href="/fixtures/network/img-high.png" imagesrcset="/fixtures/network/img-high.png 1x">
+  <style>
+    body { font-family: ui-sans-serif, system-ui, -apple-system; background:#f8fafc; padding:24px; }
+    .card { background:#fff; border:1px solid #e5e7eb; border-radius:12px; padding:16px; max-width:860px; }
+    .row { display:flex; gap:8px; flex-wrap:wrap; }
+    button { padding:8px 12px; border:1px solid #cbd5e1; border-radius:8px; background:#f1f5f9; cursor:pointer; }
+    button:hover { background:#e2e8f0; }
+    .imgs { display:grid; grid-template-columns: repeat(3, 1fr); gap:8px; margin-top:12px; }
+    img { width:100%; height:140px; object-fit:cover; display:block; background:#e2e8f0; }
+    pre { background:#0b1020; color:#a8dadc; border-radius:8px; padding:12px; overflow:auto; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Throttling / Round-trip 範例</h1>
+    <p>請在 DevTools → Network 將 Throttling 調成 Slow 3G 或自訂高延遲，觀察 Waterfall。</p>
+
+    <div class="row" style="margin:8px 0 12px;">
+      <button id="chain">串接 3 次 API</button>
+      <button id="parallel">平行載入 6 張圖</button>
+      <button id="priority">關鍵圖（fetchpriority=high）</button>
+      <button id="clear">清空結果</button>
+    </div>
+
+    <div id="out"></div>
+    <div class="imgs" id="grid"></div>
+
+    <h2>最近紀錄</h2>
+    <pre id="log"></pre>
+  </div>
+
+  <script>
+    const logEl = document.getElementById('log');
+    const out = document.getElementById('out');
+    const grid = document.getElementById('grid');
+    const log = (obj) => {
+      const line = typeof obj === 'string' ? obj : JSON.stringify(obj);
+      logEl.textContent = (line + '\n' + logEl.textContent).slice(0, 6000);
+      console.log('[demo]', obj);
+    };
+
+    document.getElementById('clear').addEventListener('click', () => {
+      out.innerHTML = ''; grid.innerHTML = ''; logEl.textContent = '';
+    });
+
+    // 串接 3 次 API（強化 round-trip 感受）
+    document.getElementById('chain').addEventListener('click', async () => {
+      log('start chain 3 requests');
+      const t0 = performance.now();
+      const a = await fetch('/fixtures/network/rt-a.json').then(r=>r.json()); log({a});
+      const b = await fetch('/fixtures/network/rt-b.json').then(r=>r.json()); log({b});
+      const c = await fetch('/fixtures/network/rt-c.json').then(r=>r.json()); log({c});
+      const t1 = performance.now();
+      out.innerHTML = `<p>總耗時：約 ${(t1 - t0).toFixed(0)} ms（Slow 3G/高 RTT 下會更明顯）</p>`;
+    });
+
+    // 平行載入 6 張圖（看併發與優先順序）
+    document.getElementById('parallel').addEventListener('click', () => {
+      grid.innerHTML = '';
+      const srcs = [
+        '/fixtures/network/img-1.png',
+        '/fixtures/network/img-2.png',
+        '/fixtures/network/img-3.png',
+        '/fixtures/network/img-4.png',
+        '/fixtures/network/img-5.png',
+        '/fixtures/network/img-6.png',
+      ];
+      srcs.forEach(src => {
+        const img = new Image();
+        img.src = src;
+        img.onload = () => log('loaded ' + src);
+        img.onerror = () => log('error ' + src);
+        grid.appendChild(img);
+      });
+    });
+
+    // 關鍵圖（高優先）：觀察 Priority 欄位
+    document.getElementById('priority').addEventListener('click', () => {
+      const img = new Image();
+      img.src = '/fixtures/network/img-high.png';
+      img.setAttribute('fetchpriority', 'high');
+      img.onload = () => log('loaded high-priority image');
+      grid.appendChild(img);
+    });
+  </script>
+</body>
+</html>
