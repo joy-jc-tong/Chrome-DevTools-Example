@@ -1,47 +1,29 @@
-const Sensors = () => {
+export default function SensorsPage() {
   return (
-    <div className="max-w-4xl">
-      <h1 className="text-3xl font-bold text-gray-900 mb-6">Sensors</h1>
-      <div className="bg-white rounded-lg border border-gray-200 p-6">
-        <p className="text-lg text-gray-700 mb-4">
-          Sensors 面板允許您模擬各種設備感應器，包括地理位置、加速度計、陀螺儀等，用於測試響應式設計和感應器相關功能。
+    <div className="space-y-8">
+      <header>
+        <h1 className="text-2xl font-bold">Sensors（地理、方向、時區、裝置尺寸）</h1>
+        <p className="text-gray-700">
+          於 <b>More tools → Sensors</b> 模擬地理位置、裝置方向與時區，也能套用各種行動裝置尺寸。
         </p>
-        
-        <div className="space-y-4">
-          <div className="p-4 bg-teal-50 rounded-lg">
-            <h3 className="font-semibold text-teal-800 mb-2">可模擬的感應器：</h3>
-            <ul className="list-disc list-inside space-y-1 text-teal-700">
-              <li><strong>Location:</strong> GPS 地理位置</li>
-              <li><strong>Accelerometer:</strong> 加速度計</li>
-              <li><strong>Gyroscope:</strong> 陀螺儀</li>
-              <li><strong>Orientation:</strong> 設備方向</li>
-            </ul>
-          </div>
+      </header>
 
-          <div className="p-4 bg-cyan-50 rounded-lg">
-            <h3 className="font-semibold text-cyan-800 mb-2">測試場景：</h3>
-            <ul className="list-disc list-inside space-y-1 text-cyan-700">
-              <li>地理位置相關應用測試</li>
-              <li>移動設備手勢測試</li>
-              <li>響應式設計驗證</li>
-              <li>感應器 API 除錯</li>
-            </ul>
-          </div>
+      <section>
+        <h2 className="text-xl font-semibold mb-2">操作步驟</h2>
+        <ol className="list-decimal list-inside text-gray-700 space-y-1">
+          <li>開示範頁 → Sensors 面板設定位置（例如 Tokyo）與時區。</li>
+          <li>點「取得定位」與「顯示當地時間」驗證數值。</li>
+          <li>切換裝置尺寸與方向，觀察 layout 反應。</li>
+        </ol>
+      </section>
 
-          <div className="p-4 bg-emerald-50 rounded-lg">
-            <h3 className="font-semibold text-emerald-800 mb-2">使用方式：</h3>
-            <ol className="list-decimal list-inside space-y-1 text-emerald-700">
-              <li>開啟 Chrome DevTools</li>
-              <li>按 Ctrl+Shift+P 開啟命令面板</li>
-              <li>搜尋「Sensors」並選擇</li>
-              <li>設定感應器參數</li>
-              <li>測試應用程式行為</li>
-            </ol>
-          </div>
-        </div>
-      </div>
+      <section>
+        <h2 className="text-xl font-semibold">互動練習</h2>
+        <a className="px-3 py-1.5 rounded-lg bg-blue-600 text-white"
+           href="/fixtures/coverage/sensors.html" target="_blank" rel="noreferrer">
+          開啟示範頁（定位 / 時區 / 尺寸）
+        </a>
+      </section>
     </div>
   );
-};
-
-export default Sensors;
+}

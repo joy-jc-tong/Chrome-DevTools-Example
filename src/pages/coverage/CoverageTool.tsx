@@ -1,48 +1,34 @@
-const CoverageTool = () => {
+export default function CoverageTool() {
   return (
-    <div className="max-w-4xl">
-      <h1 className="text-3xl font-bold text-gray-900 mb-6">Coverage Tool</h1>
-      <div className="bg-white rounded-lg border border-gray-200 p-6">
-        <p className="text-lg text-gray-700 mb-4">
-          Coverage Tool 是 Chrome DevTools 中用於分析程式碼覆蓋率的工具。它可以幫助您識別未使用的 CSS 和 JavaScript 程式碼。
+    <div className="space-y-8">
+      <header>
+        <h1 className="text-2xl font-bold">Coverage（找未用 CSS / JS）</h1>
+        <p className="text-gray-700">
+          透過 <b>Command Menu</b>（⌘/Ctrl+Shift+P）→ <b>Show Coverage</b> 開啟 Coverage 面板，
+          錄製期間統計「已執行/未使用」位元組，協助盤點可延後載入或分拆的模組。
         </p>
-        
-        <div className="space-y-4">
-          <div className="p-4 bg-blue-50 rounded-lg">
-            <h3 className="font-semibold text-blue-800 mb-2">主要功能：</h3>
-            <ul className="list-disc list-inside space-y-1 text-blue-700">
-              <li>JavaScript 程式碼覆蓋率分析</li>
-              <li>CSS 程式碼覆蓋率分析</li>
-              <li>即時覆蓋率監控</li>
-              <li>未使用程式碼識別</li>
-            </ul>
-          </div>
+      </header>
 
-          <div className="p-4 bg-green-50 rounded-lg">
-            <h3 className="font-semibold text-green-800 mb-2">使用步驟：</h3>
-            <ol className="list-decimal list-inside space-y-1 text-green-700">
-              <li>開啟 Chrome DevTools</li>
-              <li>切換到 Coverage 面板</li>
-              <li>點擊「Start instrumenting coverage」開始記錄</li>
-              <li>與頁面互動以觸發程式碼執行</li>
-              <li>點擊「Stop instrumenting coverage」停止記錄</li>
-              <li>檢視覆蓋率報告</li>
-            </ol>
-          </div>
+      <section>
+        <h2 className="text-xl font-semibold mb-2">操作步驟</h2>
+        <ol className="list-decimal list-inside text-gray-700 space-y-1">
+          <li>開啟下方示範頁 → Coverage 面板點 <b>Start instrumenting coverage</b>。</li>
+          <li>點「載入延遲模組」與「套用延遲 CSS」。</li>
+          <li>停止錄製，依「Unused bytes」排序，列出可延後載入清單。</li>
+        </ol>
+      </section>
 
-          <div className="p-4 bg-yellow-50 rounded-lg">
-            <h3 className="font-semibold text-yellow-800 mb-2">覆蓋率指標：</h3>
-            <ul className="list-disc list-inside space-y-1 text-yellow-700">
-              <li><strong>Used Bytes:</strong> 已使用的位元組數</li>
-              <li><strong>Total Bytes:</strong> 總位元組數</li>
-              <li><strong>Unused Bytes:</strong> 未使用的位元組數</li>
-              <li><strong>Coverage:</strong> 覆蓋率百分比</li>
-            </ul>
-          </div>
-        </div>
-      </div>
+      <section>
+        <h2 className="text-xl font-semibold">互動練習</h2>
+        <a className="px-3 py-1.5 rounded-lg bg-blue-600 text-white"
+           href="/fixtures/coverage/coverage-lazy.html" target="_blank" rel="noreferrer">
+          開啟示範頁（延遲模組 / CSS）
+        </a>
+        <ul className="list-disc list-inside text-gray-700 mt-3 space-y-1">
+          <li>將 `chunk-b.js` 設為互動後才載入（按鈕觸發），驗證初始未用率下降。</li>
+          <li>把 `late.css` 中不必要規則拆到條件載入，重測 Coverage。</li>
+        </ul>
+      </section>
     </div>
   );
-};
-
-export default CoverageTool;
+}

@@ -1,0 +1,24 @@
+<!doctype html><html lang="zh-Hant"><head>
+    <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <title>Coverage Lazy Demo</title>
+    <link rel="stylesheet" href="./base.css">
+    <style>body{font-family:ui-sans-serif,system-ui;background:#f8fafc;margin:0;padding:24px}
+    .card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:16px;max-width:860px}</style>
+    </head><body>
+    <div class="card">
+      <h1>Coverage：延遲模組 / CSS</h1>
+      <button id="load" style="padding:8px 12px;border:1px solid #cbd5e1;border-radius:8px;background:#f1f5f9;cursor:pointer">載入延遲模組與 CSS</button>
+      <p id="out"></p>
+    </div>
+    <script type="module">
+      import "./modules/chunk-a.js"; // 初始加載但大部分未使用
+      document.getElementById('load').onclick = async () => {
+        await import("./modules/chunk-b.js");           // 互動後才載入
+        const link = document.createElement('link');    // 延遲 CSS
+        link.rel = "stylesheet"; link.href = "./late.css";
+        document.head.appendChild(link);
+        document.getElementById('out').textContent = "延遲資源已載入";
+      };
+    </script>
+    </body></html>
+    

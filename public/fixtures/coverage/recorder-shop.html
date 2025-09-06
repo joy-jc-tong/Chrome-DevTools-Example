@@ -1,0 +1,31 @@
+<!doctype html><html lang="zh-Hant"><head>
+    <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <title>Recorder Flow Shop</title>
+    <style>
+      body{font-family:ui-sans-serif,system-ui;background:#f8fafc;margin:0;padding:24px}
+      .card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:16px;max-width:860px}
+      input,button{padding:8px 12px;border:1px solid #cbd5e1;border-radius:8px}
+    </style></head><body>
+    <div class="card">
+      <h1>Login → Search → Cart</h1>
+      <section id="login">
+        <input id="u" placeholder="帳號"><input id="p" placeholder="密碼" type="password">
+        <button id="btnLogin">登入</button>
+      </section>
+      <section id="search" style="margin-top:12px;display:none">
+        <input id="q" placeholder="搜尋關鍵字"><button id="btnSearch">搜尋</button>
+        <ul id="list"></ul>
+      </section>
+      <section id="cart" style="margin-top:12px;display:none">
+        <div id="msg"></div>
+      </section>
+    </div>
+    <script>
+      const el=(id)=>document.getElementById(id);
+      el('btnLogin').onclick=()=>{ if(el('u').value && el('p').value){ el('login').style.display='none'; el('search').style.display='block'; }};
+      el('btnSearch').onclick=()=>{ const q=el('q').value||'item'; const ul=el('list'); ul.innerHTML='';
+        ['A','B','C'].forEach(n=>{ const li=document.createElement('li'); li.textContent=q+'-'+n+' '; const b=document.createElement('button'); b.textContent='加入'; b.onclick=()=>{ el('cart').style.display='block'; el('msg').textContent='已加入 '+li.textContent; }; li.appendChild(b); ul.appendChild(li); });
+      };
+    </script>
+    </body></html>
+    

@@ -1,0 +1,3 @@
+/* 僅互動後才需要的樣式 */
+.modal { display: grid; place-items: center; }
+.tooltips, .labs, .shelf { margin: 8px } /* 故意放些未用規則 */
