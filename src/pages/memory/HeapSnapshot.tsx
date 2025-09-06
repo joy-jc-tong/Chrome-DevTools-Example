@@ -1,53 +1,39 @@
-const HeapSnapshot = () => {
-  return (
-    <div className="max-w-4xl">
-      <h1 className="text-3xl font-bold text-gray-900 mb-6">Heap Snapshot</h1>
-      <div className="bg-white rounded-lg border border-gray-200 p-6">
-        <p className="text-lg text-gray-700 mb-4">
-          Heap Snapshot 是 Chrome DevTools 中強大的記憶體分析工具，可以幫助您檢測記憶體洩漏和優化記憶體使用。
-        </p>
-        
-        <div className="space-y-6">
-          <div className="p-4 bg-blue-50 rounded-lg">
-            <h3 className="font-semibold text-blue-800 mb-2">什麼是 Heap Snapshot？</h3>
-            <p className="text-blue-700">
-              Heap Snapshot 會拍攝 JavaScript 堆記憶體的快照，顯示所有物件的記憶體使用情況，包括物件之間的引用關係。
-            </p>
-          </div>
-
-          <div className="p-4 bg-green-50 rounded-lg">
-            <h3 className="font-semibold text-green-800 mb-2">主要功能</h3>
-            <ul className="list-disc list-inside space-y-1 text-green-700">
-              <li>檢測記憶體洩漏</li>
-              <li>分析物件引用關係</li>
-              <li>識別記憶體使用最多的物件</li>
-              <li>比較不同時間點的記憶體狀態</li>
-            </ul>
-          </div>
-
-          <div className="p-4 bg-yellow-50 rounded-lg">
-            <h3 className="font-semibold text-yellow-800 mb-2">使用步驟</h3>
-            <ol className="list-decimal list-inside space-y-1 text-yellow-700">
-              <li>開啟 Chrome DevTools</li>
-              <li>切換到 Memory 面板</li>
-              <li>選擇 "Heap snapshot"</li>
-              <li>點擊 "Take snapshot" 拍攝快照</li>
-              <li>分析結果並識別問題</li>
-            </ol>
-          </div>
-
-          <div className="p-4 bg-red-50 rounded-lg">
-            <h3 className="font-semibold text-red-800 mb-2">注意事項</h3>
-            <ul className="list-disc list-inside space-y-1 text-red-700">
-              <li>快照會消耗大量記憶體</li>
-              <li>建議在開發環境中使用</li>
-              <li>避免在生產環境頻繁拍攝快照</li>
-            </ul>
-          </div>
-        </div>
+export default function HeapSnapshotPage() {
+    return (
+      <div className="space-y-8">
+        <header>
+          <h1 className="text-2xl font-bold">Heap Snapshot（Retainers / Distance）</h1>
+          <p className="text-gray-700">
+            透過 Heap Snapshot 可以拍下某一刻的堆記憶體，並用 <b>Retainers</b> 追出「誰在保留目標物件」，
+            <b>Distance</b>（到 GC Root 的距離）則幫助判斷物件與根之間的參照深度。適合找出閉包/全域暫存導致的 DOM 洩漏。
+          </p>
+        </header>
+  
+        <section>
+          <h2 className="text-xl font-semibold mb-2">操作步驟</h2>
+          <ol className="list-decimal list-inside text-gray-700 space-y-1">
+            <li>開啟下方示範頁 → 打開 <b>Memory</b> 面板。</li>
+            <li>選擇 <b>Heap snapshot</b> → <b>Take snapshot</b>。</li>
+            <li>在左側樹狀搜尋可疑類別（如 <code>Detached HTMLDivElement</code> 或自訂類別）。</li>
+            <li>選取實例 → 右側切到 <b>Retainers</b>，追出是被哪個閉包/監聽器保住。</li>
+            <li>觀察 <b>Distance</b> 與 <b>Retained Size</b>，確認保留鏈。</li>
+          </ol>
+        </section>
+  
+        <section>
+          <h2 className="text-xl font-semibold">互動練習</h2>
+          <a className="px-3 py-1.5 rounded-lg bg-blue-600 text-white"
+             href="/fixtures/memory/heap-snapshot.html" target="_blank" rel="noreferrer">
+            開啟示範頁（事件閉包保住 DOM）
+          </a>
+          <ul className="list-decimal list-inside text-gray-700 mt-3 space-y-1">
+            <li>按「新增卡片（附監聽）」10 次，再按「移除所有 DOM」。</li>
+            <li>拍攝 Snapshot，搜尋「<code>Detached</code>」或直接找 <code>Card</code> 元素。</li>
+            <li>在 Retainers 找到 <code>leakHandlers</code> 陣列或閉包把 DOM 保住的證據。</li>
+            <li>點「修正版本」再重做一次流程，確認 Snapshot 裡 Detached 降低。</li>
+          </ul>
+        </section>
       </div>
-    </div>
-  );
-};
-
-export default HeapSnapshot;
+    );
+  }
+  

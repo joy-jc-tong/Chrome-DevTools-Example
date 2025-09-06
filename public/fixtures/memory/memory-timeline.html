@@ -1,0 +1,92 @@
+<!doctype html><html lang="zh-Hant"><head>
+    <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <title>Record allocations over time Demo</title>
+    <style>
+      body{font-family:ui-sans-serif,system-ui;background:#f8fafc;margin:0;padding:24px}
+      .row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+      button{padding:8px 12px;border:1px solid #cbd5e1;border-radius:8px;background:#f1f5f9;cursor:pointer}
+      .page{background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:12px;margin-top:8px}
+      .item{background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:6px;margin:4px 0}
+    </style></head><body>
+      <h1>Memory Timeline：長流程趨勢</h1>
+      <div class="row">
+        <button id="push">新增 200 筆列表</button>
+        <button id="nav">切換頁面（模擬 router 切換）</button>
+        <button id="toggle">切換「修正版本」：關</button>
+        <button id="clear">清空</button>
+      </div>
+      <div id="pages"></div>
+    
+    <script>
+      let fixed = false;
+      const pages = document.getElementById('pages');
+      const pageStack = [];   // 模擬路由堆疊
+      const retained = [];    // 壞：保留頁面資料的全域陣列，造成累積
+    
+      function makePage(){
+        const p = document.createElement('div');
+        p.className = 'page';
+        const items = [];
+        for(let i=0;i<200;i++){
+          const el = document.createElement('div');
+          el.className = 'item';
+          el.textContent = 'row '+i+' '+Math.random().toString(36).slice(2);
+          items.push(el);
+          p.appendChild(el);
+        }
+        // 壞：事件閉包 + 全域引用，導致內容被保留
+        const clickHandler = ()=> p.dataset.clicks = (Number(p.dataset.clicks||0)+1).toString();
+        p.addEventListener('click', clickHandler);
+        if (!fixed) {
+          retained.push({ p, items, clickHandler }); // 把整頁資料加入全域保留
+        } else {
+          // 修正：不做全域保留；並在卸載時解除事件
+          p._cleanup = ()=> p.removeEventListener('click', clickHandler);
+        }
+        return p;
+      }
+    
+      function mount(page){
+        pages.innerHTML = '';
+        pages.appendChild(page);
+      }
+    
+      document.getElementById('push').onclick = ()=>{
+        const p = makePage();
+        pageStack.push(p);
+        mount(p);
+      };
+    
+      document.getElementById('nav').onclick = ()=>{
+        if (pageStack.length === 0) return;
+        // 模擬切頁：保留前頁於堆疊，載入新頁
+        const p = makePage();
+        pageStack.push(p);
+        mount(p);
+    
+        // 移除舊頁 DOM
+        const prev = pageStack[pageStack.length-2];
+        // 未修正：只從 DOM 移除，仍被 retained[] 或閉包保留
+        if (fixed) {
+          // 修正版：確實清除引用
+          if (prev && prev._cleanup) prev._cleanup();
+          // 清理先前 push 造成的全域保留
+          for (let i=retained.length-1; i>=0; i--){
+            if (retained[i].p === prev) retained.splice(i,1);
+          }
+        }
+      };
+    
+      document.getElementById('toggle').onclick = ()=>{
+        fixed = !fixed;
+        document.getElementById('toggle').textContent = '切換「修正版本」：' + (fixed?'開':'關');
+      };
+    
+      document.getElementById('clear').onclick = ()=>{
+        pages.innerHTML = '';
+        pageStack.length = 0;
+        if (fixed) retained.length = 0;
+      };
+    </script>
+    </body></html>
+    

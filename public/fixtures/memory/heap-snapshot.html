@@ -1,0 +1,67 @@
+<!doctype html><html lang="zh-Hant"><head>
+    <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <title>Heap Snapshot Leak Demo</title>
+    <style>
+      body{font-family:ui-sans-serif,system-ui;background:#f8fafc;margin:0;padding:24px}
+      .row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+      button{padding:8px 12px;border:1px solid #cbd5e1;border-radius:8px;background:#f1f5f9;cursor:pointer}
+      .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+      .card{background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:8px}
+    </style></head><body>
+      <h1>Heap Snapshot：事件閉包保住 DOM</h1>
+      <div class="row">
+        <button id="add">新增卡片（附監聽）</button>
+        <button id="add10">一次新增 10 張</button>
+        <button id="removeAll">移除所有 DOM</button>
+        <button id="fix">切換「修正版本」：關</button>
+      </div>
+      <div id="grid" class="grid"></div>
+    
+    <script>
+      // 模擬壞寫法：把事件 handler 與 DOM 參考存在全域陣列，移除 DOM 後仍被保留
+      const leakHandlers = []; // <- 你會在 Retainers 看到它
+      let fixed = false;
+    
+      function createCard(i){
+        const el = document.createElement('div');
+        el.className = 'card';
+        el.textContent = 'Card #' + i;
+        const handler = ()=> el.textContent = 'Clicked #' + i; // 閉包保留 el
+        el.addEventListener('click', handler);
+        if (!fixed) {
+          leakHandlers.push({ el, handler }); // 壞：保留參考
+        } else {
+          // 好：註冊於元素上，不另行全域保存；或提供對應的清理邏輯
+          el._handler = handler;
+        }
+        return el;
+      }
+    
+      let seq = 1;
+      document.getElementById('add').onclick = ()=>{
+        document.getElementById('grid').appendChild(createCard(seq++));
+      };
+      document.getElementById('add10').onclick = ()=>{
+        for (let k=0;k<10;k++) document.getElementById('grid').appendChild(createCard(seq++));
+      };
+      document.getElementById('removeAll').onclick = ()=>{
+        const grid = document.getElementById('grid');
+        // 壞：只移除 DOM，沒有解除全域陣列內的參考
+        if (!fixed) {
+          grid.innerHTML = '';
+        } else {
+          // 好：同時解除事件與清空參考
+          grid.querySelectorAll('.card').forEach(el=>{
+            if (el._handler) el.removeEventListener('click', el._handler);
+          });
+          grid.innerHTML = '';
+          leakHandlers.length = 0; // 釋放全域保存
+        }
+      };
+      document.getElementById('fix').onclick = ()=>{
+        fixed = !fixed;
+        document.getElementById('fix').textContent = '切換「修正版本」：' + (fixed?'開':'關');
+      };
+    </script>
+    </body></html>
+    

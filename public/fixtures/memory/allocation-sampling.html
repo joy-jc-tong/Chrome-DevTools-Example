@@ -1,0 +1,52 @@
+<!doctype html><html lang="zh-Hant"><head>
+    <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <title>Allocation Sampling Demo</title>
+    <style>
+      body{font-family:ui-sans-serif,system-ui;background:#f8fafc;margin:0;padding:24px}
+      .row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+      button{padding:8px 12px;border:1px solid #cbd5e1;border-radius:8px;background:#f1f5f9;cursor:pointer}
+      pre{background:#0b1020;color:#a8dadc;border-radius:8px;padding:12px;overflow:auto}
+    </style></head><body>
+      <h1>Allocation Sampling：熱點配置</h1>
+      <div class="row">
+        <button id="junk">產生垃圾（短命物件）</button>
+        <button id="cache">產生快取物件</button>
+        <button id="toggle">切換「優化模式」：關</button>
+      </div>
+      <pre id="log"></pre>
+    
+    <script>
+      let optimize = false;
+      const log = (m)=>{ const el=document.getElementById('log'); el.textContent=(m+'\n'+el.textContent).slice(0,6000); };
+    
+      // 短命垃圾：大量 new 對象，立刻丟棄
+      function makeJunk(n=3e4){
+        for(let i=0;i<n;i++){
+          const obj = { x:i, y:Math.random(), arr:new Array(10).fill(i) };
+          // 立刻丟棄 obj → 仍會出現在 Sampling 佔比
+        }
+      }
+    
+      // 可重用暫存：壞版每次 new；好版重用池
+      const pool = [];
+      function makeTempObjects(n=1e4){
+        for(let i=0;i<n;i++){
+          let buf;
+          if (optimize) {
+            buf = pool.pop() || new Array(256);
+            // 使用後放回池子
+            pool.push(buf);
+          } else {
+            buf = new Array(256); // 壞：每次都 new
+          }
+          buf[0] = i;
+          buf[1] = Math.random();
+        }
+      }
+    
+      document.getElementById('junk').onclick = ()=>{ makeJunk(); log('makeJunk done'); };
+      document.getElementById('cache').onclick = ()=>{ makeTempObjects(); log('makeTempObjects done'); };
+      document.getElementById('toggle').onclick = ()=>{ optimize=!optimize; document.getElementById('toggle').textContent='切換「優化模式」：'+(optimize?'開':'關'); };
+    </script>
+    </body></html>
+    
