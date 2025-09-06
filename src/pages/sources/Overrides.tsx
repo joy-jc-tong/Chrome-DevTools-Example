@@ -1,31 +1,27 @@
-const Overrides = () => {
+export default function Overrides() {
   return (
-    <div className="max-w-4xl">
-      <h1 className="text-3xl font-bold text-gray-900 mb-6">Overrides</h1>
-      <div className="bg-white rounded-lg border border-gray-200 p-6">
-        <p className="text-lg text-gray-700 mb-4">
-          學習如何使用 Overrides 功能來修改網頁的檔案內容，進行即時的程式碼測試和除錯。
-        </p>
-        <div className="mt-4 p-4 bg-gray-50 rounded-lg">
-          <h3 className="font-semibold text-gray-800 mb-2">學習重點：</h3>
-          <ul className="list-disc list-inside space-y-1 text-gray-600">
-            <li>建立 Override 檔案</li>
-            <li>修改 JavaScript 檔案</li>
-            <li>修改 CSS 樣式</li>
-            <li>修改 HTML 內容</li>
-            <li>本地檔案同步</li>
-            <li>版本控制整合</li>
-          </ul>
-        </div>
-        <div className="mt-6 p-4 bg-red-50 rounded-lg">
-          <h3 className="font-semibold text-red-800 mb-2">注意事項：</h3>
-          <p className="text-red-700">
-            Overrides 功能會將修改的檔案儲存在本地，重新整理頁面時會使用修改後的版本，這對於快速測試和除錯非常有用。
-          </p>
-        </div>
-      </div>
+    <div className="space-y-8">
+      <header>
+        <h1 className="text-2xl font-bold">Local Overrides（持久覆寫）</h1>
+        <p className="text-gray-700">把遠端檔案「存成本機副本」，重整後仍以本機版本回應，超適合快速嘗試 CSS/JS 修正。</p>
+      </header>
+      <section>
+        <h2 className="text-xl font-semibold mb-2">操作步驟</h2>
+        <ol className="list-decimal list-inside text-gray-700 space-y-1">
+          <li>Sources → <b>Overrides</b> → 選資料夾 → Allow。</li>
+          <li>打開示範頁 → Network 或 Sources 內找到 <code>styles.css</code>。</li>
+          <li>右鍵 <b>Save for overrides</b> → 改變按鈕顏色/字重 → 重整仍保留。</li>
+        </ol>
+      </section>
+      <section>
+        <h2 className="text-xl font-semibold">互動練習</h2>
+        <a className="px-3 py-1.5 rounded-lg bg-blue-600 text-white" href="/fixtures/sources/overrides.html" target="_blank" rel="noreferrer">
+          開啟示範頁（覆寫 CSS）
+        </a>
+        <ul className="list-decimal list-inside text-gray-700 mt-3 space-y-1">
+          <li>把 <code>.btn</code> 的背景改成 <code>#10b981</code>、字重 700，重整驗證仍生效。</li>
+        </ul>
+      </section>
     </div>
   );
-};
-
-export default Overrides;
+}

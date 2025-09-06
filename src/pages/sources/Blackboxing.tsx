@@ -1,31 +1,27 @@
-const Blackboxing = () => {
+export default function Blackboxing() {
   return (
-    <div className="max-w-4xl">
-      <h1 className="text-3xl font-bold text-gray-900 mb-6">Blackboxing</h1>
-      <div className="bg-white rounded-lg border border-gray-200 p-6">
-        <p className="text-lg text-gray-700 mb-4">
-          學習如何使用 Blackboxing 功能來隱藏第三方函式庫的程式碼，讓除錯過程更加專注於您的應用程式碼。
-        </p>
-        <div className="mt-4 p-4 bg-gray-50 rounded-lg">
-          <h3 className="font-semibold text-gray-800 mb-2">學習重點：</h3>
-          <ul className="list-disc list-inside space-y-1 text-gray-600">
-            <li>設定 Blackbox 模式</li>
-            <li>隱藏第三方函式庫</li>
-            <li>框架程式碼過濾</li>
-            <li>自訂 Blackbox 規則</li>
-            <li>除錯流程優化</li>
-            <li>堆疊追蹤清理</li>
-          </ul>
-        </div>
-        <div className="mt-6 p-4 bg-orange-50 rounded-lg">
-          <h3 className="font-semibold text-orange-800 mb-2">最佳實踐：</h3>
-          <p className="text-orange-700">
-            對於 React、Vue、jQuery 等框架的程式碼，使用 Blackboxing 可以讓您在除錯時專注於業務邏輯，而不會被框架內部實作干擾。
-          </p>
-        </div>
-      </div>
+    <div className="space-y-8">
+      <header>
+        <h1 className="text-2xl font-bold">Blackboxing（忽略第三方庫堆疊）</h1>
+        <p className="text-gray-700">把某些檔案標記為「不感興趣」，除錯時堆疊會自動跳過它們。</p>
+      </header>
+      <section>
+        <h2 className="text-xl font-semibold mb-2">操作步驟</h2>
+        <ol className="list-decimal list-inside text-gray-700 space-y-1">
+          <li>開示範頁 → 觸發錯誤。</li>
+          <li>在 Sources 左側找到 <code>vendor-ui.js</code> → 右鍵 <b>Blackbox script</b>。</li>
+          <li>再次觸發錯誤，Call Stack 將直接定位到 <code>app.js</code> 的實際來源。</li>
+        </ol>
+      </section>
+      <section>
+        <h2 className="text-xl font-semibold">互動練習</h2>
+        <a className="px-3 py-1.5 rounded-lg bg-blue-600 text-white" href="/fixtures/sources/blackbox.html" target="_blank" rel="noreferrer">
+          開啟示範頁（第三方包裝錯誤）
+        </a>
+        <ul className="list-decimal list-inside text-gray-700 mt-3 space-y-1">
+          <li>Blackbox <code>vendor-ui.js</code> → 堆疊變乾淨。</li>
+        </ul>
+      </section>
     </div>
   );
-};
-
-export default Blackboxing;
+}

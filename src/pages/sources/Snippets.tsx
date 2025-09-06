@@ -1,31 +1,43 @@
-const Snippets = () => {
+export default function Snippets() {
   return (
-    <div className="max-w-4xl">
-      <h1 className="text-3xl font-bold text-gray-900 mb-6">Snippets</h1>
-      <div className="bg-white rounded-lg border border-gray-200 p-6">
-        <p className="text-lg text-gray-700 mb-4">
-          學習如何使用 Snippets 功能來建立和執行可重複使用的 JavaScript 程式碼片段，提升開發效率。
-        </p>
-        <div className="mt-4 p-4 bg-gray-50 rounded-lg">
-          <h3 className="font-semibold text-gray-800 mb-2">學習重點：</h3>
-          <ul className="list-disc list-inside space-y-1 text-gray-600">
-            <li>建立程式碼片段</li>
-            <li>執行 Snippets</li>
-            <li>除錯程式碼片段</li>
-            <li>儲存常用腳本</li>
-            <li>自動化測試腳本</li>
-            <li>效能測試工具</li>
-          </ul>
-        </div>
-        <div className="mt-6 p-4 bg-indigo-50 rounded-lg">
-          <h3 className="font-semibold text-indigo-800 mb-2">應用場景：</h3>
-          <p className="text-indigo-700">
-            Snippets 非常適合用於快速測試 API、執行資料分析、建立自動化腳本，或是儲存常用的除錯程式碼。
-          </p>
-        </div>
-      </div>
+    <div className="space-y-8">
+      <header>
+        <h1 className="text-2xl font-bold">Snippets（常用腳本片段）</h1>
+        <p className="text-gray-700">把常用工具腳本存起來，一鍵執行（跨網域皆可，依 DevTools 權限）。</p>
+      </header>
+
+      <section>
+        <h2 className="text-xl font-semibold mb-2">操作步驟</h2>
+        <ol className="list-decimal list-inside text-gray-700 space-y-1">
+          <li>Sources → <b>Snippets</b> → 新增。</li>
+          <li>貼上「收集 fetch URL」程式碼 → 右鍵 Run。</li>
+          <li>切換頁面互動 → 回到 Snippet 再次 Run 觀察結果。</li>
+        </ol>
+      </section>
+
+      <section>
+        <h2 className="text-xl font-semibold mb-2">練習 Snippet：收集所有 fetch / XHR URL</h2>
+        <pre className="bg-gray-900 text-gray-100 rounded-lg p-3 overflow-auto text-sm">
+{`// 收集期間的所有 fetch/XHR URL
+(() => {
+  window.__urls = window.__urls || [];
+  // fetch
+  if (!window.__wrapFetch) {
+    const _fetch = window.fetch;
+    window.fetch = function(url, init){ window.__urls.push(url.toString()); return _fetch.apply(this, arguments); };
+    window.__wrapFetch = true;
+  }
+  // XHR
+  if (!window.__wrapXHR) {
+    const open = XMLHttpRequest.prototype.open;
+    XMLHttpRequest.prototype.open = function(method, url){ window.__urls.push(url.toString()); return open.apply(this, arguments); };
+    window.__wrapXHR = true;
+  }
+  console.table(Array.from(new Set(window.__urls)).map((u,i)=>({i,u})));
+})();`}
+        </pre>
+        <p className="text-gray-700">在 Network-heavy 的頁面執行，回到 Console 看 <code>console.table</code>。</p>
+      </section>
     </div>
   );
-};
-
-export default Snippets;
+}

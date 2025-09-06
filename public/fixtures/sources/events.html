@@ -1,0 +1,28 @@
+<!doctype html><html lang="zh-Hant"><head>
+    <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <title>Event Listener Breakpoints Demo</title>
+    <style>body{font-family:ui-sans-serif,system-ui;background:#f8fafc;padding:24px}.card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:16px;max-width:760px}</style>
+    </head><body>
+    <div class="card">
+      <h1>Event Breakpoints</h1>
+      <button id="start">Start interval</button>
+      <button id="stop">Stop interval</button>
+      <input id="inp" placeholder="在這裡打字（Keyboard）" style="display:block;margin-top:8px;padding:8px;border:1px solid #cbd5e1;border-radius:8px">
+      <button id="anim">開始動畫</button>
+      <div id="box" style="margin-top:12px;width:60px;height:60px;background:#93c5fd;border-radius:8px"></div>
+    </div>
+    <script>
+      let h=null,t=null;
+      document.getElementById('start').onclick=()=>{ if(h) return; h=setInterval(()=>{ console.log('tick', Date.now()) }, 500); };
+      document.getElementById('stop').onclick =()=>{ clearInterval(h); h=null; };
+      document.getElementById('inp').addEventListener('keydown', e=>{ if(e.key==='Enter') console.log('enter!') });
+    
+      document.getElementById('anim').onclick=()=>{
+        const box=document.getElementById('box');
+        let x=0; cancelAnimationFrame(t);
+        const step=()=>{ x=(x+2)%300; box.style.transform=`translateX(${x}px)`; t=requestAnimationFrame(step); };
+        t=requestAnimationFrame(step);
+      };
+    </script>
+    </body></html>
+    

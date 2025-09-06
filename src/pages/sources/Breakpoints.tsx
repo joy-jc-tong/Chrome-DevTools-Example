@@ -1,31 +1,31 @@
-const Breakpoints = () => {
+export default function Breakpoints() {
   return (
-    <div className="max-w-4xl">
-      <h1 className="text-3xl font-bold text-gray-900 mb-6">Breakpoints</h1>
-      <div className="bg-white rounded-lg border border-gray-200 p-6">
-        <p className="text-lg text-gray-700 mb-4">
-          學習如何在 Chrome DevTools 中設定和管理中斷點，這是除錯 JavaScript 程式碼的核心功能。
-        </p>
-        <div className="mt-4 p-4 bg-gray-50 rounded-lg">
-          <h3 className="font-semibold text-gray-800 mb-2">學習重點：</h3>
-          <ul className="list-disc list-inside space-y-1 text-gray-600">
-            <li>設定行中斷點</li>
-            <li>條件中斷點</li>
-            <li>日誌中斷點</li>
-            <li>DOM 中斷點</li>
-            <li>XHR/Fetch 中斷點</li>
-            <li>事件中斷點</li>
-          </ul>
-        </div>
-        <div className="mt-6 p-4 bg-blue-50 rounded-lg">
-          <h3 className="font-semibold text-blue-800 mb-2">實作練習：</h3>
-          <p className="text-blue-700">
-            開啟瀏覽器開發者工具，在 Sources 面板中嘗試設定各種類型的中斷點，觀察程式執行流程。
-          </p>
-        </div>
-      </div>
+    <div className="space-y-8">
+      <header>
+        <h1 className="text-2xl font-bold">Conditional Breakpoints（條件中斷點）</h1>
+        <p className="text-gray-700">只在「滿足條件」時才停下（例如某筆輸入造成錯誤）。</p>
+      </header>
+
+      <section>
+        <h2 className="text-xl font-semibold mb-2">操作步驟</h2>
+        <ol className="list-decimal list-inside text-gray-700 space-y-1">
+          <li>開示範頁 → 打開 <b>Sources</b> → 找到 <code>conditional.js</code>。</li>
+          <li>在 <code>processInput</code> 的行號上點一下 → 右鍵「Add conditional breakpoint…」。</li>
+          <li>輸入條件：<code>text === 'error'</code>（或 <code>/bad/i.test(text)</code>）。</li>
+          <li>回頁面輸入 <code>error</code> → 送出 → 程式應在該行暫停。</li>
+        </ol>
+      </section>
+
+      <section>
+        <h2 className="text-xl font-semibold">互動練習</h2>
+        <a className="px-3 py-1.5 rounded-lg bg-blue-600 text-white" href="/fixtures/sources/conditional.html" target="_blank" rel="noreferrer">
+          開啟示範頁（只在 “error” 停）
+        </a>
+        <ul className="list-decimal list-inside text-gray-700 mt-3 space-y-1">
+          <li>條件：<code>text === 'error'</code> → 驗證只有輸入 error 才中斷。</li>
+          <li>把條件改成 <code>text.length &gt;= 8</code> 試試。</li>
+        </ul>
+      </section>
     </div>
   );
-};
-
-export default Breakpoints;
+}

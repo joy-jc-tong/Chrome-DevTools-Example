@@ -1,31 +1,30 @@
-const Events = () => {
+export default function EventsBreakpoints() {
   return (
-    <div className="max-w-4xl">
-      <h1 className="text-3xl font-bold text-gray-900 mb-6">Event Listener Breakpoints</h1>
-      <div className="bg-white rounded-lg border border-gray-200 p-6">
-        <p className="text-lg text-gray-700 mb-4">
-          學習如何設定事件監聽器中斷點，用於除錯使用者互動相關的程式碼執行。
-        </p>
-        <div className="mt-4 p-4 bg-gray-50 rounded-lg">
-          <h3 className="font-semibold text-gray-800 mb-2">學習重點：</h3>
-          <ul className="list-disc list-inside space-y-1 text-gray-600">
-            <li>滑鼠事件中斷點</li>
-            <li>鍵盤事件中斷點</li>
-            <li>觸控事件中斷點</li>
-            <li>自訂事件中斷點</li>
-            <li>事件冒泡除錯</li>
-            <li>事件委派分析</li>
-          </ul>
-        </div>
-        <div className="mt-6 p-4 bg-purple-50 rounded-lg">
-          <h3 className="font-semibold text-purple-800 mb-2">實用技巧：</h3>
-          <p className="text-purple-700">
-            當您需要了解某個使用者操作觸發了哪些事件處理器時，事件中斷點可以幫助您追蹤整個事件流程。
-          </p>
-        </div>
-      </div>
+    <div className="space-y-8">
+      <header>
+        <h1 className="text-2xl font-bold">Event Listener Breakpoints</h1>
+        <p className="text-gray-700">在事件「被觸發」那一刻就停下（Keyboard/Timer/Animation…）。</p>
+      </header>
+
+      <section>
+        <h2 className="text-xl font-semibold mb-2">操作步驟</h2>
+        <ol className="list-decimal list-inside text-gray-700 space-y-1">
+          <li>開示範頁 → Sources 右側的 <b>Event Listener Breakpoints</b>。</li>
+          <li>展開「<b>Timer</b>」勾選 <b>setInterval</b>；展開「<b>Keyboard</b>」勾 <b>keydown</b>。</li>
+          <li>在頁面按「Start interval」，或聚焦輸入框打字 → 會在對應事件處停下。</li>
+        </ol>
+      </section>
+
+      <section>
+        <h2 className="text-xl font-semibold">互動練習</h2>
+        <a className="px-3 py-1.5 rounded-lg bg-blue-600 text-white" href="/fixtures/sources/events.html" target="_blank" rel="noreferrer">
+          開啟示範頁（Timer / Keyboard）
+        </a>
+        <ul className="list-decimal list-inside text-gray-700 mt-3 space-y-1">
+          <li>找到 <code>setInterval</code> 建立的位置（呼叫堆疊應顯示來源）。</li>
+          <li>勾 <b>Animation</b> 再按「開始動畫」，在 <code>requestAnimationFrame</code> 處停下。</li>
+        </ul>
+      </section>
     </div>
   );
-};
-
-export default Events;
+}
