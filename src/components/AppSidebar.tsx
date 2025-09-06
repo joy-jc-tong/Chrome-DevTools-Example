@@ -43,6 +43,14 @@ const sidebarItems: SidebarItem[] = [
     path: '/sources',
     label: 'Sources',
     description: '除錯 JavaScript 程式碼、設定中斷點',
+    children: [
+      { path: '/sources/breakpoints', name: 'Breakpoints' },
+      { path: '/sources/xhr-fetch', name: 'XHR/Fetch Breakpoints' },
+      { path: '/sources/events', name: 'Event Listener Breakpoints' },
+      { path: '/sources/blackboxing', name: 'Blackboxing' },
+      { path: '/sources/overrides', name: 'Overrides' },
+      { path: '/sources/snippets', name: 'Snippets' },
+    ],
   },
   {
     path: '/network',

@@ -3,6 +3,12 @@ import PageShell from '../components/PageShell';
 import Elements from '../pages/Elements';
 import Console from '../pages/Console';
 import Sources from '../pages/Sources';
+import Breakpoints from '../pages/sources/Breakpoints';
+import XhrFetch from '../pages/sources/XhrFetch';
+import Events from '../pages/sources/Events';
+import Blackboxing from '../pages/sources/Blackboxing';
+import Overrides from '../pages/sources/Overrides';
+import Snippets from '../pages/sources/Snippets';
 import Network from '../pages/Network';
 import Performance from '../pages/Performance';
 import Memory from '../pages/Memory';
@@ -105,6 +111,36 @@ export const router = createBrowserRouter([
       {
         path: 'sources',
         element: <Sources />,
+        children: [
+          {
+            index: true,
+            element: <Breakpoints />,
+          },
+          {
+            path: 'breakpoints',
+            element: <Breakpoints />,
+          },
+          {
+            path: 'xhr-fetch',
+            element: <XhrFetch />,
+          },
+          {
+            path: 'events',
+            element: <Events />,
+          },
+          {
+            path: 'blackboxing',
+            element: <Blackboxing />,
+          },
+          {
+            path: 'overrides',
+            element: <Overrides />,
+          },
+          {
+            path: 'snippets',
+            element: <Snippets />,
+          },
+        ],
       },
       {
         path: 'network',
