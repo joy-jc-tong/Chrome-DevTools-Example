@@ -101,6 +101,13 @@ const sidebarItems: SidebarItem[] = [
     path: '/coverage',
     label: 'Coverage',
     description: '檢視程式碼覆蓋率、未使用的程式碼',
+    children: [
+      { path: '/coverage/tool', name: 'Coverage Tool' },
+      { path: '/coverage/rendering', name: 'Rendering' },
+      { path: '/coverage/sensors', name: 'Sensors' },
+      { path: '/coverage/recorder', name: 'Recorder' },
+      { path: '/coverage/security-issues', name: 'Security Issues' },
+    ],
   },
 ];
 

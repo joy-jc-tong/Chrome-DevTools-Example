@@ -21,6 +21,11 @@ import ServiceWorkers from '../pages/application/ServiceWorkers';
 import Manifest from '../pages/application/Manifest';
 import Cookies from '../pages/application/Cookies';
 import Coverage from '../pages/Coverage';
+import CoverageTool from '../pages/coverage/CoverageTool';
+import Rendering from '../pages/coverage/Rendering';
+import Sensors from '../pages/coverage/Sensors';
+import Recorder from '../pages/coverage/Recorder';
+import SecurityIssues from '../pages/coverage/SecurityIssues';
 import NotFound from '../pages/NotFound';
 import DomBreakpoints from '../pages/elements/DomBreakpoints';
 import EventListeners from '../pages/elements/EventListeners';
@@ -257,6 +262,32 @@ export const router = createBrowserRouter([
       {
         path: 'coverage',
         element: <Coverage />,
+        children: [
+          {
+            index: true,
+            element: <CoverageTool />,
+          },
+          {
+            path: 'tool',
+            element: <CoverageTool />,
+          },
+          {
+            path: 'rendering',
+            element: <Rendering />,
+          },
+          {
+            path: 'sensors',
+            element: <Sensors />,
+          },
+          {
+            path: 'recorder',
+            element: <Recorder />,
+          },
+          {
+            path: 'security-issues',
+            element: <SecurityIssues />,
+          },
+        ],
       },
       {
         path: '*',
