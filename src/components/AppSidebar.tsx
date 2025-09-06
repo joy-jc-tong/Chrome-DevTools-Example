@@ -72,6 +72,11 @@ const sidebarItems: SidebarItem[] = [
     path: '/memory',
     label: 'Memory',
     description: '監控記憶體使用量、記憶體洩漏',
+    children: [
+      { path: '/memory/heap-snapshot', name: 'Heap Snapshot' },
+      { path: '/memory/allocation-sampling', name: 'Allocation Sampling' },
+      { path: '/memory/timeline', name: 'Timeline' },
+    ],
   },
   {
     path: '/application',

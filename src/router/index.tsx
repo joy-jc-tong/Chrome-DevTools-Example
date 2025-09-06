@@ -6,6 +6,9 @@ import Sources from '../pages/Sources';
 import Network from '../pages/Network';
 import Performance from '../pages/Performance';
 import Memory from '../pages/Memory';
+import HeapSnapshot from '../pages/memory/HeapSnapshot';
+import AllocationSampling from '../pages/memory/AllocationSampling';
+import Timeline from '../pages/memory/Timeline';
 import Application from '../pages/Application';
 import Coverage from '../pages/Coverage';
 import NotFound from '../pages/NotFound';
@@ -166,6 +169,24 @@ export const router = createBrowserRouter([
       {
         path: 'memory',
         element: <Memory />,
+        children: [
+          {
+            index: true,
+            element: <HeapSnapshot />,
+          },
+          {
+            path: 'heap-snapshot',
+            element: <HeapSnapshot />,
+          },
+          {
+            path: 'allocation-sampling',
+            element: <AllocationSampling />,
+          },
+          {
+            path: 'timeline',
+            element: <Timeline />,
+          },
+        ],
       },
       {
         path: 'application',

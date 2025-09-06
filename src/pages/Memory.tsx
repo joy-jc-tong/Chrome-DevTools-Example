@@ -1,9 +1,11 @@
+import { Outlet } from 'react-router-dom';
+
 const Memory = () => {
   return (
     <div className="max-w-4xl">
       <h1 className="text-3xl font-bold text-gray-900 mb-6">Memory 面板</h1>
       <div className="bg-white rounded-lg border border-gray-200 p-6">
-        <p className="text-lg text-gray-700">
+        <p className="text-lg text-gray-700 mb-4">
           這是 Memory 面板的學習內容。在這裡您可以學習如何監控記憶體使用量、檢測記憶體洩漏以及進行記憶體分析。
         </p>
         <div className="mt-4 p-4 bg-gray-50 rounded-lg">
@@ -16,6 +18,7 @@ const Memory = () => {
           </ul>
         </div>
       </div>
+      <Outlet />
     </div>
   );
 };
