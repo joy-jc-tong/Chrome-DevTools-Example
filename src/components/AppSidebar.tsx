@@ -61,6 +61,12 @@ const sidebarItems: SidebarItem[] = [
     path: '/performance',
     label: 'Performance',
     description: '分析頁面效能、載入時間、渲染效能',
+    children: [
+      { path: '/performance/screenshots', name: 'Screenshots / Filmstrip' },
+      { path: '/performance/cls', name: 'Web Vitals Lane & Layout Shift Regions' },
+      { path: '/performance/flamegraphs', name: 'Main / Bottom-Up / Call Tree 讀法' },
+      { path: '/performance/throttling', name: 'CPU / Network 模擬' },
+    ],
   },
   {
     path: '/memory',

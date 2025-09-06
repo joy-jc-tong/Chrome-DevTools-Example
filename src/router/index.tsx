@@ -25,6 +25,10 @@ import WebSocket from '../pages/network/WebSocket';
 import BlockingOverrides from '../pages/network/BlockingOverrides';
 import Throttling from '../pages/network/Throttling';
 import HAR from '../pages/network/HAR';
+import Screenshots from '../pages/performance/Screenshots';
+import Cls from '../pages/performance/Cls';
+import Flamegraphs from '../pages/performance/Flamegraphs';
+import PerfThrottling from '../pages/performance/PerfThrottling';
 
 export const router = createBrowserRouter([
   {
@@ -136,6 +140,28 @@ export const router = createBrowserRouter([
       {
         path: 'performance',
         element: <Performance />,
+        children: [
+          {
+            index: true,
+            element: <Screenshots />,
+          },
+          {
+            path: 'screenshots',
+            element: <Screenshots />,
+          },
+          {
+            path: 'cls',
+            element: <Cls />,
+          },
+          {
+            path: 'flamegraphs',
+            element: <Flamegraphs />,
+          },
+          {
+            path: 'throttling',
+            element: <PerfThrottling />,
+          },
+        ],
       },
       {
         path: 'memory',
