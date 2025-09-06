@@ -1,73 +1,34 @@
-const Cookies = () => {
+export default function CookiesPage() {
   return (
-    <div className="max-w-4xl">
-      <h1 className="text-3xl font-bold text-gray-900 mb-6">Cookies 面板</h1>
-      <div className="bg-white rounded-lg border border-gray-200 p-6">
-        <p className="text-lg text-gray-700 mb-4">
-          Cookies 面板讓您檢視、編輯和管理網站設定的 Cookies，包括它們的屬性、值和過期時間。
+    <div className="space-y-8">
+      <header>
+        <h1 className="text-2xl font-bold">Cookies（SameSite / Secure / HttpOnly）</h1>
+        <p className="text-gray-700">
+          在 Application → <b>Cookies</b> 檢視屬性。跨站情境通常需要
+          <code> SameSite=None; Secure</code>；敏感 Cookie 建議 <code>HttpOnly</code> 防 JS 讀取。
         </p>
-        
-        <div className="space-y-6">
-          <div className="p-4 bg-gray-50 rounded-lg">
-            <h3 className="font-semibold text-gray-800 mb-2">Cookie 屬性</h3>
-            <div className="space-y-2 text-sm">
-              <div><span className="font-medium">Name:</span> Cookie 名稱</div>
-              <div><span className="font-medium">Value:</span> Cookie 值</div>
-              <div><span className="font-medium">Domain:</span> 適用網域</div>
-              <div><span className="font-medium">Path:</span> 適用路徑</div>
-              <div><span className="font-medium">Expires:</span> 過期時間</div>
-              <div><span className="font-medium">Size:</span> Cookie 大小</div>
-            </div>
-          </div>
-          
-          <div className="p-4 bg-gray-50 rounded-lg">
-            <h3 className="font-semibold text-gray-800 mb-2">安全屬性</h3>
-            <div className="space-y-2 text-sm">
-              <div><span className="font-medium">HttpOnly:</span> 僅限 HTTP 存取</div>
-              <div><span className="font-medium">Secure:</span> 僅限 HTTPS 傳輸</div>
-              <div><span className="font-medium">SameSite:</span> 跨站請求限制</div>
-            </div>
-          </div>
-          
-          <div className="p-4 bg-gray-50 rounded-lg">
-            <h3 className="font-semibold text-gray-800 mb-2">Cookie 類型</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <h4 className="font-medium text-gray-700 mb-1">Session Cookies</h4>
-                <p className="text-xs text-gray-600">關閉瀏覽器後自動刪除</p>
-              </div>
-              <div>
-                <h4 className="font-medium text-gray-700 mb-1">Persistent Cookies</h4>
-                <p className="text-xs text-gray-600">有明確過期時間的 Cookies</p>
-              </div>
-            </div>
-          </div>
-          
-          <div className="p-4 bg-gray-50 rounded-lg">
-            <h3 className="font-semibold text-gray-800 mb-2">管理功能</h3>
-            <div className="space-y-2 text-sm">
-              <div>• 檢視所有 Cookies 的詳細資訊</div>
-              <div>• 編輯 Cookie 的值和屬性</div>
-              <div>• 刪除單個或所有 Cookies</div>
-              <div>• 過濾和搜尋 Cookies</div>
-              <div>• 匯出 Cookies 資料</div>
-            </div>
-          </div>
-        </div>
-        
-        <div className="mt-6 p-4 bg-orange-50 rounded-lg">
-          <h3 className="font-semibold text-orange-800 mb-2">學習重點：</h3>
-          <ul className="list-disc list-inside space-y-1 text-orange-700">
-            <li>檢視和編輯 Cookie 屬性</li>
-            <li>理解 Cookie 安全設定</li>
-            <li>管理 Cookie 生命週期</li>
-            <li>除錯 Cookie 相關問題</li>
-            <li>測試 Cookie 行為</li>
-          </ul>
-        </div>
-      </div>
+      </header>
+
+      <section>
+        <h2 className="text-xl font-semibold mb-2">操作步驟</h2>
+        <ol className="list-decimal list-inside text-gray-700 space-y-1">
+          <li>開啟示範頁 → 透過按鈕設置不同屬性。</li>
+          <li>到 Application → Cookies 檢視 Expires / SameSite / Secure / HttpOnly。</li>
+          <li>Console 讀取 <code>document.cookie</code>，比較有無 <code>HttpOnly</code> 的差異。</li>
+        </ol>
+      </section>
+
+      <section>
+        <h2 className="text-xl font-semibold">互動練習</h2>
+        <a className="px-3 py-1.5 rounded-lg bg-blue-600 text-white"
+           href="/fixtures/application/cookies.html" target="_blank" rel="noreferrer">
+          開啟示範頁（設定不同屬性）
+        </a>
+        <ul className="list-disc list-inside text-gray-700 mt-3 space-y-1">
+          <li>設 <code>SameSite=None; Secure</code>（需 HTTPS 才會生效）。</li>
+          <li>理解為什麼 JS 無法設定或讀取 <code>HttpOnly</code>。</li>
+        </ul>
+      </section>
     </div>
   );
-};
-
-export default Cookies;
+}

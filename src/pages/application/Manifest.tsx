@@ -1,68 +1,34 @@
-const Manifest = () => {
+export default function ManifestIndexedDB() {
   return (
-    <div className="max-w-4xl">
-      <h1 className="text-3xl font-bold text-gray-900 mb-6">Manifest 面板</h1>
-      <div className="bg-white rounded-lg border border-gray-200 p-6">
-        <p className="text-lg text-gray-700 mb-4">
-          Manifest 面板顯示 Web App Manifest 檔案的內容，這是 Progressive Web App (PWA) 的核心配置檔案。
+    <div className="space-y-8">
+      <header>
+        <h1 className="text-2xl font-bold">IndexedDB Viewer（資料結構 / 版本）</h1>
+        <p className="text-gray-700">
+          在 Application → <b>IndexedDB</b> 可檢視資料庫、object stores、indexes 與實際資料。
+          升版在 <code>onupgradeneeded</code> 進行（建立 store/index、資料遷移）。
         </p>
-        
-        <div className="space-y-6">
-          <div className="p-4 bg-gray-50 rounded-lg">
-            <h3 className="font-semibold text-gray-800 mb-2">基本資訊</h3>
-            <div className="space-y-2 text-sm">
-              <div><span className="font-medium">name:</span> 應用程式名稱</div>
-              <div><span className="font-medium">short_name:</span> 簡短名稱</div>
-              <div><span className="font-medium">description:</span> 應用程式描述</div>
-              <div><span className="font-medium">start_url:</span> 啟動 URL</div>
-              <div><span className="font-medium">display:</span> 顯示模式</div>
-            </div>
-          </div>
-          
-          <div className="p-4 bg-gray-50 rounded-lg">
-            <h3 className="font-semibold text-gray-800 mb-2">圖示設定</h3>
-            <p className="text-sm text-gray-600 mb-3">
-              icons 陣列定義應用程式在不同裝置和情境下使用的圖示。
-            </p>
-            <div className="text-xs text-gray-500">
-              支援多種尺寸：192x192, 512x512 等
-            </div>
-          </div>
-          
-          <div className="p-4 bg-gray-50 rounded-lg">
-            <h3 className="font-semibold text-gray-800 mb-2">顯示模式</h3>
-            <div className="space-y-2 text-sm">
-              <div><span className="font-medium">fullscreen:</span> 全螢幕模式</div>
-              <div><span className="font-medium">standalone:</span> 獨立應用程式模式</div>
-              <div><span className="font-medium">minimal-ui:</span> 最小化 UI 模式</div>
-              <div><span className="font-medium">browser:</span> 瀏覽器模式</div>
-            </div>
-          </div>
-          
-          <div className="p-4 bg-gray-50 rounded-lg">
-            <h3 className="font-semibold text-gray-800 mb-2">主題色彩</h3>
-            <p className="text-sm text-gray-600 mb-3">
-              theme_color 和 background_color 定義應用程式的主題色彩。
-            </p>
-            <div className="text-xs text-gray-500">
-              影響狀態列、位址列等 UI 元素
-            </div>
-          </div>
-        </div>
-        
-        <div className="mt-6 p-4 bg-purple-50 rounded-lg">
-          <h3 className="font-semibold text-purple-800 mb-2">學習重點：</h3>
-          <ul className="list-disc list-inside space-y-1 text-purple-700">
-            <li>檢視 Manifest 檔案內容</li>
-            <li>驗證 PWA 安裝條件</li>
-            <li>測試不同顯示模式</li>
-            <li>檢查圖示和主題設定</li>
-            <li>除錯 PWA 相關問題</li>
-          </ul>
-        </div>
-      </div>
+      </header>
+
+      <section>
+        <h2 className="text-xl font-semibold mb-2">操作步驟</h2>
+        <ol className="list-decimal list-inside text-gray-700 space-y-1">
+          <li>開啟示範頁 → 點「建 v1」建立 DB 與 <code>notes</code> store。</li>
+          <li>點「升 v2」新增索引 <code>byTag</code>。</li>
+          <li>在 IndexedDB 檢視器確認 stores / indexes 與資料。</li>
+        </ol>
+      </section>
+
+      <section>
+        <h2 className="text-xl font-semibold">互動練習</h2>
+        <a className="px-3 py-1.5 rounded-lg bg-blue-600 text-white"
+           href="/fixtures/application/indexeddb.html" target="_blank" rel="noreferrer">
+          開啟示範頁（版本升級與索引）
+        </a>
+        <ul className="list-disc list-inside text-gray-700 mt-3 space-y-1">
+          <li>用 index 查詢 tag=work，確認結果。</li>
+          <li>在 Viewer 刪除一筆，再回頁面讀取比對。</li>
+        </ul>
+      </section>
     </div>
   );
-};
-
-export default Manifest;
+}

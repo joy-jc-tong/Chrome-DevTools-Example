@@ -1,0 +1,43 @@
+<!doctype html><html lang="zh-Hant"><head>
+    <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <title>Cookies Demo</title>
+    <style>
+      body{font-family:ui-sans-serif,system-ui;background:#f8fafc;padding:24px}
+      .card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:16px;max-width:860px}
+      button{padding:8px 12px;border:1px solid #cbd5e1;border-radius:8px;background:#f1f5f9;cursor:pointer;margin-right:8px}
+      pre{background:#0b1020;color:#a8dadc;border-radius:8px;padding:12px;overflow:auto}
+    </style></head><body>
+    <div class="card">
+      <h1>Cookies（SameSite / Secure / HttpOnly）</h1>
+      <div>
+        <button id="setLax">設置 Lax</button>
+        <button id="setStrict">設置 Strict</button>
+        <button id="setNone">設置 None; Secure</button>
+        <button id="setHttpOnly">模擬 HttpOnly（需伺服器）</button>
+        <button id="show">顯示 document.cookie</button>
+      </div>
+      <pre id="log"></pre>
+    </div>
+    <script>
+      const log=t=>{const el=document.getElementById('log'); el.textContent=(t+'\n'+el.textContent).slice(0,8000);};
+      const oneDay=24*3600;
+    
+      document.getElementById('setLax').onclick=()=>{
+        document.cookie = `demo=lax-${Date.now()}; Path=/; Max-Age=${oneDay}; SameSite=Lax`;
+        log('已設置 SameSite=Lax');
+      };
+      document.getElementById('setStrict').onclick=()=>{
+        document.cookie = `demo=strict-${Date.now()}; Path=/; Max-Age=${oneDay}; SameSite=Strict`;
+        log('已設置 SameSite=Strict');
+      };
+      document.getElementById('setNone').onclick=()=>{
+        document.cookie = `demo=none-${Date.now()}; Path=/; Max-Age=${oneDay}; SameSite=None; Secure`;
+        log('嘗試設置 SameSite=None; Secure（需 HTTPS）');
+      };
+      document.getElementById('setHttpOnly').onclick=()=>{
+        log('HttpOnly 只能由伺服器透過 Set-Cookie 設定；JS 無法設定/讀取。');
+      };
+      document.getElementById('show').onclick=()=>log('document.cookie = '+document.cookie);
+    </script>
+    </body></html>
+    

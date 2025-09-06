@@ -1,0 +1,69 @@
+<!doctype html><html lang="zh-Hant"><head>
+    <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <title>Clear Storage Demo</title>
+    <style>
+      body{font-family:ui-sans-serif,system-ui;background:#f8fafc;padding:24px}
+      .card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:16px;max-width:860px}
+      button{padding:8px 12px;border:1px solid #cbd5e1;border-radius:8px;background:#f1f5f9;cursor:pointer;margin-right:8px}
+      pre{background:#0b1020;color:#a8dadc;border-radius:8px;padding:12px;overflow:auto}
+    </style></head><body>
+    <div class="card">
+      <h1>Clear Storage 範例</h1>
+      <div>
+        <button id="seed">灌資料</button>
+        <button id="check">檢查狀態</button>
+        <button id="register-sw">註冊 Service Worker</button>
+        <button id="unregister-sw">反註冊 SW</button>
+      </div>
+      <pre id="log"></pre>
+    </div>
+    <script>
+      const log=(m)=>{const el=document.getElementById('log'); el.textContent=(m+'\n'+el.textContent).slice(0,8000);};
+    
+      async function seed(){
+        localStorage.setItem('ls:key','value-'+Date.now());
+        sessionStorage.setItem('ss:key','value-'+Date.now());
+        document.cookie="demo_cookie=choco; path=/";
+        // IndexedDB
+        await new Promise((resolve,reject)=>{
+          const req=indexedDB.open('clear-demo',1);
+          req.onupgradeneeded=()=>{ const db=req.result; const s=db.createObjectStore('items',{keyPath:'id'}); s.add({id:1,ts:Date.now()}); };
+          req.onsuccess=()=>{ const db=req.result; const tx=db.transaction('items','readwrite'); tx.objectStore('items').put({id:2,ts:Date.now()}); tx.oncomplete=()=>{db.close(); resolve();};};
+          req.onerror=()=>reject(req.error);
+        });
+        // Cache Storage
+        const c = await caches.open('clear-cache');
+        await c.put('/fixtures/application/ping.txt', new Response('pong '+Date.now(), {headers:{'Content-Type':'text/plain'}}));
+        log('已灌入 Local/Session/Cookie/IDB/Cache');
+      }
+    
+      async function check(){
+        const ls=localStorage.length, ss=sessionStorage.length;
+        const ck=document.cookie;
+        let idbCount=0;
+        await new Promise((resolve)=>{
+          const req=indexedDB.open('clear-demo',1);
+          req.onsuccess=()=>{ const db=req.result; const tx=db.transaction('items','readonly'); const req2=tx.objectStore('items').getAll(); req2.onsuccess=()=>{ idbCount=(req2.result||[]).length; db.close(); resolve(); }; req2.onerror=()=>resolve(); };
+          req.onerror=()=>resolve();
+        });
+        const keys=await caches.keys();
+        log(JSON.stringify({ localStorage:ls, sessionStorage:ss, cookies:ck, idbItems:idbCount, cacheKeys:keys }, null, 2));
+      }
+    
+      document.getElementById('seed').onclick = seed;
+      document.getElementById('check').onclick = check;
+    
+      document.getElementById('register-sw').onclick = async ()=>{
+        if('serviceWorker' in navigator){
+          await navigator.serviceWorker.register('./sw-clear.js', {scope:'./'});
+          log('SW registered');
+        }
+      };
+      document.getElementById('unregister-sw').onclick = async ()=>{
+        const regs = await navigator.serviceWorker.getRegistrations();
+        for (const r of regs) await r.unregister();
+        log('SW unregistered');
+      };
+    </script>
+    </body></html>
+    

@@ -1,0 +1,70 @@
+<!doctype html><html lang="zh-Hant"><head>
+    <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <title>IndexedDB Demo</title>
+    <style>
+      body{font-family:ui-sans-serif,system-ui;background:#f8fafc;padding:24px}
+      .card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:16px;max-width:860px}
+      button{padding:8px 12px;border:1px solid #cbd5e1;border-radius:8px;background:#f1f5f9;cursor:pointer;margin-right:8px}
+      pre{background:#0b1020;color:#a8dadc;border-radius:8px;padding:12px;overflow:auto}
+    </style></head><body>
+    <div class="card">
+      <h1>IndexedDB Viewer 範例（版本升級）</h1>
+      <div>
+        <button id="v1">建 v1（notes store）</button>
+        <button id="seed">寫入資料</button>
+        <button id="v2">升 v2（加 index byTag）</button>
+        <button id="read">讀取（by tag=work）</button>
+        <button id="clear">清庫</button>
+      </div>
+      <pre id="log"></pre>
+    </div>
+    <script>
+      const DB='demo-idb', STORE='notes';
+      const log=(m)=>{const el=document.getElementById('log'); el.textContent=(m+'\n'+el.textContent).slice(0,8000);};
+    
+      function openDB(v){
+        return new Promise((resolve,reject)=>{
+          const req=indexedDB.open(DB, v);
+          req.onupgradeneeded=()=>{ const db=req.result;
+            if (v===1){
+              const s=db.createObjectStore(STORE,{keyPath:'id',autoIncrement:true});
+              s.createIndex('byCreated','created');
+            }
+            if (v===2){
+              const s=req.transaction.objectStore(STORE);
+              if (!s.indexNames.contains('byTag')) s.createIndex('byTag','tag');
+            }
+          };
+          req.onsuccess=()=>resolve(req.result);
+          req.onerror=()=>reject(req.error);
+        });
+      }
+    
+      document.getElementById('v1').onclick=async ()=>{
+        const db=await openDB(1); db.close(); log('v1 ready: store=notes, index=byCreated');
+      };
+      document.getElementById('seed').onclick=async ()=>{
+        const db=await openDB(1);
+        const tx=db.transaction(STORE,'readwrite'), s=tx.objectStore(STORE);
+        await Promise.all([
+          s.add({title:'A',tag:'work',created:Date.now()}),
+          s.add({title:'B',tag:'life',created:Date.now()+1}),
+          s.add({title:'C',tag:'work',created:Date.now()+2}),
+        ]);
+        tx.oncomplete=()=>{ db.close(); log('seeded 3 notes'); };
+      };
+      document.getElementById('v2').onclick=async ()=>{
+        const db=await openDB(2); db.close(); log('v2 ready: add index byTag');
+      };
+      document.getElementById('read').onclick=async ()=>{
+        const db=await openDB(2);
+        const tx=db.transaction(STORE,'readonly'), s=tx.objectStore(STORE), idx=s.index('byTag');
+        const req=idx.getAll('work');
+        req.onsuccess=()=>{ log('byTag=work → '+JSON.stringify(req.result)); db.close(); };
+      };
+      document.getElementById('clear').onclick=async ()=>{
+        indexedDB.deleteDatabase(DB); log('DB deleted');
+      };
+    </script>
+    </body></html>
+    

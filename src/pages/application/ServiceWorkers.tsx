@@ -1,69 +1,33 @@
-const ServiceWorkers = () => {
+export default function ServiceWorkers() {
   return (
-    <div className="max-w-4xl">
-      <h1 className="text-3xl font-bold text-gray-900 mb-6">Service Workers 面板</h1>
-      <div className="bg-white rounded-lg border border-gray-200 p-6">
-        <p className="text-lg text-gray-700 mb-4">
-          Service Workers 面板讓您檢視和管理註冊的 Service Workers，包括它們的狀態、快取策略和事件監聽器。
+    <div className="space-y-8">
+      <header>
+        <h1 className="text-2xl font-bold">Service Workers（Bypass / Update on reload）</h1>
+        <p className="text-gray-700">
+          舊版 SW 阻擋更新時，在 Application → <b>Service Workers</b> 勾 <b>Bypass for network</b> 或
+          <b> Update on reload</b>，可直接走網路或強制更新 SW。
         </p>
-        
-        <div className="space-y-6">
-          <div className="p-4 bg-gray-50 rounded-lg">
-            <h3 className="font-semibold text-gray-800 mb-2">Service Worker 狀態</h3>
-            <div className="grid grid-cols-2 gap-4 text-sm">
-              <div>
-                <span className="font-medium">Installing:</span>
-                <span className="ml-2 text-gray-600">正在安裝中</span>
-              </div>
-              <div>
-                <span className="font-medium">Installed:</span>
-                <span className="ml-2 text-gray-600">已安裝</span>
-              </div>
-              <div>
-                <span className="font-medium">Activating:</span>
-                <span className="ml-2 text-gray-600">正在啟動中</span>
-              </div>
-              <div>
-                <span className="font-medium">Activated:</span>
-                <span className="ml-2 text-gray-600">已啟動</span>
-              </div>
-            </div>
-          </div>
-          
-          <div className="p-4 bg-gray-50 rounded-lg">
-            <h3 className="font-semibold text-gray-800 mb-2">快取管理</h3>
-            <p className="text-sm text-gray-600 mb-3">
-              Service Workers 可以攔截網路請求並提供快取回應，實現離線功能。
-            </p>
-            <div className="text-xs text-gray-500">
-              支援 Cache API 和 IndexedDB 儲存
-            </div>
-          </div>
-          
-          <div className="p-4 bg-gray-50 rounded-lg">
-            <h3 className="font-semibold text-gray-800 mb-2">事件監聽</h3>
-            <div className="space-y-2 text-sm">
-              <div><span className="font-medium">fetch:</span> 攔截網路請求</div>
-              <div><span className="font-medium">install:</span> Service Worker 安裝事件</div>
-              <div><span className="font-medium">activate:</span> Service Worker 啟動事件</div>
-              <div><span className="font-medium">message:</span> 與主執行緒通訊</div>
-            </div>
-          </div>
-        </div>
-        
-        <div className="mt-6 p-4 bg-green-50 rounded-lg">
-          <h3 className="font-semibold text-green-800 mb-2">學習重點：</h3>
-          <ul className="list-disc list-inside space-y-1 text-green-700">
-            <li>檢視 Service Worker 註冊狀態</li>
-            <li>監控快取策略和儲存</li>
-            <li>除錯 Service Worker 程式碼</li>
-            <li>測試離線功能</li>
-            <li>強制更新 Service Worker</li>
-          </ul>
-        </div>
-      </div>
+      </header>
+
+      <section>
+        <h2 className="text-xl font-semibold mb-2">操作步驟</h2>
+        <ol className="list-decimal list-inside text-gray-700 space-y-1">
+          <li>開示範頁註冊 v1，請求 <code>/version.txt</code>（回 v1）。</li>
+          <li>切換註冊 v2，再請求；若仍是 v1，勾 Bypass / Update on reload 後重試。</li>
+        </ol>
+      </section>
+
+      <section>
+        <h2 className="text-xl font-semibold">互動練習</h2>
+        <a className="px-3 py-1.5 rounded-lg bg-blue-600 text-white"
+           href="/fixtures/application/sw-demo.html" target="_blank" rel="noreferrer">
+          開啟示範頁（SW 版本切換）
+        </a>
+        <ul className="list-disc list-inside text-gray-700 mt-3 space-y-1">
+          <li>觀察不勾任何選項時，舊版 SW 仍攔截的狀況。</li>
+          <li>勾 Bypass / Update on reload 後，回應應變為 v2。</li>
+        </ul>
+      </section>
     </div>
   );
-};
-
-export default ServiceWorkers;
+}
