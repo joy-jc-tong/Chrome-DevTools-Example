@@ -90,6 +90,12 @@ const sidebarItems: SidebarItem[] = [
     path: '/application',
     label: 'Application',
     description: '管理儲存空間、快取、服務工作者',
+    children: [
+      { path: '/application/storage', name: 'Storage' },
+      { path: '/application/service-workers', name: 'Service Workers' },
+      { path: '/application/manifest', name: 'Manifest' },
+      { path: '/application/cookies', name: 'Cookies' },
+    ],
   },
   {
     path: '/coverage',

@@ -16,6 +16,10 @@ import HeapSnapshot from '../pages/memory/HeapSnapshot';
 import AllocationSampling from '../pages/memory/AllocationSampling';
 import Timeline from '../pages/memory/Timeline';
 import Application from '../pages/Application';
+import Storage from '../pages/application/Storage';
+import ServiceWorkers from '../pages/application/ServiceWorkers';
+import Manifest from '../pages/application/Manifest';
+import Cookies from '../pages/application/Cookies';
 import Coverage from '../pages/Coverage';
 import NotFound from '../pages/NotFound';
 import DomBreakpoints from '../pages/elements/DomBreakpoints';
@@ -227,6 +231,28 @@ export const router = createBrowserRouter([
       {
         path: 'application',
         element: <Application />,
+        children: [
+          {
+            index: true,
+            element: <Storage />,
+          },
+          {
+            path: 'storage',
+            element: <Storage />,
+          },
+          {
+            path: 'service-workers',
+            element: <ServiceWorkers />,
+          },
+          {
+            path: 'manifest',
+            element: <Manifest />,
+          },
+          {
+            path: 'cookies',
+            element: <Cookies />,
+          },
+        ],
       },
       {
         path: 'coverage',
