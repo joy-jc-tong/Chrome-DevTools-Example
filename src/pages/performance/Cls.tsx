@@ -18,15 +18,17 @@ export default function PerfCls() {
         </ol>
       </section>
 
-      <section>
+      <section className="space-y-3">
         <h2 className="text-xl font-semibold">互動練習</h2>
-        <a className="px-3 py-1.5 rounded-lg bg-blue-600 text-white" href={`${import.meta.env.BASE_URL}fixtures/performance/cls.html`} target="_blank" rel="noreferrer">
-          開啟示範頁（製造 CLS）
-        </a>
-        <ul className="list-decimal list-inside text-gray-700 mt-3 space-y-1">
-          <li>找出「最大一次 CLS」的責任元素。</li>
-          <li>修改示範頁（在 DevTools 加 `min-height` 或預留空間）再錄一次，比較 CLS 下降。</li>
-        </ul>
+        <div className="rounded-xl border p-4 bg-gray-50">
+          <a className="px-3 py-1.5 rounded-lg bg-blue-600 text-white" href={`${import.meta.env.BASE_URL}fixtures/performance/cls.html`} target="_blank" rel="noreferrer">
+            開啟示範頁（製造 CLS）
+          </a>
+          <ul className="list-decimal list-inside text-gray-700 mt-3 space-y-1">
+            <li>找出「最大一次 CLS」的責任元素。</li>
+            <li>修改示範頁（在 DevTools 加 `min-height` 或預留空間）再錄一次，比較 CLS 下降。</li>
+          </ul>
+        </div>
       </section>
     </div>
   );

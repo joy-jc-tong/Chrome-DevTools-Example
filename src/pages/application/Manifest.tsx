@@ -18,16 +18,18 @@ export default function ManifestIndexedDB() {
         </ol>
       </section>
 
-      <section>
+      <section className="space-y-3">
         <h2 className="text-xl font-semibold">互動練習</h2>
-        <a className="px-3 py-1.5 rounded-lg bg-blue-600 text-white"
-           href={`${import.meta.env.BASE_URL}fixtures/application/indexeddb.html`} target="_blank" rel="noreferrer">
-          開啟示範頁（版本升級與索引）
-        </a>
-        <ul className="list-disc list-inside text-gray-700 mt-3 space-y-1">
-          <li>用 index 查詢 tag=work，確認結果。</li>
-          <li>在 Viewer 刪除一筆，再回頁面讀取比對。</li>
-        </ul>
+        <div className="rounded-xl border p-4 bg-gray-50">
+          <a className="px-3 py-1.5 rounded-lg bg-blue-600 text-white"
+             href={`${import.meta.env.BASE_URL}fixtures/application/indexeddb.html`} target="_blank" rel="noreferrer">
+            開啟示範頁（版本升級與索引）
+          </a>
+          <ul className="list-disc list-inside text-gray-700 mt-3 space-y-1">
+            <li>用 index 查詢 tag=work，確認結果。</li>
+            <li>在 Viewer 刪除一筆，再回頁面讀取比對。</li>
+          </ul>
+        </div>
       </section>
     </div>
   );

@@ -18,16 +18,18 @@ export default function Storage() {
         </ol>
       </section>
 
-      <section>
+      <section className="space-y-3">
         <h2 className="text-xl font-semibold">互動練習</h2>
-        <a className="px-3 py-1.5 rounded-lg bg-blue-600 text-white"
-           href={`${import.meta.env.BASE_URL}fixtures/application/clear-storage.html`} target="_blank" rel="noreferrer">
-          開啟示範頁（灌資料 → 一鍵清）
-        </a>
-        <ul className="list-disc list-inside text-gray-700 mt-3 space-y-1">
-          <li>勾選「Unregister service workers」一起移除 SW 控制。</li>
-          <li>清除後重整，確認應用回到初始狀態。</li>
-        </ul>
+        <div className="rounded-xl border p-4 bg-gray-50">
+          <a className="px-3 py-1.5 rounded-lg bg-blue-600 text-white"
+             href={`${import.meta.env.BASE_URL}fixtures/application/clear-storage.html`} target="_blank" rel="noreferrer">
+            開啟示範頁（灌資料 → 一鍵清）
+          </a>
+          <ul className="list-disc list-inside text-gray-700 mt-3 space-y-1">
+            <li>勾選「Unregister service workers」一起移除 SW 控制。</li>
+            <li>清除後重整，確認應用回到初始狀態。</li>
+          </ul>
+        </div>
       </section>
     </div>
   );

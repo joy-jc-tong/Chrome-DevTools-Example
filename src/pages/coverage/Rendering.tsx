@@ -18,16 +18,18 @@ export default function RenderingTools() {
         </ol>
       </section>
 
-      <section>
+      <section className="space-y-3">
         <h2 className="text-xl font-semibold">互動練習</h2>
-        <a className="px-3 py-1.5 rounded-lg bg-blue-600 text-white"
-           href={`${import.meta.env.BASE_URL}fixtures/coverage/rendering-hot.html`} target="_blank" rel="noreferrer">
-          開啟示範頁（重繪熱區）
-        </a>
-        <ul className="list-disc list-inside text-gray-700 mt-3 space-y-1">
-          <li>指出反覆重繪的熱區與原因（使用 `offsetTop` 造成 layout thrash 等）。</li>
-          <li>把高頻操作改為 transform 置換，重測閃爍與 FPS。</li>
-        </ul>
+        <div className="rounded-xl border p-4 bg-gray-50">
+          <a className="px-3 py-1.5 rounded-lg bg-blue-600 text-white"
+             href={`${import.meta.env.BASE_URL}fixtures/coverage/rendering-hot.html`} target="_blank" rel="noreferrer">
+            開啟示範頁（重繪熱區）
+          </a>
+          <ul className="list-disc list-inside text-gray-700 mt-3 space-y-1">
+            <li>指出反覆重繪的熱區與原因（使用 `offsetTop` 造成 layout thrash 等）。</li>
+            <li>把高頻操作改為 transform 置換，重測閃爍與 FPS。</li>
+          </ul>
+        </div>
       </section>
     </div>
   );

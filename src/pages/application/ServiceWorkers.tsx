@@ -17,16 +17,18 @@ export default function ServiceWorkers() {
         </ol>
       </section>
 
-      <section>
+      <section className="space-y-3">
         <h2 className="text-xl font-semibold">互動練習</h2>
-        <a className="px-3 py-1.5 rounded-lg bg-blue-600 text-white"
-           href={`${import.meta.env.BASE_URL}fixtures/application/sw-demo.html`} target="_blank" rel="noreferrer">
-          開啟示範頁（SW 版本切換）
-        </a>
-        <ul className="list-disc list-inside text-gray-700 mt-3 space-y-1">
-          <li>觀察不勾任何選項時，舊版 SW 仍攔截的狀況。</li>
-          <li>勾 Bypass / Update on reload 後，回應應變為 v2。</li>
-        </ul>
+        <div className="rounded-xl border p-4 bg-gray-50">
+          <a className="px-3 py-1.5 rounded-lg bg-blue-600 text-white"
+             href={`${import.meta.env.BASE_URL}fixtures/application/sw-demo.html`} target="_blank" rel="noreferrer">
+            開啟示範頁（SW 版本切換）
+          </a>
+          <ul className="list-disc list-inside text-gray-700 mt-3 space-y-1">
+            <li>觀察不勾任何選項時，舊版 SW 仍攔截的狀況。</li>
+            <li>勾 Bypass / Update on reload 後，回應應變為 v2。</li>
+          </ul>
+        </div>
       </section>
     </div>
   );

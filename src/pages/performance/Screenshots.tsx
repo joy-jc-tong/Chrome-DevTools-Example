@@ -18,15 +18,17 @@ export default function PerfScreenshots() {
         </ol>
       </section>
 
-      <section>
+      <section className="space-y-3">
         <h2 className="text-xl font-semibold">互動練習</h2>
-        <a className="px-3 py-1.5 rounded-lg bg-blue-600 text-white" href={`${import.meta.env.BASE_URL}fixtures/performance/filmstrip.html`} target="_blank" rel="noreferrer">
-          開啟示範頁（延遲載入 LCP）
-        </a>
-        <ul className="list-decimal list-inside text-gray-700 mt-3 space-y-1">
-          <li>指出 LCP 對應的 Filmstrip 畫面幀（截圖加註）。</li>
-          <li>觀察「骨架屏 → 大圖出現」的時間差，解釋體感落差來源。</li>
-        </ul>
+        <div className="rounded-xl border p-4 bg-gray-50">
+          <a className="px-3 py-1.5 rounded-lg bg-blue-600 text-white" href={`${import.meta.env.BASE_URL}fixtures/performance/filmstrip.html`} target="_blank" rel="noreferrer">
+            開啟示範頁（延遲載入 LCP）
+          </a>
+          <ul className="list-decimal list-inside text-gray-700 mt-3 space-y-1">
+            <li>指出 LCP 對應的 Filmstrip 畫面幀（截圖加註）。</li>
+            <li>觀察「骨架屏 → 大圖出現」的時間差，解釋體感落差來源。</li>
+          </ul>
+        </div>
       </section>
     </div>
   );

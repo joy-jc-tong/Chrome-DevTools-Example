@@ -13,14 +13,16 @@ export default function Overrides() {
           <li>右鍵 <b>Save for overrides</b> → 改變按鈕顏色/字重 → 重整仍保留。</li>
         </ol>
       </section>
-      <section>
+      <section className="space-y-3">
         <h2 className="text-xl font-semibold">互動練習</h2>
-        <a className="px-3 py-1.5 rounded-lg bg-blue-600 text-white" href={`${import.meta.env.BASE_URL}fixtures/sources/overrides.html`} target="_blank" rel="noreferrer">
-          開啟示範頁（覆寫 CSS）
-        </a>
-        <ul className="list-decimal list-inside text-gray-700 mt-3 space-y-1">
-          <li>把 <code>.btn</code> 的背景改成 <code>#10b981</code>、字重 700，重整驗證仍生效。</li>
-        </ul>
+        <div className="rounded-xl border p-4 bg-gray-50">
+          <a className="px-3 py-1.5 rounded-lg bg-blue-600 text-white" href={`${import.meta.env.BASE_URL}fixtures/sources/overrides.html`} target="_blank" rel="noreferrer">
+            開啟示範頁（覆寫 CSS）
+          </a>
+          <ul className="list-decimal list-inside text-gray-700 mt-3 space-y-1">
+            <li>把 <code>.btn</code> 的背景改成 <code>#10b981</code>、字重 700，重整驗證仍生效。</li>
+          </ul>
+        </div>
       </section>
     </div>
   );

@@ -19,16 +19,18 @@ export default function AllocationSamplingPage() {
         </ol>
       </section>
 
-      <section>
+      <section className="space-y-3">
         <h2 className="text-xl font-semibold">互動練習</h2>
-        <a className="px-3 py-1.5 rounded-lg bg-blue-600 text-white"
-           href={`${import.meta.env.BASE_URL}fixtures/memory/allocation-sampling.html`} target="_blank" rel="noreferrer">
-          開啟示範頁（過度配置 vs 物件重用）
-        </a>
-        <ul className="list-decimal list-inside text-gray-700 mt-3 space-y-1">
-          <li>在 Sampling 報表中鎖定最大熱點（如 <code>makeTempObjects</code>）。</li>
-          <li>開啟「優化模式」後重測，總分配量應下降。</li>
-        </ul>
+        <div className="rounded-xl border p-4 bg-gray-50">
+          <a className="px-3 py-1.5 rounded-lg bg-blue-600 text-white"
+             href={`${import.meta.env.BASE_URL}fixtures/memory/allocation-sampling.html`} target="_blank" rel="noreferrer">
+            開啟示範頁（過度配置 vs 物件重用）
+          </a>
+          <ul className="list-decimal list-inside text-gray-700 mt-3 space-y-1">
+            <li>在 Sampling 報表中鎖定最大熱點（如 <code>makeTempObjects</code>）。</li>
+            <li>開啟「優化模式」後重測，總分配量應下降。</li>
+          </ul>
+        </div>
       </section>
     </div>
   );

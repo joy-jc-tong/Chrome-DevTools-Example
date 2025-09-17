@@ -19,15 +19,17 @@ export default function PerfThrottling() {
         </ol>
       </section>
 
-      <section>
+      <section className="space-y-3">
         <h2 className="text-xl font-semibold">互動練習</h2>
-        <a className="px-3 py-1.5 rounded-lg bg-blue-600 text-white" href={`${import.meta.env.BASE_URL}fixtures/performance/throttle-inp.html`} target="_blank" rel="noreferrer">
-          開啟示範頁（INP/TBT 測試）
-        </a>
-        <ul className="list-decimal list-inside text-gray-700 mt-3 space-y-1">
-          <li>在 6× CPU 下測一次 INP；把重計算切分後（toggle 优化），再測一次，對比 INP/TBT。</li>
-          <li>同時開啟 Network 節流 → 觀察 LCP 與 INP 是否相互影響。</li>
-        </ul>
+        <div className="rounded-xl border p-4 bg-gray-50">
+          <a className="px-3 py-1.5 rounded-lg bg-blue-600 text-white" href={`${import.meta.env.BASE_URL}fixtures/performance/throttle-inp.html`} target="_blank" rel="noreferrer">
+            開啟示範頁（INP/TBT 測試）
+          </a>
+          <ul className="list-decimal list-inside text-gray-700 mt-3 space-y-1">
+            <li>在 6× CPU 下測一次 INP；把重計算切分後（toggle 优化），再測一次，對比 INP/TBT。</li>
+            <li>同時開啟 Network 節流 → 觀察 LCP 與 INP 是否相互影響。</li>
+          </ul>
+        </div>
       </section>
     </div>
   );

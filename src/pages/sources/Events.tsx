@@ -15,15 +15,17 @@ export default function EventsBreakpoints() {
         </ol>
       </section>
 
-      <section>
+      <section className="space-y-3">
         <h2 className="text-xl font-semibold">互動練習</h2>
-        <a className="px-3 py-1.5 rounded-lg bg-blue-600 text-white" href={`${import.meta.env.BASE_URL}fixtures/sources/events.html`} target="_blank" rel="noreferrer">
-          開啟示範頁（Timer / Keyboard）
-        </a>
-        <ul className="list-decimal list-inside text-gray-700 mt-3 space-y-1">
-          <li>找到 <code>setInterval</code> 建立的位置（呼叫堆疊應顯示來源）。</li>
-          <li>勾 <b>Animation</b> 再按「開始動畫」，在 <code>requestAnimationFrame</code> 處停下。</li>
-        </ul>
+        <div className="rounded-xl border p-4 bg-gray-50">
+          <a className="px-3 py-1.5 rounded-lg bg-blue-600 text-white" href={`${import.meta.env.BASE_URL}fixtures/sources/events.html`} target="_blank" rel="noreferrer">
+            開啟示範頁（Timer / Keyboard）
+          </a>
+          <ul className="list-decimal list-inside text-gray-700 mt-3 space-y-1">
+            <li>找到 <code>setInterval</code> 建立的位置（呼叫堆疊應顯示來源）。</li>
+            <li>勾 <b>Animation</b> 再按「開始動畫」，在 <code>requestAnimationFrame</code> 處停下。</li>
+          </ul>
+        </div>
       </section>
     </div>
   );

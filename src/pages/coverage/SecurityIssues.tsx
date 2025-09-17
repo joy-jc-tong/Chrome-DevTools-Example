@@ -17,12 +17,14 @@ export default function SecurityIssuesPage() {
         </ol>
       </section>
 
-      <section>
+      <section className="space-y-3">
         <h2 className="text-xl font-semibold">互動練習</h2>
-        <a className="px-3 py-1.5 rounded-lg bg-blue-600 text-white"
-           href={`${import.meta.env.BASE_URL}fixtures/coverage/security-csp.html`} target="_blank" rel="noreferrer">
-          開啟示範頁（CSP 違規）
-        </a>
+        <div className="rounded-xl border p-4 bg-gray-50">
+          <a className="px-3 py-1.5 rounded-lg bg-blue-600 text-white"
+             href={`${import.meta.env.BASE_URL}fixtures/coverage/security-csp.html`} target="_blank" rel="noreferrer">
+            開啟示範頁（CSP 違規）
+          </a>
+        </div>
       </section>
     </div>
   );

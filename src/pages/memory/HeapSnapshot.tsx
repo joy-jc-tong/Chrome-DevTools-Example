@@ -20,18 +20,20 @@ export default function HeapSnapshotPage() {
           </ol>
         </section>
   
-        <section>
+        <section className="space-y-3">
           <h2 className="text-xl font-semibold">互動練習</h2>
-          <a className="px-3 py-1.5 rounded-lg bg-blue-600 text-white"
-             href={`${import.meta.env.BASE_URL}fixtures/memory/heap-snapshot.html`} target="_blank" rel="noreferrer">
-            開啟示範頁（事件閉包保住 DOM）
-          </a>
-          <ul className="list-decimal list-inside text-gray-700 mt-3 space-y-1">
-            <li>按「新增卡片（附監聽）」10 次，再按「移除所有 DOM」。</li>
-            <li>拍攝 Snapshot，搜尋「<code>Detached</code>」或直接找 <code>Card</code> 元素。</li>
-            <li>在 Retainers 找到 <code>leakHandlers</code> 陣列或閉包把 DOM 保住的證據。</li>
-            <li>點「修正版本」再重做一次流程，確認 Snapshot 裡 Detached 降低。</li>
-          </ul>
+          <div className="rounded-xl border p-4 bg-gray-50">
+            <a className="px-3 py-1.5 rounded-lg bg-blue-600 text-white"
+               href={`${import.meta.env.BASE_URL}fixtures/memory/heap-snapshot.html`} target="_blank" rel="noreferrer">
+              開啟示範頁（事件閉包保住 DOM）
+            </a>
+            <ul className="list-decimal list-inside text-gray-700 mt-3 space-y-1">
+              <li>按「新增卡片（附監聽）」10 次，再按「移除所有 DOM」。</li>
+              <li>拍攝 Snapshot，搜尋「<code>Detached</code>」或直接找 <code>Card</code> 元素。</li>
+              <li>在 Retainers 找到 <code>leakHandlers</code> 陣列或閉包把 DOM 保住的證據。</li>
+              <li>點「修正版本」再重做一次流程，確認 Snapshot 裡 Detached 降低。</li>
+            </ul>
+          </div>
         </section>
       </div>
     );

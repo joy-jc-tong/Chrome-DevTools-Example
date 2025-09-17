@@ -16,15 +16,17 @@ export default function Breakpoints() {
         </ol>
       </section>
 
-      <section>
+      <section className="space-y-3">
         <h2 className="text-xl font-semibold">互動練習</h2>
-        <a className="px-3 py-1.5 rounded-lg bg-blue-600 text-white" href={`${import.meta.env.BASE_URL}fixtures/sources/conditional.html`} target="_blank" rel="noreferrer">
-          開啟示範頁（只在 “error” 停）
-        </a>
-        <ul className="list-decimal list-inside text-gray-700 mt-3 space-y-1">
-          <li>條件：<code>text === 'error'</code> → 驗證只有輸入 error 才中斷。</li>
-          <li>把條件改成 <code>text.length &gt;= 8</code> 試試。</li>
-        </ul>
+        <div className="rounded-xl border p-4 bg-gray-50">
+          <a className="px-3 py-1.5 rounded-lg bg-blue-600 text-white" href={`${import.meta.env.BASE_URL}fixtures/sources/conditional.html`} target="_blank" rel="noreferrer">
+            開啟示範頁（只在 "error" 停）
+          </a>
+          <ul className="list-decimal list-inside text-gray-700 mt-3 space-y-1">
+            <li>條件：<code>text === 'error'</code> → 驗證只有輸入 error 才中斷。</li>
+            <li>把條件改成 <code>text.length &gt;= 8</code> 試試。</li>
+          </ul>
+        </div>
       </section>
     </div>
   );

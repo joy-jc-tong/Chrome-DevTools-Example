@@ -13,15 +13,17 @@ export default function XhrFetch() {
           <li>在暫停點檢查 <code>url</code>、<code>init.body</code>（或 XHR 的 <code>payload</code>）。</li>
         </ol>
       </section>
-      <section>
+      <section className="space-y-3">
         <h2 className="text-xl font-semibold">互動練習</h2>
-        <a className="px-3 py-1.5 rounded-lg bg-blue-600 text-white" href={`${import.meta.env.BASE_URL}fixtures/sources/xhr-fetch.html`} target="_blank" rel="noreferrer">
-          開啟示範頁（攔截 /search）
-        </a>
-        <ul className="list-decimal list-inside text-gray-700 mt-3 space-y-1">
-          <li>新增條件字串：<code>/search</code> → 觀察每次搜尋都會停下。</li>
-          <li>在 Call Stack 中展開，確認是按鈕 handler 觸發。</li>
-        </ul>
+        <div className="rounded-xl border p-4 bg-gray-50">
+          <a className="px-3 py-1.5 rounded-lg bg-blue-600 text-white" href={`${import.meta.env.BASE_URL}fixtures/sources/xhr-fetch.html`} target="_blank" rel="noreferrer">
+            開啟示範頁（攔截 /search）
+          </a>
+          <ul className="list-decimal list-inside text-gray-700 mt-3 space-y-1">
+            <li>新增條件字串：<code>/search</code> → 觀察每次搜尋都會停下。</li>
+            <li>在 Call Stack 中展開，確認是按鈕 handler 觸發。</li>
+          </ul>
+        </div>
       </section>
     </div>
   );

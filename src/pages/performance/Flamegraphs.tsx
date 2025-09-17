@@ -20,15 +20,17 @@ export default function PerfFlamegraphs() {
         </ol> 
       </section>
 
-      <section>
+      <section className="space-y-3">
         <h2 className="text-xl font-semibold">互動練習</h2>
-        <a className="px-3 py-1.5 rounded-lg bg-blue-600 text-white" href={`${import.meta.env.BASE_URL}fixtures/performance/cpu-hot.html`} target="_blank" rel="noreferrer">
-          開啟示範頁（CPU 熱點）
-        </a>
-        <ul className="list-decimal list-inside text-gray-700 mt-3 space-y-1">
-          <li>鎖定一個 ≥50ms 的長任務，截圖註記。</li>
-          <li>把計算拆成多段（修改示範頁 script），再錄一次，對比 TBT/長任務次數。</li>
-        </ul>
+        <div className="rounded-xl border p-4 bg-gray-50">
+          <a className="px-3 py-1.5 rounded-lg bg-blue-600 text-white" href={`${import.meta.env.BASE_URL}fixtures/performance/cpu-hot.html`} target="_blank" rel="noreferrer">
+            開啟示範頁（CPU 熱點）
+          </a>
+          <ul className="list-decimal list-inside text-gray-700 mt-3 space-y-1">
+            <li>鎖定一個 ≥50ms 的長任務，截圖註記。</li>
+            <li>把計算拆成多段（修改示範頁 script），再錄一次，對比 TBT/長任務次數。</li>
+          </ul>
+        </div>
       </section>
     </div>
   );
