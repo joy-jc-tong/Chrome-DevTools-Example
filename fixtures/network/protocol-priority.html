@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <title>Protocol / Priority Demo</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    body { font-family: sans-serif; background:#f8fafc; padding:24px; }
+    .card { background:#fff; border:1px solid #e5e7eb; border-radius:12px; padding:16px; max-width:700px; }
+    img { max-width: 100%; margin-top:12px; display:block; }
+    button { padding:8px 12px; border:1px solid #ccc; border-radius:6px; cursor:pointer; margin-top:12px; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Protocol / Priority 範例</h1>
+    <p>點按鈕 → 載入多個資源，觀察 Network 面板的 <b>Protocol</b> 與 <b>Priority</b> 欄位。</p>
+    <button id="loadBtn">載入多資源</button>
+    <div id="output"></div>
+  </div>
+
+  <script>
+    document.getElementById('loadBtn').addEventListener('click', () => {
+      // 動態插入 JS
+      const script = document.createElement('script');
+      script.src = '/fixtures/network/dummy.js';
+      document.body.appendChild(script);
+
+      // 動態插入 CSS
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = '/fixtures/network/dummy.css';
+      document.head.appendChild(link);
+
+      // 圖片（普通優先級）
+      const img1 = document.createElement('img');
+      img1.src = '/fixtures/network/img-low.png';
+      document.getElementById('output').appendChild(img1);
+
+      // 圖片（高優先級）
+      const img2 = document.createElement('img');
+      img2.src = '/fixtures/network/img-high.png';
+      img2.setAttribute('fetchpriority', 'high');
+      document.getElementById('output').appendChild(img2);
+    });
+  </script>
+</body>
+</html>

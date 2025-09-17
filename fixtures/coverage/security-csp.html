@@ -1,0 +1,16 @@
+<!doctype html><html lang="zh-Hant"><head>
+    <meta charset="utf-8"/><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; object-src 'none'">
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <title>CSP / Issues Demo</title>
+    <style>body{font-family:ui-sans-serif,system-ui;background:#f8fafc;margin:0;padding:24px}.card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:16px;max-width:860px}</style>
+    </head><body>
+    <div class="card">
+      <h1>CSP 違規示範</h1>
+      <p>此頁以 meta CSP 禁用 inline script；下方 inline script 將被阻擋，Issues 面板會列出違規與修正建議（加入 <code>'unsafe-inline'</code> 或轉成外部檔案）。</p>
+    </div>
+    <script>
+      // 這段為 inline script，會被上方 CSP 阻擋（可在 Issues 面板看到）
+      console.log('inline should be blocked');
+    </script>
+    </body></html>
+    

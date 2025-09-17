@@ -1,0 +1,35 @@
+<!doctype html><html lang="zh-Hant"><head>
+    <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <title>Rendering Hot Area</title>
+    <style>
+      body{font-family:ui-sans-serif,system-ui;background:#f8fafc;margin:0;padding:24px}
+      .card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:16px;max-width:860px}
+      .list{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}
+      .item{height:60px;border-radius:8px;border:1px solid #e5e7eb;background:#fff}
+    </style></head><body>
+    <div class="card">
+      <h1>Rendering：重繪熱區</h1>
+      <button id="jitter" style="padding:8px 12px;border:1px solid #cbd5e1;border-radius:8px;background:#f1f5f9">切換抖動模式</button>
+      <div class="list" id="list"></div>
+    </div>
+    <script>
+      const list = document.getElementById('list');
+      for(let i=0;i<80;i++){ const d=document.createElement('div'); d.className='item'; list.appendChild(d); }
+      let jitter=false;
+      document.getElementById('jitter').onclick=()=>{ jitter=!jitter; if(jitter) start(); };
+      function start(){
+        let x=0;
+        function loop(){
+          if(!jitter) return;
+          // 壞：讀寫交錯造成重排 + 重繪
+          const h = list.offsetHeight; // 讀
+          list.querySelectorAll('.item').forEach((el,i)=>{
+            el.style.width = (60 + ((x+i)%20))+'px'; // 寫
+          });
+          x++; requestAnimationFrame(loop);
+        }
+        loop();
+      }
+    </script>
+    </body></html>
+    

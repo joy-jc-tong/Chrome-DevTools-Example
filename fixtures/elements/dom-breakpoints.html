@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <title>DOM Breakpoints Demo</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    body { font-family: ui-sans-serif, system-ui, -apple-system; margin: 0; padding: 24px; background: #f8fafc; }
+    .card { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 16px; max-width: 820px; }
+    .row { display: flex; gap: 12px; flex-wrap: wrap; }
+    button { padding: 8px 12px; border-radius: 8px; border: 1px solid #e5e7eb; background: #f1f5f9; cursor: pointer; }
+    button:hover { background: #e2e8f0; }
+    ul { margin-top: 12px; padding-left: 20px; }
+    li { padding: 6px 8px; border-bottom: 1px dashed #e5e7eb; }
+    .highlight { background: #fff7ed; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>DOM Breakpoints 範例</h1>
+    <p>請在 Elements 面板對下方清單或按鈕設定 <em>Break on...</em>，再觸發變動以觀察暫停位置。</p>
+
+    <div class="row" style="margin: 8px 0 12px;">
+      <button id="btn-add">新增一筆項目</button>
+      <button id="btn-remove">移除最後一筆</button>
+      <button id="btn-toggle-class">切換 class（highlight）</button>
+      <button id="btn-inline-style">改 style（color）</button>
+    </div>
+
+    <ul id="list">
+      <li id="item-1">項目 1</li>
+      <li id="item-2">項目 2</li>
+      <li id="item-3">項目 3</li>
+    </ul>
+  </div>
+
+  <script>
+    (function () {
+      const list = document.getElementById('list');
+      const addBtn = document.getElementById('btn-add');
+      const removeBtn = document.getElementById('btn-remove');
+      const toggleClassBtn = document.getElementById('btn-toggle-class');
+      const inlineStyleBtn = document.getElementById('btn-inline-style');
+
+      // 操作行為（可用來設 DOM/屬性 Breakpoint）
+      addBtn.addEventListener('click', () => {
+        const li = document.createElement('li');
+        li.textContent = '新項目 ' + Math.floor(Math.random() * 1000);
+        list.appendChild(li);
+      });
+
+      removeBtn.addEventListener('click', () => {
+        const last = list.lastElementChild;
+        if (last) last.remove();
+      });
+
+      toggleClassBtn.addEventListener('click', () => {
+        toggleClassBtn.classList.toggle('highlight'); // 屬性(class)變更
+      });
+
+      inlineStyleBtn.addEventListener('click', () => {
+        inlineStyleBtn.style.color = inlineStyleBtn.style.color ? '' : '#dc2626'; // 內聯 style 變更
+      });
+
+      // Query 參數：自動觸發故障情境
+      const params = new URLSearchParams(location.search);
+      const fault = params.get('fault');
+
+      if (fault === 'remove') {
+        setTimeout(() => {
+          const target = document.querySelector('#item-2');
+          if (target) target.remove(); // 觀察 Node removal / Subtree modifications
+        }, 10000);
+      }
+
+      if (fault === 'attr') {
+        setTimeout(() => {
+          toggleClassBtn.classList.add('highlight'); // class 變更
+          toggleClassBtn.setAttribute('data-flag', 'on'); // data-* 屬性變更
+          inlineStyleBtn.style.color = '#16a34a'; // style 變更
+        }, 1500);
+      }
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <title>Accessibility Pane Demo</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    body { font-family: ui-sans-serif, system-ui, -apple-system; margin: 0; padding: 24px; background: #f8fafc; }
+    .card { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 16px; max-width: 900px; }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .box { border: 1px dashed #cbd5e1; border-radius: 8px; padding: 12px; }
+    .btn-like { padding: 8px 12px; border-radius: 8px; background: #e2e8f0; cursor: pointer; display: inline-block; }
+    .kbd { background:#0b1020; color:#e2e8f0; padding:2px 6px; border-radius:4px; font-family:ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .visually-hidden { position: absolute !important; height: 1px; width: 1px; overflow: hidden; clip: rect(1px, 1px, 1px, 1px); white-space: nowrap; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>無障礙檢查範例</h1>
+    <!-- 故意跳級：直接用 h3 -->
+    <h3>（故意的錯誤階層：這裡應該是 h2）</h3>
+
+    <div class="row">
+      <!-- 1) 用 div 假裝按鈕：無 role、不可聚焦、無鍵盤操作 -->
+      <section class="box">
+        <h2>假按鈕（需要修正）</h2>
+        <div id="fakeBtn" class="btn-like">儲存</div>
+        <p>問題：<code>div</code> 沒有語意；鍵盤 <span class="kbd">Tab</span> 無法聚焦，<span class="kbd">Enter</span>/<span class="kbd">Space</span> 也不會觸發。</p>
+        <p>修正方向：改用 <code>&lt;button&gt;</code>；或加 <code>role="button"</code>、<code>tabindex="0"</code>，並處理鍵盤事件。</p>
+      </section>
+
+      <!-- 2) 圖示按鈕：缺 accessible name -->
+      <section class="box">
+        <h2>圖示按鈕（缺無障礙名稱）</h2>
+        <button id="iconBtn" class="btn-like" aria-label="">
+          <!-- 只有圖示，沒有文字 -->
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#334155" aria-hidden="true">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.41 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.41 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+          </svg>
+        </button>
+        <p>問題：只有 SVG，<code>aria-label</code> 為空，<b>Computed name</b> 會是空白。</p>
+        <p>修正方向：補上 <code>aria-label="新增到最愛"</code> 或加入可見文字。</p>
+      </section>
+
+      <!-- 3) 切換開關：aria-pressed 狀態需同步 -->
+      <section class="box">
+        <h2>切換開關（需同步 aria-pressed）</h2>
+        <button id="toggle" class="btn-like" aria-pressed="false">切換</button>
+        <p>問題：點擊後需要同步更新 <code>aria-pressed</code>，用於輔助科技朗讀狀態。</p>
+      </section>
+
+      <!-- 4) 錯誤的 aria-hidden 使用 -->
+      <section class="box">
+        <h2>被誤用 <code>aria-hidden</code> 的內容</h2>
+        <p id="hiddenText" aria-hidden="true">這段文字被標記為 aria-hidden="true"，會從無障礙樹移除。</p>
+        <p>修正方向：移除多餘的 <code>aria-hidden</code>（除非它真的應該被忽略）。</p>
+      </section>
+    </div>
+
+    <!-- live region：狀態提示 -->
+    <p class="visually-hidden" role="status" aria-live="polite" id="live">狀態訊息將顯示於此</p>
+  </div>
+
+  <script>
+    // 1) 假按鈕：滑鼠可點，但鍵盤不行（刻意示範）
+    document.getElementById('fakeBtn').addEventListener('click', () => {
+      announce('已嘗試儲存（但這顆是 div 假按鈕，請修正語意與鍵盤可用性）');
+    });
+
+    // 2) 圖示按鈕：沒有 name
+    document.getElementById('iconBtn').addEventListener('click', () => {
+      announce('已點擊圖示按鈕（請補 aria-label 才有名稱）');
+    });
+
+    // 3) 切換開關：同步 aria-pressed
+    const toggle = document.getElementById('toggle');
+    toggle.addEventListener('click', () => {
+      const next = toggle.getAttribute('aria-pressed') !== 'true';
+      toggle.setAttribute('aria-pressed', String(next));
+      announce('切換狀態：' + (next ? '開啟' : '關閉'));
+    });
+
+    // live region 簡易公告
+    const live = document.getElementById('live');
+    function announce(msg) { live.textContent = msg; }
+  </script>
+</body>
+</html>

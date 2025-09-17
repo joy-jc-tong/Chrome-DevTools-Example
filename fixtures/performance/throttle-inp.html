@@ -1,0 +1,38 @@
+<!doctype html><html lang="zh-Hant"><head>
+    <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <title>CPU / Network Throttling Demo</title>
+    <style>
+      body{font-family:ui-sans-serif,system-ui;background:#f8fafc;margin:0;padding:24px}
+      .card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:16px;max-width:860px}
+      button{padding:8px 12px;border:1px solid #cbd5e1;border-radius:8px;background:#f1f5f9;cursor:pointer;margin-right:8px}
+      .list{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+      .item{background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:8px}
+    </style></head><body>
+    <div class="card">
+      <h1>INP / TBT 測試</h1>
+      <button id="toggle">切換「切分優化」：關</button>
+      <button id="interact">互動測試（產生重計算與 DOM 更新）</button>
+      <div id="list" class="list"></div>
+    </div>
+    <script>
+      let split=false; document.getElementById('toggle').onclick=()=>{split=!split;document.getElementById('toggle').textContent='切換「切分優化」：'+(split?'開':'關')};
+      const list=document.getElementById('list');
+      function heavy(n=4e6){ let s=0; for(let i=0;i<n;i++){ s+=Math.sqrt((i%997)+1) } return s }
+      function updateDOM(count=120){
+        list.innerHTML='';
+        for(let i=0;i<count;i++){ const d=document.createElement('div'); d.className='item'; d.textContent='item '+i; list.appendChild(d); }
+      }
+      document.getElementById('interact').addEventListener('click', ()=>{
+        // 模擬一次使用者互動：重計算 + DOM 更新（會影響 INP/TBT）
+        if(!split){
+          heavy(6e6); updateDOM(240);
+        }else{
+          // 切分：把重工作分 8 次，降低單次長任務
+          let left=8; const chunk=Math.floor(6e6/left);
+          const step=()=>{ heavy(chunk); updateDOM(30); if(--left>0) setTimeout(step,0); };
+          step();
+        }
+      });
+    </script>
+    </body></html>
+    

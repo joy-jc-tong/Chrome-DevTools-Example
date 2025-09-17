@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <title>Event Listeners Demo</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    body { font-family: ui-sans-serif, system-ui, -apple-system; margin: 0; }
+    .container { padding: 24px; max-width: 720px; margin: auto; }
+    button { padding: 10px 16px; border-radius: 8px; border: 1px solid #e5e7eb; background: #f1f5f9; cursor: pointer; }
+    button:hover { background: #e2e8f0; }
+    .scroll-box { height: 200px; overflow-y: auto; border: 1px solid #e5e7eb; margin-top: 20px; padding: 12px; }
+    .scroll-content { height: 800px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Event Listeners 範例</h1>
+    <p>請使用 Elements → Event Listeners Pane 檢查下方元素的事件綁定狀態。</p>
+
+    <button id="btn">點我測試</button>
+
+    <div class="scroll-box" id="scroll-box">
+      <div class="scroll-content">滾動這裡觸發 scroll 事件</div>
+    </div>
+  </div>
+
+  <script>
+    const btn = document.getElementById('btn');
+    const box = document.getElementById('scroll-box');
+
+    // 綁定兩次 click 事件
+    btn.addEventListener('click', () => {
+      console.log('[click handler 1] 來自 script.js: 第一次綁定');
+    });
+
+    btn.addEventListener('click', () => {
+      console.log('[click handler 2] 來自 script.js: 第二次綁定');
+    }, { passive: false });
+
+    // 綁定 scroll 事件（非 passive）
+    box.addEventListener('scroll', (e) => {
+      console.log('[scroll handler] 非 passive，可能會阻塞', e.target.scrollTop);
+    }, { passive: false });
+  </script>
+</body>
+</html>

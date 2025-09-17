@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <title>Blocking / Overrides Demo</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    body { font-family: ui-sans-serif, system-ui, -apple-system; background:#f8fafc; padding:24px; }
+    .card { background:#fff; border:1px solid #e5e7eb; border-radius:12px; padding:16px; max-width:760px; }
+    .banner { margin-top:12px; padding:12px; background:#e0f2fe; border-radius:6px; }
+    .error { color:#dc2626; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Network Blocking / Overrides 範例</h1>
+    <p>打開 DevTools → Network，嘗試封鎖或覆寫請求。</p>
+    <div id="banner" class="banner">載入中...</div>
+    <pre id="apiResult"></pre>
+  </div>
+
+  <script src="/fixtures/network/ads.js"></script>
+  <script>
+    // 1) 載入 API
+    fetch('/fixtures/network/api/data.json')
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('apiResult').textContent = 'API 回應：' + JSON.stringify(data);
+      })
+      .catch(err => {
+        document.getElementById('apiResult').textContent = 'API 載入失敗';
+        document.getElementById('apiResult').className = 'error';
+      });
+
+    // 2) 載入 Banner JSON（可做 Overrides）
+    fetch('/fixtures/network/banner.json')
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('banner').textContent = data.message;
+      });
+  </script>
+</body>
+</html>

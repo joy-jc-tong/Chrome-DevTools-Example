@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <title>WebSocket Demo</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    body { font-family: sans-serif; background:#f8fafc; padding:24px; }
+    .card { background:#fff; border:1px solid #e5e7eb; border-radius:12px; padding:16px; max-width:600px; }
+    button { padding:8px 12px; border:1px solid #ccc; border-radius:6px; margin-right:8px; cursor:pointer; }
+    #log { margin-top:12px; font-size:14px; color:#334155; }
+    .msg { margin:4px 0; }
+    .send { color:#2563eb; }
+    .recv { color:#16a34a; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>WebSocket 測試頁</h1>
+    <p>打開 DevTools → Network → 點擊 WS 連線 → Messages 分頁，檢查訊息。</p>
+    <button id="connectBtn">連線 WebSocket</button>
+    <button id="sendBtn" disabled>送出訊息</button>
+    <div id="log"></div>
+  </div>
+
+  <script>
+    let socket;
+
+    const log = (text, cls) => {
+      const div = document.createElement("div");
+      div.className = "msg " + cls;
+      div.textContent = text;
+      document.getElementById("log").appendChild(div);
+    };
+
+    document.getElementById("connectBtn").addEventListener("click", () => {
+      socket = new WebSocket("wss://echo.websocket.events");
+      socket.addEventListener("open", () => {
+        log("已連線", "recv");
+        document.getElementById("sendBtn").disabled = false;
+      });
+      socket.addEventListener("message", e => log("收到: " + e.data, "recv"));
+      socket.addEventListener("close", () => log("連線關閉", "recv"));
+    });
+
+    document.getElementById("sendBtn").addEventListener("click", () => {
+      const msg = JSON.stringify({ type: "ping", ts: Date.now() });
+      socket.send(msg);
+      log("送出: " + msg, "send");
+    });
+  </script>
+</body>
+</html>

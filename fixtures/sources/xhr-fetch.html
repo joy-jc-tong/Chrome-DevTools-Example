@@ -1,0 +1,33 @@
+<!doctype html><html lang="zh-Hant"><head>
+    <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <title>XHR / Fetch Breakpoints Demo</title>
+    <style>body{font-family:ui-sans-serif,system-ui;background:#f8fafc;padding:24px}.card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:16px;max-width:760px}button{padding:8px 12px;border:1px solid #cbd5e1;border-radius:8px;background:#f1f5f9;cursor:pointer;margin-right:8px}</style>
+    </head><body>
+    <div class="card">
+      <h1>XHR / Fetch Breakpoints</h1>
+      <button id="fetchHello">搜尋 hello（fetch）</button>
+      <button id="fetchError">搜尋 error（fetch）</button>
+      <button id="xhrHello">搜尋 hello（XHR）</button>
+      <pre id="log"></pre>
+    </div>
+    <script>
+      const log=(m)=>{const el=document.getElementById('log');el.textContent=(m+'\n'+el.textContent).slice(0,6000);};
+    
+      document.getElementById('fetchHello').onclick=()=>searchFetch('hello');
+      document.getElementById('fetchError').onclick=()=>searchFetch('error');
+      async function searchFetch(q){
+        const url = '/fixtures/sources/api/search-'+q+'.json';
+        const res = await fetch(url, { method:'GET' });
+        const data = await res.json();
+        log('fetch '+q+': '+JSON.stringify(data));
+      }
+    
+      document.getElementById('xhrHello').onclick=()=> {
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', '/fixtures/sources/api/search-hello.json');
+        xhr.onload = ()=> log('xhr hello: '+xhr.responseText);
+        xhr.send();
+      };
+    </script>
+    </body></html>
+    

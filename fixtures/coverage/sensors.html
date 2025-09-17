@@ -1,0 +1,26 @@
+<!doctype html><html lang="zh-Hant"><head>
+    <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <title>Sensors Demo</title>
+    <style>body{font-family:ui-sans-serif,system-ui;background:#f8fafc;margin:0;padding:24px}.card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:16px;max-width:860px}</style>
+    </head><body>
+    <div class="card">
+      <h1>Sensors：定位 / 時區 / 尺寸</h1>
+      <button id="geo">取得定位</button>
+      <button id="time">顯示當地時間</button>
+      <pre id="out"></pre>
+    </div>
+    <script>
+      const out=(t)=>{const el=document.getElementById('out'); el.textContent=(t+'\n'+el.textContent).slice(0,8000);};
+      document.getElementById('geo').onclick=()=>{
+        navigator.geolocation.getCurrentPosition(
+          (pos)=>out('lat='+pos.coords.latitude+', lng='+pos.coords.longitude),
+          (err)=>out('geo error: '+err.message)
+        );
+      };
+      document.getElementById('time').onclick=()=>{
+        out('time: '+new Date().toString());
+        out('Intl timeZone: '+Intl.DateTimeFormat().resolvedOptions().timeZone);
+      };
+    </script>
+    </body></html>
+    
