@@ -19,27 +19,30 @@
     <div id="output"></div>
   </div>
 
+  <script src="../base-path.js"></script>
   <script>
     document.getElementById('loadBtn').addEventListener('click', () => {
+      const basePath = getBasePath();
+      
       // 動態插入 JS
       const script = document.createElement('script');
-      script.src = '/fixtures/network/dummy.js';
+      script.src = basePath + 'fixtures/network/dummy.js';
       document.body.appendChild(script);
 
       // 動態插入 CSS
       const link = document.createElement('link');
       link.rel = 'stylesheet';
-      link.href = '/fixtures/network/dummy.css';
+      link.href = basePath + 'fixtures/network/dummy.css';
       document.head.appendChild(link);
 
       // 圖片（普通優先級）
       const img1 = document.createElement('img');
-      img1.src = '/fixtures/network/img-low.png';
+      img1.src = basePath + 'fixtures/network/img-low.png';
       document.getElementById('output').appendChild(img1);
 
       // 圖片（高優先級）
       const img2 = document.createElement('img');
-      img2.src = '/fixtures/network/img-high.png';
+      img2.src = basePath + 'fixtures/network/img-high.png';
       img2.setAttribute('fetchpriority', 'high');
       document.getElementById('output').appendChild(img2);
     });

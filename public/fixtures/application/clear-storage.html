@@ -17,6 +17,7 @@
       </div>
       <pre id="log"></pre>
     </div>
+    <script src="../base-path.js"></script>
     <script>
       const log=(m)=>{const el=document.getElementById('log'); el.textContent=(m+'\n'+el.textContent).slice(0,8000);};
     
@@ -33,7 +34,8 @@
         });
         // Cache Storage
         const c = await caches.open('clear-cache');
-        await c.put('/fixtures/application/ping.txt', new Response('pong '+Date.now(), {headers:{'Content-Type':'text/plain'}}));
+        const basePath = getBasePath();
+        await c.put(basePath + 'fixtures/application/ping.txt', new Response('pong '+Date.now(), {headers:{'Content-Type':'text/plain'}}));
         log('已灌入 Local/Session/Cookie/IDB/Cache');
       }
     

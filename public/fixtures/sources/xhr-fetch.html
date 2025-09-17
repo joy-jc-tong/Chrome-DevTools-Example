@@ -10,21 +10,24 @@
       <button id="xhrHello">搜尋 hello（XHR）</button>
       <pre id="log"></pre>
     </div>
+    <script src="../base-path.js"></script>
     <script>
       const log=(m)=>{const el=document.getElementById('log');el.textContent=(m+'\n'+el.textContent).slice(0,6000);};
     
       document.getElementById('fetchHello').onclick=()=>searchFetch('hello');
       document.getElementById('fetchError').onclick=()=>searchFetch('error');
       async function searchFetch(q){
-        const url = '/fixtures/sources/api/search-'+q+'.json';
+        const basePath = getBasePath();
+        const url = basePath + 'fixtures/sources/api/search-'+q+'.json';
         const res = await fetch(url, { method:'GET' });
         const data = await res.json();
         log('fetch '+q+': '+JSON.stringify(data));
       }
     
       document.getElementById('xhrHello').onclick=()=> {
+        const basePath = getBasePath();
         const xhr = new XMLHttpRequest();
-        xhr.open('GET', '/fixtures/sources/api/search-hello.json');
+        xhr.open('GET', basePath + 'fixtures/sources/api/search-hello.json');
         xhr.onload = ()=> log('xhr hello: '+xhr.responseText);
         xhr.send();
       };
