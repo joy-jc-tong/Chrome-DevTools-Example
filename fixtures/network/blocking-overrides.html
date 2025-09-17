@@ -19,10 +19,11 @@
     <pre id="apiResult"></pre>
   </div>
 
-  <script src="/fixtures/network/ads.js"></script>
+  <script src="../base-path.js"></script>
+  <script src="ads.js"></script>
   <script>
     // 1) 載入 API
-    fetch('/fixtures/network/api/data.json')
+    fetch(getBasePath() + 'fixtures/network/api/data.json')
       .then(res => res.json())
       .then(data => {
         document.getElementById('apiResult').textContent = 'API 回應：' + JSON.stringify(data);
@@ -33,7 +34,7 @@
       });
 
     // 2) 載入 Banner JSON（可做 Overrides）
-    fetch('/fixtures/network/banner.json')
+    fetch(getBasePath() + 'fixtures/network/banner.json')
       .then(res => res.json())
       .then(data => {
         document.getElementById('banner').textContent = data.message;

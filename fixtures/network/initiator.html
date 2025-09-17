@@ -19,13 +19,15 @@
     <div id="output"></div>
   </div>
 
+  <script src="../base-path.js"></script>
   <script>
     document.getElementById('loadBtn').addEventListener('click', async () => {
-      const res = await fetch('/fixtures/network/sample.json');
+      const basePath = getBasePath();
+      const res = await fetch(basePath + 'fixtures/network/sample.json');
       const data = await res.json();
       document.getElementById('output').innerHTML = `
         <p>已載入 JSON：${JSON.stringify(data)}</p>
-        <img src="/fixtures/network/sample.png" alt="依賴圖片"/>
+        <img src="${basePath}fixtures/network/sample.png" alt="依賴圖片"/>
       `;
     });
   </script>

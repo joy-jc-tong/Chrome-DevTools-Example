@@ -4,7 +4,8 @@
   <meta charset="utf-8" />
   <title>Throttling / Round-trip Demo</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <link rel="preload" as="image" href="/fixtures/network/img-high.png" imagesrcset="/fixtures/network/img-high.png 1x">
+  <script src="../base-path.js"></script>
+  <link rel="preload" as="image" href="img-high.png" imagesrcset="img-high.png 1x">
   <style>
     body { font-family: ui-sans-serif, system-ui, -apple-system; background:#f8fafc; padding:24px; }
     .card { background:#fff; border:1px solid #e5e7eb; border-radius:12px; padding:16px; max-width:860px; }
@@ -53,9 +54,10 @@
     document.getElementById('chain').addEventListener('click', async () => {
       log('start chain 3 requests');
       const t0 = performance.now();
-      const a = await fetch('/fixtures/network/rt-a.json').then(r=>r.json()); log({a});
-      const b = await fetch('/fixtures/network/rt-b.json').then(r=>r.json()); log({b});
-      const c = await fetch('/fixtures/network/rt-c.json').then(r=>r.json()); log({c});
+      const basePath = getBasePath();
+      const a = await fetch(basePath + 'fixtures/network/rt-a.json').then(r=>r.json()); log({a});
+      const b = await fetch(basePath + 'fixtures/network/rt-b.json').then(r=>r.json()); log({b});
+      const c = await fetch(basePath + 'fixtures/network/rt-c.json').then(r=>r.json()); log({c});
       const t1 = performance.now();
       out.innerHTML = `<p>總耗時：約 ${(t1 - t0).toFixed(0)} ms（Slow 3G/高 RTT 下會更明顯）</p>`;
     });
@@ -63,17 +65,18 @@
     // 平行載入 6 張圖（看併發與優先順序）
     document.getElementById('parallel').addEventListener('click', () => {
       grid.innerHTML = '';
+      const basePath = getBasePath();
       const srcs = [
-        '/fixtures/network/img-1.png',
-        '/fixtures/network/img-2.png',
-        '/fixtures/network/img-3.png',
-        '/fixtures/network/img-4.png',
-        '/fixtures/network/img-5.png',
-        '/fixtures/network/img-6.png',
+        'fixtures/network/img-1.png',
+        'fixtures/network/img-2.png',
+        'fixtures/network/img-3.png',
+        'fixtures/network/img-4.png',
+        'fixtures/network/img-5.png',
+        'fixtures/network/img-6.png',
       ];
       srcs.forEach(src => {
         const img = new Image();
-        img.src = src;
+        img.src = basePath + src;
         img.onload = () => log('loaded ' + src);
         img.onerror = () => log('error ' + src);
         grid.appendChild(img);
@@ -83,7 +86,7 @@
     // 關鍵圖（高優先）：觀察 Priority 欄位
     document.getElementById('priority').addEventListener('click', () => {
       const img = new Image();
-      img.src = '/fixtures/network/img-high.png';
+      img.src = getBasePath() + 'fixtures/network/img-high.png';
       img.setAttribute('fetchpriority', 'high');
       img.onload = () => log('loaded high-priority image');
       grid.appendChild(img);
