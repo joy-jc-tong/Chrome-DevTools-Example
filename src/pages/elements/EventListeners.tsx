@@ -42,7 +42,7 @@ export default function EventListeners() {
           <div className="flex flex-wrap gap-2">
             <a
               className="px-3 py-1.5 rounded-lg bg-blue-600 text-white"
-              href="/fixtures/elements/event-listeners.html"
+              href={`${import.meta.env.BASE_URL}fixtures/elements/event-listeners.html`}
               target="_blank"
               rel="noreferrer"
             >

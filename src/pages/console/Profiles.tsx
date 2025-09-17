@@ -41,7 +41,7 @@ export default function ProfilesPage() {
           <p className="text-gray-700 mb-3">使用下方示範頁（新分頁開啟）：</p>
           <a
             className="px-3 py-1.5 rounded-lg bg-blue-600 text-white"
-            href="/fixtures/console/profiles.html"
+            href={`${import.meta.env.BASE_URL}fixtures/console/profiles.html`}
             target="_blank" rel="noreferrer"
           >
             開啟示範頁（heavy work 測試）

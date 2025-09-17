@@ -42,7 +42,7 @@ export default function UtilitiesApi() {
           <div className="flex flex-wrap gap-2">
             <a
               className="px-3 py-1.5 rounded-lg bg-blue-600 text-white"
-              href="/fixtures/console/utilities-api.html"
+              href={`${import.meta.env.BASE_URL}fixtures/console/utilities-api.html`}
               target="_blank" rel="noreferrer"
             >
               開啟示範頁（含事件與表格）

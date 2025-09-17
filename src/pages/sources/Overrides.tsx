@@ -15,7 +15,7 @@ export default function Overrides() {
       </section>
       <section>
         <h2 className="text-xl font-semibold">互動練習</h2>
-        <a className="px-3 py-1.5 rounded-lg bg-blue-600 text-white" href="/fixtures/sources/overrides.html" target="_blank" rel="noreferrer">
+        <a className="px-3 py-1.5 rounded-lg bg-blue-600 text-white" href={`${import.meta.env.BASE_URL}fixtures/sources/overrides.html`} target="_blank" rel="noreferrer">
           開啟示範頁（覆寫 CSS）
         </a>
         <ul className="list-decimal list-inside text-gray-700 mt-3 space-y-1">

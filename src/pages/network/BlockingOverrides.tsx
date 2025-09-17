@@ -41,7 +41,7 @@ export default function BlockingOverrides() {
         <div className="rounded-xl border p-4 bg-gray-50">
           <a
             className="px-3 py-1.5 rounded-lg bg-blue-600 text-white"
-            href="/fixtures/network/blocking-overrides.html"
+            href={`${import.meta.env.BASE_URL}fixtures/network/blocking-overrides.html`}
             target="_blank" rel="noreferrer"
           >
             開啟示範頁（Blocking / Overrides）

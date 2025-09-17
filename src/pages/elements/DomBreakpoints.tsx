@@ -42,7 +42,7 @@ export default function DomBreakpoints() {
           <div className="flex flex-wrap gap-2">
             <a
               className="px-3 py-1.5 rounded-lg bg-blue-600 text-white"
-              href="/fixtures/elements/dom-breakpoints.html?fault=remove"
+              href={`${import.meta.env.BASE_URL}fixtures/elements/dom-breakpoints.html?fault=remove`}
               target="_blank"
               rel="noreferrer"
             >
@@ -50,7 +50,7 @@ export default function DomBreakpoints() {
             </a>
             <a
               className="px-3 py-1.5 rounded-lg bg-gray-200 text-gray-900"
-              href="/fixtures/elements/dom-breakpoints.html?fault=attr"
+              href={`${import.meta.env.BASE_URL}fixtures/elements/dom-breakpoints.html?fault=attr`}
               target="_blank"
               rel="noreferrer"
             >
@@ -58,7 +58,7 @@ export default function DomBreakpoints() {
             </a>
             <a
               className="px-3 py-1.5 rounded-lg bg-gray-200 text-gray-900"
-              href="/fixtures/elements/dom-breakpoints.html"
+              href={`${import.meta.env.BASE_URL}fixtures/elements/dom-breakpoints.html`}
               target="_blank"
               rel="noreferrer"
             >

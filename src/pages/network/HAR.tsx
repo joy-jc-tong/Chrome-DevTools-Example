@@ -32,10 +32,10 @@ export default function HarPage() {
         <h2 className="text-xl font-semibold">互動練習</h2>
         <div className="rounded-xl border p-4 bg-gray-50">
           <div className="flex flex-wrap gap-2 mb-2">
-            <a className="px-3 py-1.5 rounded-lg bg-blue-600 text-white" href="/fixtures/network/har-demo.html" target="_blank" rel="noreferrer">
+            <a className="px-3 py-1.5 rounded-lg bg-blue-600 text-white" href={`${import.meta.env.BASE_URL}fixtures/network/har-demo.html`} target="_blank" rel="noreferrer">
               開啟示範頁（產生多種請求）
             </a>
-            <a className="px-3 py-1.5 rounded-lg bg-gray-200 text-gray-900" href="/fixtures/network/sample.har" target="_blank" rel="noreferrer">
+            <a className="px-3 py-1.5 rounded-lg bg-gray-200 text-gray-900" href={`${import.meta.env.BASE_URL}fixtures/network/sample.har`} target="_blank" rel="noreferrer">
               下載範例 HAR（用來匯入）
             </a>
           </div>

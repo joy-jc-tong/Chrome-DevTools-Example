@@ -39,14 +39,14 @@ export default function Layout() {
           <div className="flex flex-wrap gap-2">
             <a
               className="px-3 py-1.5 rounded-lg bg-blue-600 text-white"
-              href="/fixtures/elements/layout.html?mode=flex"
+              href={`${import.meta.env.BASE_URL}fixtures/elements/layout.html?mode=flex`}
               target="_blank" rel="noreferrer"
             >
               Flex 排版（卡片不對齊）
             </a>
             <a
               className="px-3 py-1.5 rounded-lg bg-gray-200 text-gray-900"
-              href="/fixtures/elements/layout.html?mode=grid"
+              href={`${import.meta.env.BASE_URL}fixtures/elements/layout.html?mode=grid`}
               target="_blank" rel="noreferrer"
             >
               Grid 排版（間距問題）

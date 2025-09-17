@@ -27,6 +27,7 @@ import Sensors from '../pages/coverage/Sensors';
 import Recorder from '../pages/coverage/Recorder';
 import SecurityIssues from '../pages/coverage/SecurityIssues';
 import NotFound from '../pages/NotFound';
+import Home from '../pages/Home';
 import DomBreakpoints from '../pages/elements/DomBreakpoints';
 import EventListeners from '../pages/elements/EventListeners';
 import Layout from '../pages/elements/Layout';
@@ -55,7 +56,7 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Elements />,
+        element: <Home />,
       },
       {
         path: 'elements',
@@ -295,4 +296,6 @@ export const router = createBrowserRouter([
       },
     ],
   },
-]);
+], {
+  basename: import.meta.env.BASE_URL,
+});

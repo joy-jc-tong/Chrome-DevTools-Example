@@ -34,7 +34,7 @@ export default function Throttling() {
         <div className="rounded-xl border p-4 bg-gray-50">
           <a
             className="px-3 py-1.5 rounded-lg bg-blue-600 text-white"
-            href="/fixtures/network/throttling.html"
+            href={`${import.meta.env.BASE_URL}fixtures/network/throttling.html`}
             target="_blank" rel="noreferrer"
           >
             開啟示範頁（Throttling / Round-trip）

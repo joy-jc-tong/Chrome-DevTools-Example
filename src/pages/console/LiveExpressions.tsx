@@ -39,7 +39,7 @@ export default function LiveExpressions() {
           <p className="text-gray-700 mb-3">使用下方示範頁（新分頁開啟）：</p>
           <a
             className="px-3 py-1.5 rounded-lg bg-blue-600 text-white"
-            href="/fixtures/console/live-expressions.html"
+            href={`${import.meta.env.BASE_URL}fixtures/console/live-expressions.html`}
             target="_blank" rel="noreferrer"
           >
             開啟示範頁（含計時器與 state）

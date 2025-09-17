@@ -40,7 +40,7 @@ export default function Changes() {
           <div className="flex flex-wrap gap-2">
             <a
               className="px-3 py-1.5 rounded-lg bg-blue-600 text-white"
-              href="/fixtures/elements/changes.html"
+              href={`${import.meta.env.BASE_URL}fixtures/elements/changes.html`}
               target="_blank" rel="noreferrer"
             >
               開啟示範頁

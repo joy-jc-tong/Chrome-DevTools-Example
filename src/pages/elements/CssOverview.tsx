@@ -40,7 +40,7 @@ export default function CssOverview() {
           <div className="flex flex-wrap gap-2">
             <a
               className="px-3 py-1.5 rounded-lg bg-blue-600 text-white"
-              href="/fixtures/elements/css-overview.html"
+              href={`${import.meta.env.BASE_URL}fixtures/elements/css-overview.html`}
               target="_blank" rel="noreferrer"
             >
               開啟示範頁（含對比不足＆相近色）

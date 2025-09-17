@@ -22,7 +22,7 @@ export default function AllocationSamplingPage() {
       <section>
         <h2 className="text-xl font-semibold">互動練習</h2>
         <a className="px-3 py-1.5 rounded-lg bg-blue-600 text-white"
-           href="/fixtures/memory/allocation-sampling.html" target="_blank" rel="noreferrer">
+           href={`${import.meta.env.BASE_URL}fixtures/memory/allocation-sampling.html`} target="_blank" rel="noreferrer">
           開啟示範頁（過度配置 vs 物件重用）
         </a>
         <ul className="list-decimal list-inside text-gray-700 mt-3 space-y-1">
