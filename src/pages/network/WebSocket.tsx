@@ -5,31 +5,29 @@ export default function WebSocketPage() {
       <header>
         <h1 className="text-2xl font-bold">WebSocket / Events 檢視器</h1>
         <p className="text-gray-700 leading-relaxed">
-          Network 面板支援檢視 WebSocket 連線。點開 WebSocket 請求後，可在「Messages」分頁看到雙向事件流
-          （客戶端送出的訊息與伺服器回應）。這對除錯即時應用特別重要，例如聊天室、遊戲、通知服務。
+          Network 面板可以檢視 WebSocket 連線，並在「Messages」分頁看到雙向事件流。
+          你可以同時追蹤瀏覽器送出的訊息和伺服器回應，非常適合即時應用的除錯。
         </p>
       </header>
 
-      {/* 功能要點 */}
+      {/* 為什麼要用 */}
       <section>
-        <h2 className="text-xl font-semibold mb-2">功能要點</h2>
+        <h2 className="text-xl font-semibold mb-2">為什麼要用？</h2>
         <ul className="list-disc list-inside text-gray-700 space-y-1">
-          <li>WebSocket 請求會顯示在 Network 表格中，標示為 <code>WS</code>。</li>
-          <li>點開後有 <b>Frames</b> / <b>Messages</b> 分頁，顯示傳入/傳出的資料。</li>
-          <li>可過濾訊息方向（Send / Receive），並查看原始 JSON 或文字。</li>
-          <li>適合驗證資料格式是否正確、或是否有不必要的訊息洪流。</li>
+          <li>想確認聊天室或遊戲傳的資料是不是正確。</li>
+          <li>想檢查伺服器回覆的格式（JSON/文字）有沒有問題。</li>
+          <li>想找出是否有不必要的訊息洪流造成效能問題。</li>
         </ul>
       </section>
 
-      {/* 操作步驟 */}
+      {/* 怎麼用 */}
       <section>
-        <h2 className="text-xl font-semibold mb-2">操作步驟</h2>
+        <h2 className="text-xl font-semibold mb-2">怎麼用？</h2>
         <ol className="list-decimal list-inside text-gray-700 space-y-1">
-          <li>開啟下方示範頁，並打開 DevTools → Network。</li>
-          <li>點「連線 WebSocket」按鈕 → 瀏覽器會建立一條 <code>ws://</code> 連線。</li>
-          <li>切到 Network 面板 → 找到 <b>WS</b> 請求 → 點開 → Messages 分頁。</li>
-          <li>點「送出訊息」按鈕 → 在 Messages 分頁中應看到送出與伺服器回覆。</li>
-          <li>試著多次送訊息，觀察 event log。</li>
+          <li>打開 Network 面板並建立 WebSocket 連線（例：點「連線 WebSocket」按鈕）。</li>
+          <li>在請求清單中找到 WS 連線，點開後切到 Messages 分頁。</li>
+          <li>傳送訊息（例：按「送出訊息」按鈕），觀察「送出/接收」的事件記錄。</li>
+          <li>可以過濾 Send / Receive，並檢查原始 JSON 或文字內容。</li>
         </ol>
       </section>
 
@@ -52,15 +50,6 @@ export default function WebSocketPage() {
         </div>
       </section>
 
-      {/* 小技巧 */}
-      <section>
-        <h2 className="text-xl font-semibold mb-2">使用小技巧</h2>
-        <ul className="list-disc list-inside text-gray-700 space-y-1">
-          <li>用「Filter → WS」快速過濾出所有 WebSocket 連線。</li>
-          <li>如果訊息格式是 JSON，可在 Messages 面板直接展開 JSON。</li>
-          <li>注意不要把心跳訊息（ping/pong）誤當成有效 payload。</li>
-        </ul>
-      </section>
     </div>
   );
 }

@@ -4,27 +4,27 @@ export default function HarPage() {
       <header>
         <h1 className="text-2xl font-bold">HAR 匯出 / 匯入</h1>
         <p className="text-gray-700 leading-relaxed">
-          HAR（HTTP Archive）是一種標準化的網路追蹤格式，包含請求/回應、時間線（timings）、headers、payload 等。
-          在 DevTools 的 Network 面板可以「匯出 HAR」記錄現場問題，也可以「匯入 HAR」重看別人的抓包。
+          HAR（HTTP Archive）是一種標準化的網路追蹤檔案，記錄所有請求與回應，包括 headers、payload、timing 等。
+          在 DevTools 的 Network 面板可以把請求匯出成 HAR，也能匯入別人的 HAR 來重現網路狀況。
         </p>
       </header>
 
       <section>
-        <h2 className="text-xl font-semibold mb-2">常見用途</h2>
+        <h2 className="text-xl font-semibold mb-2">為什麼要用？</h2>
         <ul className="list-disc list-inside text-gray-700 space-y-1">
-          <li>把疑難雜症的「網路證據」打包給同事/外包廠商。</li>
-          <li>在沒有重現環境時，離線瀏覽別人的請求序列與時間線。</li>
-          <li>留存效能基準（baseline）以便日後對照。</li>
+          <li>想把「疑難雜症的網路證據」打包交給同事或外包廠商。</li>
+          <li>沒有重現環境，也能離線查看別人的請求序列與時間線。</li>
+          <li>想保存某次效能基準（baseline），方便日後比較。</li>
         </ul>
       </section>
 
       <section>
-        <h2 className="text-xl font-semibold mb-2">操作步驟</h2>
-        <ol className="list-decimal list-inside text-gray-700 space-y-2">
-          <li>打開下方示範頁，於 Network 面板製造一些請求。</li>
-          <li><b>匯出 HAR</b>：在 Network 請求清單空白處或任何請求上「右鍵」 → <em>Save all as HAR with content</em>（含回應內容）。</li>
-          <li><b>匯入 HAR</b>：將 HAR 檔 <em>拖放</em> 到 Network 面板，或使用右鍵選單的 <em>Import HAR</em>。</li>
-          <li>匯入後可像真實流量一樣檢視每個 request 的 Headers、Preview、Timing、Initiator 等。</li>
+        <h2 className="text-xl font-semibold mb-2">怎麼用？</h2>
+        <ol className="list-decimal list-inside text-gray-700 space-y-1">
+          <li>在 Network 面板產生一些請求。</li>
+          <li>匯出 HAR：在請求清單空白處或任一請求上右鍵 → Save all as HAR with content。</li>
+          <li>匯入 HAR：把 HAR 檔拖進 Network 面板，或右鍵選單 → Import HAR。</li>
+          <li>匯入後可像真實流量一樣檢視每個 request 的 Headers、Preview、Timing、Initiator 等資訊。</li>
         </ol>
       </section>
 
@@ -47,14 +47,6 @@ export default function HarPage() {
         </div>
       </section>
 
-      <section>
-        <h2 className="text-xl font-semibold mb-2">小技巧</h2>
-        <ul className="list-disc list-inside text-gray-700 space-y-1">
-          <li><b>包含內容</b>：選「with content」才能離線查看回應（JSON/HTML/CSS/圖片）。</li>
-          <li><b>隱私</b>：HAR 可能含 Cookie/Authorization/查詢字串，分享前請先脫敏。</li>
-          <li><b>可讀性</b>：用 <code>.har</code> 上傳到問題追蹤工具，或用 HAR viewer（或 DevTools 本身）閱讀。</li>
-        </ul>
-      </section>
     </div>
   );
 }

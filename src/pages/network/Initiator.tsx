@@ -3,34 +3,30 @@ export default function Initiator() {
     <div className="space-y-8">
       {/* 標題＋摘要 */}
       <header>
-        <h1 className="text-2xl font-bold">Initiator / Dependencies</h1>
+        <h1 className="text-2xl font-bold">Network Initiator</h1>
         <p className="text-gray-700 leading-relaxed">
-          在 Network 面板中，右鍵任一請求 → <b>「Show initiator」</b> 或 <b>「Show dependencies」</b>，
-          可以顯示「誰觸發了該請求」以及「此請求又帶出了哪些後續依賴」。這對排查效能問題特別有用，
-          例如：為什麼會多載入某張圖片？或是哪個 JS 造成了額外 API 呼叫？
+          Network 面板可以幫你顯示請求之間的因果關係。
+          用 Show initiator 可以看「誰觸發了這個請求」，用 Show dependencies 可以看「這個請求又帶出了哪些後續資源」。
         </p>
       </header>
 
-      {/* 功能要點 */}
+      {/* 為什麼要用 */}
       <section>
-        <h2 className="text-xl font-semibold mb-2">功能要點</h2>
+        <h2 className="text-xl font-semibold mb-2">為什麼要用？</h2>
         <ul className="list-disc list-inside text-gray-700 space-y-1">
-          <li><b>Initiator</b>：顯示該請求是由哪段 JS / HTML 觸發（例如某個 script 標籤或 fetch）。</li>
-          <li><b>Dependencies</b>：顯示此資源載入後，又引發了哪些其他請求（例如 CSS 再載入字型）。</li>
-          <li>可在 Requests 表格右鍵選單 → <b>Show initiator</b> 或 <b>Show dependencies</b>。</li>
+          <li>想知道是哪段 JS 或 HTML 造成了某個 API 呼叫。</li>
+          <li>想搞清楚為什麼載入了一張多餘的圖片。</li>
+          <li>想分析某個資源下載後，還會引發哪些後續請求（例如 CSS 觸發字型載入）。</li>
         </ul>
       </section>
 
-      {/* 操作步驟 */}
+      {/* 怎麼用 */}
       <section>
-        <h2 className="text-xl font-semibold mb-2">操作步驟</h2>
+        <h2 className="text-xl font-semibold mb-2">怎麼用？</h2>
         <ol className="list-decimal list-inside text-gray-700 space-y-1">
-          <li>開啟下方示範頁，並打開 DevTools → Network 面板。</li>
-          <li>點「載入資料」按鈕，會發出一個 <code>fetch()</code> → 這是 initiator。</li>
-          <li>該 JSON 載入後，程式會再依序載入一張圖片（依賴）。</li>
-          <li>在 Network 請求列表，右鍵 JSON → <b>Show initiator</b>，確認是按鈕 handler。</li>
-          <li>右鍵圖片 → <b>Show initiator</b>，看到是 JSON handler 引發的。</li>
-          <li>右鍵 JSON → <b>Show dependencies</b>，應能看到圖片是它的依賴。</li>
+          <li>打開 Network 面板並觀察請求。</li>
+          <li>在任一請求上右鍵 → Show initiator，可以看到是哪段程式或元素觸發的。</li>
+          <li>在任一請求上右鍵 → Show dependencies，可以看到該請求下載後又引發了哪些後續請求。</li>
         </ol>
       </section>
 
@@ -53,15 +49,6 @@ export default function Initiator() {
         </div>
       </section>
 
-      {/* 小技巧 */}
-      <section>
-        <h2 className="text-xl font-semibold mb-2">使用小技巧</h2>
-        <ul className="list-disc list-inside text-gray-700 space-y-1">
-          <li>排查「為什麼會多載入某資源」時，先檢查 initiator。</li>
-          <li>對照 Dependencies，可以快速理解某些資源鏈（CSS → 字型、JS → API）。</li>
-          <li>搭配 Coverage 或 Performance，可以進一步分析效能瓶頸。</li>
-        </ul>
-      </section>
     </div>
   );
 }

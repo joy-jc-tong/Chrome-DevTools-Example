@@ -5,32 +5,30 @@ export default function ProtocolPriority() {
       <header>
         <h1 className="text-2xl font-bold">Protocol / Priority</h1>
         <p className="text-gray-700 leading-relaxed">
-          Network 面板中的 <b>Protocol</b> 與 <b>Priority</b> 欄位，可以檢視每個請求的傳輸協定（HTTP/1.1、HTTP/2、HTTP/3）
-          以及瀏覽器排程資源的優先順序。這些資訊對於效能分析非常關鍵，能幫助判斷：
-          為什麼有的資源比較慢才載入、是否用了最新協定、是否有優先級錯置問題。
+          Network 面板可以顯示每個請求用的 傳輸協定（HTTP/1.1、HTTP/2、HTTP/3）和 優先順序（Priority）。
+          這能幫助你了解資源是怎麼被瀏覽器安排下載的。
         </p>
       </header>
 
-      {/* 功能要點 */}
+      {/* 為什麼要用 */}
       <section>
-        <h2 className="text-xl font-semibold mb-2">功能要點</h2>
+        <h2 className="text-xl font-semibold mb-2">為什麼要用？</h2>
         <ul className="list-disc list-inside text-gray-700 space-y-1">
-          <li><b>Protocol</b>：顯示資源傳輸的協定版本（http/1.1, h2, h3）。</li>
-          <li><b>Priority</b>：顯示瀏覽器給資源的下載優先順序（Highest, High, Medium, Low, Lowest）。</li>
-          <li>通常 HTML / CSS / JS 會是 High/Highest，而圖片/字型則可能較低。</li>
-          <li>可以藉由 preload / fetchpriority 屬性來調整資源優先順序。</li>
+          <li>想知道網站是不是用了最新的 HTTP/2 或 HTTP/3。</li>
+          <li>想分析為什麼有些資源載入比較慢。</li>
+          <li>想檢查瀏覽器排程是不是把重要資源（HTML/CSS/JS）排在高優先級。</li>
+          <li>想測試 preload 或 fetchpriority 是否真的改變了下載順序。</li>
         </ul>
       </section>
 
-      {/* 操作步驟 */}
+      {/* 怎麼用 */}
       <section>
-        <h2 className="text-xl font-semibold mb-2">操作步驟</h2>
+        <h2 className="text-xl font-semibold mb-2">怎麼用？</h2>
         <ol className="list-decimal list-inside text-gray-700 space-y-1">
-          <li>開啟下方示範頁，並打開 DevTools → Network 面板。</li>
-          <li>在表格欄位中打開 <b>Protocol</b> 與 <b>Priority</b>（右鍵 → 選擇欄位顯示）。</li>
-          <li>點「載入多資源」按鈕，頁面會載入多個 JS / 圖片 / 字型。</li>
-          <li>觀察每個 request 的協定（h2/h3/http1.1）與優先順序。</li>
-          <li>對比圖片的 <code>fetchpriority="high"</code> 與一般圖片，看看 Priority 有何不同。</li>
+          <li>打開 Network 面板，在表格中啟用 Protocol 和 Priority 欄位（右鍵 → 勾選）。</li>
+          <li>載入頁面或點「載入多資源」按鈕。</li>
+          <li>觀察每個請求的 協定版本（h2/h3/http/1.1）與 優先順序（Highest, High, Medium, Low, Lowest）。</li>
+          <li>對比一般圖片與 fetchpriority="high" 的圖片，看看 Priority 有何不同。</li>
         </ol>
       </section>
 
@@ -53,15 +51,6 @@ export default function ProtocolPriority() {
         </div>
       </section>
 
-      {/* 小技巧 */}
-      <section>
-        <h2 className="text-xl font-semibold mb-2">使用小技巧</h2>
-        <ul className="list-disc list-inside text-gray-700 space-y-1">
-          <li>若遇到「圖片載太慢」，可考慮在 <code>&lt;img&gt;</code> 加 <code>fetchpriority="high"</code>。</li>
-          <li>確保伺服器支援 HTTP/2/3，可提升多路傳輸效能。</li>
-          <li>搭配 Waterfall Timeline，可以直觀看到優先順序是否生效。</li>
-        </ul>
-      </section>
     </div>
   );
 }

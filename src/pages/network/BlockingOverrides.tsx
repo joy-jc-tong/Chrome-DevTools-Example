@@ -5,34 +5,45 @@ export default function BlockingOverrides() {
       <header>
         <h1 className="text-2xl font-bold">Blocking / Request Overrides</h1>
         <p className="text-gray-700 leading-relaxed">
-          Network 工具提供兩種進階控制：<b>Request Blocking</b> 與 <b>Local Overrides</b>。
-          前者直接阻擋符合規則的資源請求（顯示為 <code>blocked:devtools</code>），
-          後者則允許你在本機建立覆寫檔案，讓特定 URL 直接回傳本地版本。
-          這對除錯第三方腳本、測試無網路狀態、或快速 Demo 改動特別有用。
+          Network 工具提供兩種進階控制：
+          <br />
+          <b>Request Blocking</b>：直接阻擋符合規則的請求（顯示為 blocked:devtools）。
+          <br />
+          <b>Local Overrides</b>：把遠端檔案替換成本機版本，請求會回傳你修改後的內容。
         </p>
       </header>
 
-      {/* 功能要點 */}
+      {/* 為什麼要用 */}
       <section>
-        <h2 className="text-xl font-semibold mb-2">功能要點</h2>
+        <h2 className="text-xl font-semibold mb-2">為什麼要用？</h2>
         <ul className="list-disc list-inside text-gray-700 space-y-1">
-          <li><b>Request Blocking</b>：在 Network → 右上 ⋮ → <b>More tools → Network request blocking</b>。新增 URL 規則即可阻擋。</li>
-          <li><b>Local Overrides</b>：在 Sources 面板 → <b>Overrides</b>，選擇本機資料夾，允許 DevTools 儲存並覆寫指定 URL 回應。</li>
-          <li>被封鎖的請求會顯示 <code>blocked:devtools</code>；被覆寫的請求會顯示「local override」標籤。</li>
+          <li>想測試網站在 缺少某些資源 時的行為（例如廣告腳本被封鎖）。</li>
+          <li>想快速修改 API 回應或檔案內容，不需要改後端。</li>
+          <li>想 Demo 一個 UI 修正，或模擬不同的伺服器回應。</li>
         </ul>
       </section>
 
-      {/* 操作步驟 */}
+      {/* 怎麼用 */}
       <section>
-        <h2 className="text-xl font-semibold mb-2">操作步驟</h2>
-        <ol className="list-decimal list-inside text-gray-700 space-y-1">
-          <li>開啟下方示範頁，打開 DevTools → Network。</li>
-          <li>試試 <b>Request Blocking</b>：新增規則 <code>*/ads.js</code> 或 <code>*/api/*</code>，重載頁面觀察。</li>
-          <li>試試 <b>Local Overrides</b>：到 Sources → Overrides → 選資料夾 → Allow。  
-            - 在 Network 找到 <code>banner.json</code> → 右鍵 <b>Save for overrides</b>。  
-            - 修改內容 → 重載頁面 → 頁面顯示修改後的 JSON。  
-          </li>
-        </ol>
+        <h2 className="text-xl font-semibold mb-2">怎麼用？</h2>
+        <div className="space-y-4">
+          <div>
+            <h3 className="text-lg font-medium mb-2">Request Blocking</h3>
+            <ol className="list-decimal list-inside text-gray-700 space-y-1 ml-4">
+              <li>打開 Network → More tools → Network request blocking。</li>
+              <li>新增規則（例：*/ads.js 或 */api/*）。</li>
+              <li>重載頁面，符合規則的請求會顯示為 blocked:devtools。</li>
+            </ol>
+          </div>
+          <div>
+            <h3 className="text-lg font-medium mb-2">Local Overrides</h3>
+            <ol className="list-decimal list-inside text-gray-700 space-y-1 ml-4">
+              <li>在 Sources → Overrides 選一個本機資料夾並允許存取。</li>
+              <li>在 Network 找到要改的檔案（例：banner.json），右鍵 → Save for overrides。</li>
+              <li>修改內容後重載頁面，請求會顯示 local override，並套用你修改後的版本。</li>
+            </ol>
+          </div>
+        </div>
       </section>
 
       {/* 互動練習 */}
@@ -54,15 +65,6 @@ export default function BlockingOverrides() {
         </div>
       </section>
 
-      {/* 小技巧 */}
-      <section>
-        <h2 className="text-xl font-semibold mb-2">使用小技巧</h2>
-        <ul className="list-disc list-inside text-gray-700 space-y-1">
-          <li>快速「拔掉第三方腳本」：用 Blocking 阻擋 <code>*/tracking.js</code>。</li>
-          <li>快速「假資料」：用 Overrides 改 API JSON，不需要後端配合。</li>
-          <li>搭配「Disable cache」確保觀察的都是新結果。</li>
-        </ul>
-      </section>
     </div>
   );
 }
