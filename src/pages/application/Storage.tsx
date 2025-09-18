@@ -4,17 +4,27 @@ export default function Storage() {
       <header>
         <h1 className="text-2xl font-bold">Clear Storage（清乾淨環境）</h1>
         <p className="text-gray-700">
-          當狀態被快取 / Storage / Service Worker 汙染時，到 Application → <b>Clear storage</b> →
-          勾選要清的項目 → <b>Clear site data</b>，可一鍵清空並回到乾淨初始態。
+          Clear Storage 可以一鍵清掉網站的所有狀態，包括 LocalStorage、SessionStorage、IndexedDB、Cache、Cookies 和 Service Worker。
+          用它就能讓網頁回到「剛開啟時的乾淨狀態」。
         </p>
       </header>
 
       <section>
-        <h2 className="text-xl font-semibold mb-2">操作步驟</h2>
+        <h2 className="text-xl font-semibold mb-2">為什麼要用？</h2>
+        <ul className="list-disc list-inside text-gray-700 space-y-1">
+          <li>測試時，網站被快取或舊資料影響，結果不準。</li>
+          <li>想確認程式在「第一次載入」時的表現。</li>
+          <li>想清掉 Service Worker 或離線快取，模擬全新使用者環境。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 className="text-xl font-semibold mb-2">怎麼用？</h2>
         <ol className="list-decimal list-inside text-gray-700 space-y-1">
-          <li>開啟下方示範頁，先按「灌資料」。</li>
-          <li>DevTools → Application → <b>Clear storage</b>，全勾 → <b>Clear site data</b>。</li>
-          <li>回頁面按「檢查狀態」，驗證 Local/Session/IDB/Cache/Cookies/SW 已清。</li>
+          <li>打開 Application 面板 → Clear storage。</li>
+          <li>勾選要清的項目（建議全勾）。</li>
+          <li>點 Clear site data，網站的狀態會被清空。</li>
+          <li>回到頁面操作，驗證所有 Storage / Cache / Cookies / SW 都已經被清除。</li>
         </ol>
       </section>
 

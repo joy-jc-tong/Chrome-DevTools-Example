@@ -4,17 +4,26 @@ export default function ManifestIndexedDB() {
       <header>
         <h1 className="text-2xl font-bold">IndexedDB Viewer（資料結構 / 版本）</h1>
         <p className="text-gray-700">
-          在 Application → <b>IndexedDB</b> 可檢視資料庫、object stores、indexes 與實際資料。
-          升版在 <code>onupgradeneeded</code> 進行（建立 store/index、資料遷移）。
+          IndexedDB Viewer 可以在 DevTools 裡直接檢視資料庫結構，包含 資料庫版本、object stores、indexes 與實際資料。
+          當資料庫升版時（onupgradeneeded），也能看到新的 store 或 index 是否正確建立。
         </p>
       </header>
 
       <section>
-        <h2 className="text-xl font-semibold mb-2">操作步驟</h2>
+        <h2 className="text-xl font-semibold mb-2">為什麼要用？</h2>
+        <ul className="list-disc list-inside text-gray-700 space-y-1">
+          <li>想確認 IndexedDB 裡有哪些資料表（stores）和索引（indexes）。</li>
+          <li>想檢查資料是否真的寫入成功。</li>
+          <li>想驗證升版後的結構變更（例如新增 index、資料遷移）。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 className="text-xl font-semibold mb-2">怎麼用？</h2>
         <ol className="list-decimal list-inside text-gray-700 space-y-1">
-          <li>開啟示範頁 → 點「建 v1」建立 DB 與 <code>notes</code> store。</li>
-          <li>點「升 v2」新增索引 <code>byTag</code>。</li>
-          <li>在 IndexedDB 檢視器確認 stores / indexes 與資料。</li>
+          <li>打開 Application → IndexedDB。</li>
+          <li>展開資料庫，檢查 stores、indexes 與資料。</li>
+          <li>建立或升版資料庫後（例如在程式中觸發 onupgradeneeded），回到 Viewer 驗證結構是否更新正確。</li>
         </ol>
       </section>
 

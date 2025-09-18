@@ -4,16 +4,27 @@ export default function ServiceWorkers() {
       <header>
         <h1 className="text-2xl font-bold">Service Workers（Bypass / Update on reload）</h1>
         <p className="text-gray-700">
-          舊版 SW 阻擋更新時，在 Application → <b>Service Workers</b> 勾 <b>Bypass for network</b> 或
-          <b> Update on reload</b>，可直接走網路或強制更新 SW。
+          Service Workers 面板可以控制 SW 的行為。
+          當舊版 SW 阻擋更新時，你可以用 Bypass for network 直接跳過快取，或用 Update on reload 強制更新 SW。
         </p>
       </header>
 
       <section>
-        <h2 className="text-xl font-semibold mb-2">操作步驟</h2>
+        <h2 className="text-xl font-semibold mb-2">為什麼要用？</h2>
+        <ul className="list-disc list-inside text-gray-700 space-y-1">
+          <li>想跳過 Service Worker，直接從網路拿最新檔案。</li>
+          <li>遇到 SW 沒自動更新，想手動強制換成新版本。</li>
+          <li>測試 SW 行為，驗證不同版本是否正確生效。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 className="text-xl font-semibold mb-2">怎麼用？</h2>
         <ol className="list-decimal list-inside text-gray-700 space-y-1">
-          <li>開示範頁註冊 v1，請求 <code>/version.txt</code>（回 v1）。</li>
-          <li>切換註冊 v2，再請求；若仍是 v1，勾 Bypass / Update on reload 後重試。</li>
+          <li>打開 Application → Service Workers。</li>
+          <li>勾選 Bypass for network → 請求會直接走網路，不經過 SW。</li>
+          <li>勾選 Update on reload → 下次重新整理會強制更新 SW。</li>
+          <li>驗證請求結果是否已從新版 Service Worker 或網路取得。</li>
         </ol>
       </section>
 
