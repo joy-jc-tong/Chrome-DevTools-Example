@@ -5,30 +5,30 @@ export default function CssOverview() {
       <header>
         <h1 className="text-2xl font-bold">CSS Overview</h1>
         <p className="text-gray-700 leading-relaxed">
-          CSS Overview 可彙整整頁的樣式資訊：色彩、字型、媒體查詢、未使用宣告（若偵測到）與
-          <b> 文字對比問題</b>。用於快速稽核設計一致性與可存取性（a11y）。
+          CSS Overview 會整理整個頁面的樣式資訊，像是色彩、字型、媒體查詢，還會檢查文字對比問題或找出沒用到的 CSS。
+          它就像是一個快速的設計稽核工具。
         </p>
       </header>
 
-      {/* 功能要點 */}
+      {/* 為什麼要用 */}
       <section>
-        <h2 className="text-xl font-semibold mb-2">功能要點</h2>
+        <h2 className="text-xl font-semibold mb-2">為什麼要用？</h2>
         <ul className="list-disc list-inside text-gray-700 space-y-1">
-          <li>Colors：列出頁面使用到的色票與近似色；可點擊篩選來源元素。</li>
-          <li>Contrast issues：標示對比不足的文字，顯示實際前景/背景與建議修正。</li>
-          <li>Fonts / Media queries：統計全站字體與媒體查詢分布，用於設計稽核。</li>
-          <li>Unused declarations（有時）：在特定情況下會列出未使用的 CSS 宣告。</li>
+          <li>想看整個網站用了哪些顏色 → 用 Colors 看色票分布。</li>
+          <li>發現文字太淺、對比不足 → 在 Contrast issues 找問題與修正建議。</li>
+          <li>想確認全站字型與媒體查詢狀況 → 看 Fonts / Media queries 統計。</li>
+          <li>懷疑有多餘 CSS → 有時會在 Unused declarations 找到。</li>
         </ul>
       </section>
 
-      {/* 操作步驟 */}
+      {/* 怎麼用 */}
       <section>
-        <h2 className="text-xl font-semibold mb-2">操作步驟</h2>
+        <h2 className="text-xl font-semibold mb-2">怎麼用？</h2>
         <ol className="list-decimal list-inside text-gray-700 space-y-1">
-          <li>開啟要稽核的頁面（下方示範頁）。</li>
-          <li>Command Menu（<kbd>Ctrl/⌘</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd>）輸入 <em>“Show CSS Overview”</em>。</li>
-          <li>點選 <b>Capture overview</b> 進行擷取。</li>
-          <li>瀏覽 <em>Colors / Contrast issues / Fonts / Media queries</em> 區塊，點擊項目回到對應元素。</li>
+          <li>開啟要檢查的頁面。</li>
+          <li>按 Ctrl/⌘ + Shift + P，輸入 Show CSS Overview。</li>
+          <li>點 Capture overview 進行擷取。</li>
+          <li>在 Colors、Contrast issues、Fonts、Media queries 區塊查看結果，點項目可回到對應元素。</li>
         </ol>
       </section>
 
@@ -55,15 +55,6 @@ export default function CssOverview() {
         </div>
       </section>
 
-      {/* 小技巧 */}
-      <section>
-        <h2 className="text-xl font-semibold mb-2">使用小技巧</h2>
-        <ul className="list-disc list-inside text-gray-700 space-y-1">
-          <li>對比不足的文字可在 Elements → Styles 直接調整色碼，再回到 CSS Overview 重擷取驗證。</li>
-          <li>若顏色分布過於零碎，考慮建立設計色票與語意色（primary/secondary/neutral）。</li>
-          <li>對於跨頁檢查，可用同一套 fixture 不同查詢參數，或用 Recorder 錄流後逐頁擷取。</li>
-        </ul>
-      </section>
     </div>
   );
 }

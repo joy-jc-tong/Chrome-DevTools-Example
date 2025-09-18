@@ -3,32 +3,32 @@ export default function Accessibility() {
     <div className="space-y-8">
       {/* 標題＋摘要 */}
       <header>
-        <h1 className="text-2xl font-bold">Accessibility Pane（Name / Role / Value）</h1>
+        <h1 className="text-2xl font-bold">Accessibility Pane</h1>
         <p className="text-gray-700 leading-relaxed">
-          Accessibility 面板可檢查目前選取節點的「計算後無障礙資訊」：包括 <b>Role</b>、<b>Name</b>（可見名稱或替代文字）、
-          以及 <b>States/Properties</b>（如 <code>aria-pressed</code>、<code>aria-hidden</code>）。適合排查「按鈕被做成 div、鍵盤無法操作、
-          名稱缺漏、誤用 aria 屬性」等常見問題。
+          Accessibility Pane 會顯示元素的「無障礙資訊」，像是 Role（角色）、Name（名稱或替代文字）、以及狀態屬性（例如 aria-pressed、aria-hidden）。
+          它能幫助確認這個元素對螢幕閱讀器或鍵盤使用者是不是友善。
         </p>
       </header>
 
-      {/* 功能要點 */}
+      {/* 為什麼要用 */}
       <section>
-        <h2 className="text-xl font-semibold mb-2">功能要點</h2>
+        <h2 className="text-xl font-semibold mb-2">為什麼要用？</h2>
         <ul className="list-disc list-inside text-gray-700 space-y-1">
-          <li><b>Computed Properties</b>：查看最終的 Name / Role / Value 與是否可聚焦。</li>
-          <li><b>Accessibility Tree</b>：確認節點是否被隱藏（例如被 <code>aria-hidden</code> 或 CSS 影響）。</li>
-          <li><b>Keyboard</b>：檢查是否能以 <kbd>Tab</kbd> 聚焦、以 <kbd>Enter</kbd>/<kbd>Space</kbd> 觸發。</li>
-          <li><b>States</b>：例如 <code>aria-pressed</code>、<code>aria-expanded</code> 必須與實際 UI 同步。</li>
+          <li>有些「按鈕」其實是用 <code>&lt;div&gt;</code> 做的，結果鍵盤不能操作。</li>
+          <li>圖片沒有 alt 或 aria-label，螢幕閱讀器會唸不出名字。</li>
+          <li>元素被 aria-hidden 或 CSS 隱藏，使用者其實看不到。</li>
+          <li>像 aria-pressed、aria-expanded 這些狀態沒有和 UI 同步，會讓助讀器誤解。</li>
         </ul>
       </section>
 
-      {/* 操作步驟 */}
+      {/* 怎麼用 */}
       <section>
-        <h2 className="text-xl font-semibold mb-2">操作步驟</h2>
+        <h2 className="text-xl font-semibold mb-2">怎麼用？</h2>
         <ol className="list-decimal list-inside text-gray-700 space-y-1">
-          <li>開啟下方示範頁，於 Elements 選取對應元素。</li>
-          <li>切到右側 <b>Accessibility</b> 面板，檢查 <em>Computed name / Role / Keyboard-focusable / Properties</em>。</li>
-          <li>依說明修正（改 tag、補 aria-label、補 <code>tabindex</code> 與鍵盤事件、同步 state）。</li>
+          <li>在 Elements 選一個元素。</li>
+          <li>切到右邊的 Accessibility 面板。</li>
+          <li>檢查 Name / Role / Keyboard-focusable / Properties。</li>
+          <li>根據需要修正：改正確的 tag、補上 aria-label、設定 tabindex、或同步 aria 狀態。</li>
         </ol>
       </section>
 
@@ -57,15 +57,6 @@ export default function Accessibility() {
         </div>
       </section>
 
-      {/* 小技巧 */}
-      <section>
-        <h2 className="text-xl font-semibold mb-2">使用小技巧</h2>
-        <ul className="list-disc list-inside text-gray-700 space-y-1">
-          <li>在暫停互動或測試鍵盤時，開啟 <b>Rendering → Emulate vision deficiencies</b> 模擬視覺狀況（延伸檢查）。</li>
-          <li>搭配 Console 的 <code>getEventListeners($0)</code> 檢查鍵盤事件是否有綁到目前元素。</li>
-          <li>按鈕/連結必須可用鍵盤操作：<kbd>Tab</kbd> 聚焦、<kbd>Enter</kbd>/<kbd>Space</kbd> 觸發。</li>
-        </ul>
-      </section>
     </div>
   );
 }

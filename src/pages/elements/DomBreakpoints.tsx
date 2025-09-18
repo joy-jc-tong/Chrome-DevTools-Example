@@ -5,30 +5,34 @@ export default function DomBreakpoints() {
       <header>
         <h1 className="text-2xl font-bold">DOM Breakpoints</h1>
         <p className="text-gray-700 leading-relaxed">
-          在 Elements 面板中，可以為 DOM 節點設置中斷點來追蹤其變化。當選定的節點或其子節點發生修改時，
-          程式執行會自動暫停，協助定位觸發變化的程式碼。此功能適用於調試動態內容更新、樣式修改或元素移除等情境。
-          可選擇三種類型的中斷點：子樹修改（Subtree）、屬性修改（Attributes）、節點移除（Node removal）。
+          DOM Breakpoints 就像幫某個網頁元素掛上「監視器」。
+          只要這個元素或它的屬性/子節點被改動，瀏覽器就會幫你 自動暫停程式，讓你看是誰動了它。
         </p>
       </header>
 
-      {/* 功能要點 */}
+      {/* 為什麼要用 */}
       <section>
-        <h2 className="text-xl font-semibold mb-2">功能要點</h2>
+        <h2 className="text-xl font-semibold mb-2">為什麼要用？</h2>
         <ul className="list-disc list-inside text-gray-700 space-y-1">
-          <li>子樹修改：當目標節點內的任一子節點被新增、移動或刪除時暫停。</li>
-          <li>屬性修改：當目標節點的屬性（含 class、style、data-*）被變更時暫停。</li>
-          <li>節點移除：當目標節點本身被從 DOM 中移除時暫停。</li>
+          <li>清單裡的項目莫名消失 → 設 子樹修改 看是誰刪的。</li>
+          <li>按鈕樣式自己變了 → 設 屬性修改 找出改 class 或 style 的程式碼。</li>
+          <li>整個元素突然消失 → 設 節點移除 查出是誰 remove。</li>
         </ul>
       </section>
 
-      {/* 操作步驟 */}
+      {/* 怎麼用 */}
       <section>
-        <h2 className="text-xl font-semibold mb-2">操作步驟</h2>
+        <h2 className="text-xl font-semibold mb-2">怎麼用？</h2>
         <ol className="list-decimal list-inside text-gray-700 space-y-1">
-          <li>在 Elements 面板選取目標節點（例如列表中的某一項）。</li>
-          <li>於該節點上按右鍵 → <b>Break on…</b> → 選擇 <em>Subtree / Attribute / Node removal</em> 之一。</li>
-          <li>回到頁面操作或觸發程式碼變動；程式將在 Sources 面板暫停，並顯示呼叫堆疊。</li>
-          <li>展開 <b>Call Stack</b> 與 <b>Scope</b>，定位觸發變化的程式位置與相關變數。</li>
+          <li>在 Elements 面板 選一個元素（例：某個 <code>&lt;li&gt;</code>）。</li>
+          <li>右鍵 → Break on… → 選擇：<br/>
+            <span className="ml-4 block">
+              <strong>Subtree modifications</strong>：監看子節點的新增/刪除/移動。<br/>
+              <strong>Attributes modifications</strong>：監看屬性（class、style、data-*）。<br/>
+              <strong>Node removal</strong>：監看這個元素本身被刪掉。
+            </span>
+          </li>
+          <li>回到網頁操作，當變化發生 → DevTools 會在 Sources 面板自動暫停，並顯示 Call Stack（誰呼叫的程式碼）。</li>
         </ol>
       </section>
 
@@ -71,15 +75,6 @@ export default function DomBreakpoints() {
             <li>對任一按鈕設定 <b>Attribute</b> 中斷點，點擊「切換 class」或「改 style」驗證暫停。</li>
           </ul>
         </div>
-      </section>
-
-      {/* 小技巧 */}
-      <section>
-        <h2 className="text-xl font-semibold mb-2">使用小技巧</h2>
-        <ul className="list-disc list-inside text-gray-700 space-y-1">
-          <li>與 <b>Event Listener Breakpoints</b> 搭配：若不知道由事件或計時器觸發，可同時勾選 <em>Timer</em> 或 <em>Mouse</em> 類別。</li>
-          <li>暫停時可在 Console 觀察 <code>$0</code>（目前選取節點）與變動前後的屬性差異。</li>
-        </ul>
       </section>
     </div>
   );

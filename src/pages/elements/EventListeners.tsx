@@ -5,30 +5,34 @@ export default function EventListeners() {
       <header>
         <h1 className="text-2xl font-bold">Event Listeners Pane</h1>
         <p className="text-gray-700 leading-relaxed">
-          Event Listeners 面板能快速檢視元素上綁定的事件、來源檔案以及事件是否為{" "}
-          <code>passive</code>。這對於調查滾動卡頓、事件重複綁定或事件觸發順序特別有用。
+          Event Listeners Pane 就像幫元素開一個「事件清單」。
+          你可以看到這個元素綁了哪些事件（click、scroll…），事件來自哪個檔案，還能知道是不是 passive。
         </p>
       </header>
 
-      {/* 功能要點 */}
+      {/* 為什麼要用 */}
       <section>
-        <h2 className="text-xl font-semibold mb-2">功能要點</h2>
+        <h2 className="text-xl font-semibold mb-2">為什麼要用？</h2>
         <ul className="list-disc list-inside text-gray-700 space-y-1">
-          <li>檢視某元素綁定了哪些事件（例如 click、scroll）。</li>
-          <li>定位事件處理程式的來源檔案與行號。</li>
-          <li>檢查事件是否為 <code>passive</code>，避免滾動事件阻塞。</li>
-          <li>發現重複綁定或記憶體洩漏的潛在來源。</li>
+          <li>點按鈕時反應怪怪的 → 看是不是綁了兩個 click。</li>
+          <li>滾動頁面時卡卡的 → 看 scroll 事件是不是 不是 passive。</li>
+          <li>想查事件從哪裡來的 → 看來源檔案與行號。</li>
         </ul>
       </section>
 
-      {/* 操作步驟 */}
+      {/* 怎麼用 */}
       <section>
-        <h2 className="text-xl font-semibold mb-2">操作步驟</h2>
+        <h2 className="text-xl font-semibold mb-2">怎麼用？</h2>
         <ol className="list-decimal list-inside text-gray-700 space-y-1">
-          <li>在 Elements 面板選取某個 DOM 節點。</li>
-          <li>切換到右側的 <b>Event Listeners</b> Pane。</li>
-          <li>展開事件類型（例如 click、scroll）。</li>
-          <li>檢查來源檔案、事件順序與是否為 passive。</li>
+          <li>在 Elements 面板 選一個元素（例：某個按鈕）。</li>
+          <li>切到右邊的 Event Listeners 分頁。</li>
+          <li>展開事件類型（click、scroll…），就能看到：<br/>
+            <span className="ml-4 block">
+              綁了多少事件<br/>
+              來源檔案與行號<br/>
+              是否標記為 passive
+            </span>
+          </li>
         </ol>
       </section>
 
@@ -58,15 +62,6 @@ export default function EventListeners() {
         </div>
       </section>
 
-      {/* 小技巧 */}
-      <section>
-        <h2 className="text-xl font-semibold mb-2">使用小技巧</h2>
-        <ul className="list-disc list-inside text-gray-700 space-y-1">
-          <li>可搭配 <b>getEventListeners($0)</b> 在 Console 中快速列出選取元素的事件。</li>
-          <li>對滾動相關元素建議設定 passive 事件，避免阻塞主執行緒。</li>
-          <li>對可疑元素定期檢查是否被重複綁定事件。</li>
-        </ul>
-      </section>
     </div>
   );
 }

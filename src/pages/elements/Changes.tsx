@@ -3,32 +3,31 @@ export default function Changes() {
     <div className="space-y-8">
       {/* 標題＋摘要 */}
       <header>
-        <h1 className="text-2xl font-bold">Changes（本地改動差異）</h1>
+        <h1 className="text-2xl font-bold">Changes Pane</h1>
         <p className="text-gray-700 leading-relaxed">
-          Changes 面板會記錄在 DevTools 內進行的本地改動（例如在 Elements 的 Attributes/Styles、
-          或在 Sources 直接編輯檔案），並以差異（diff）呈現，便於回顧、擷取或複製貼回專案。
-          常見情境：快速 Demo 修 UI、臨時調整樣式與字詞、比對多處修改。
+          Changes Pane 會記錄你在 DevTools 裡做的修改，像改了樣式、屬性或直接在 Sources 編輯檔案。
+          它會用差異（diff）方式顯示，方便你回顧或複製回專案。
         </p>
       </header>
 
-      {/* 功能要點 */}
+      {/* 為什麼要用 */}
       <section>
-        <h2 className="text-xl font-semibold mb-2">功能要點</h2>
+        <h2 className="text-xl font-semibold mb-2">為什麼要用？</h2>
         <ul className="list-disc list-inside text-gray-700 space-y-1">
-          <li>記錄在 DevTools 內的本地修改（Styles/Elements/Sources）並以檔案為單位顯示 diff。</li>
-          <li>支援複製整段 patch，方便貼到 PR 或專案原始碼。</li>
-          <li>與 <b>Local Overrides</b> 可搭配：若需要重整後留存改動，可再使用 Overrides（本題先不使用）。</li>
+          <li>臨時調整 UI 樣式後 → 想把改動複製回專案。</li>
+          <li>快速 Demo → 看哪些地方被動過手。</li>
+          <li>同一個檔案改了好幾處 → 一次比對所有修改。</li>
         </ul>
       </section>
 
-      {/* 操作步驟 */}
+      {/* 怎麼用 */}
       <section>
-        <h2 className="text-xl font-semibold mb-2">操作步驟</h2>
+        <h2 className="text-xl font-semibold mb-2">怎麼用？</h2>
         <ol className="list-decimal list-inside text-gray-700 space-y-1">
-          <li>在新分頁開啟下方示範頁。</li>
-          <li>在 Elements → Styles 面板直接調整 CSS 宣告；或在 Elements 面板改變節點屬性/文字。</li>
-          <li>開啟 <b>More tools → Changes</b>，即可看到逐檔案的差異（新增/刪除行）。</li>
-          <li>點選檔名可檢視詳細變更；可複製 patch 以貼回專案。</li>
+          <li>在頁面上做修改（例如改 CSS 樣式或元素屬性）。</li>
+          <li>開啟 More tools → Changes。</li>
+          <li>面板會顯示檔案的新增/刪除行差異。</li>
+          <li>點檔名可看詳細內容，也能複製 patch 貼回專案。</li>
         </ol>
       </section>
 
@@ -68,16 +67,6 @@ export default function Changes() {
             </p>
           </div>
         </div>
-      </section>
-
-      {/* 小技巧 */}
-      <section>
-        <h2 className="text-xl font-semibold mb-2">使用小技巧</h2>
-        <ul className="list-disc list-inside text-gray-700 space-y-1">
-          <li>若 diff 太多，可在 Elements 限縮修改範圍（針對特定區塊）。</li>
-          <li>需要重整後留存變更時，再開啟 <b>Local Overrides</b>（此題不必）。</li>
-          <li>在 Sources 也能直接編輯檔案內容，Changes 同樣會記錄差異。</li>
-        </ul>
       </section>
     </div>
   );
