@@ -1,7 +1,7 @@
 # DevTools 練功房 by 童
-https://joy-jc-tong.github.io/Chrome-DevTools-Example/
+網站: https://joy-jc-tong.github.io/Chrome-DevTools-Example/
 
-## 📑 Table of Contents
+## 📑 功能目錄
 - [DOM Breakpoints](#1-dom-breakpoints)
 - [Event Listeners](#2-event-listeners)
 - [Layout Pane](#3-layout-pane)
@@ -17,7 +17,12 @@ https://joy-jc-tong.github.io/Chrome-DevTools-Example/
 - **功能簡介**：在指定 DOM 節點發生變動時中斷程式，協助追蹤來源程式碼。  
 - **應用場景**：  
   - 偵測 UI 突然消失或被修改時，找出是哪段 JavaScript 造成。  
-  - 偵測元素屬性（如 `class`、`style`）被更改。  
+  - 偵測元素屬性（如 `class`、`style`）被更改。
+- **範例畫面**：
+  - 子樹修改(<ul>設定"Subtree"，移除子項<li>會觸發)
+  - <img width="1156" height="598" alt="image" src="https://github.com/user-attachments/assets/f5e4b0b0-c63a-456e-8137-3bc5f98fc768" />
+
+      
 ---
 
 ### 2. Event Listeners
