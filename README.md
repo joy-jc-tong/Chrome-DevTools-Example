@@ -18,11 +18,6 @@
 - **應用場景**：  
   - 偵測 UI 突然消失或被修改時，找出是哪段 JavaScript 造成。  
   - 偵測元素屬性（如 `class`、`style`）被更改。
-- **範例畫面**：
-  - 子樹修改(<ul>設定"Subtree"，移除子項<li>會觸發)
-  - <img width="1156" height="598" alt="image" src="https://github.com/user-attachments/assets/f5e4b0b0-c63a-456e-8137-3bc5f98fc768" />
-
-      
 ---
 
 ### 2. Event Listeners
