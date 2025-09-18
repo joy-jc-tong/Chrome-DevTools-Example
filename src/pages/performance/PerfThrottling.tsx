@@ -4,18 +4,27 @@ export default function PerfThrottling() {
       <header>
         <h1 className="text-2xl font-bold">CPU / Network 模擬（Throttling）</h1>
         <p className="text-gray-700">
-          在 Performance 錄製前，可設定 <b>CPU 4×/6× throttle</b> 與 Network 節流，以模擬低階裝置與慢網路，
-          再比較 INP/TBT/LCP 改善前後的差異。
+          Performance 面板可以在錄製前設定 CPU 節流（例如 4× / 6×）和 Network 節流（例如 Slow 3G）。
+          這能模擬低階裝置或慢速網路，幫助你測試效能優化前後的差異。
         </p>
       </header>
 
       <section>
-        <h2 className="text-xl font-semibold mb-2">操作步驟</h2>
+        <h2 className="text-xl font-semibold mb-2">為什麼要用？</h2>
+        <ul className="list-disc list-inside text-gray-700 space-y-1">
+          <li>想確認網站在低階手機或慢網路下，體驗是不是能接受。</li>
+          <li>想比較優化前後的指標（INP、TBT、LCP）是否真的有改善。</li>
+          <li>想重現真實使用者的卡頓情境，方便釐清問題。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 className="text-xl font-semibold mb-2">怎麼用？</h2>
         <ol className="list-decimal list-inside text-gray-700 space-y-1">
-          <li>開啟示範頁，打開 Performance → 設定 CPU Throttling = 6×，Network = Slow 3G。</li>
-          <li>開始錄製 → 連續點擊「互動測試」按鈕（會觸發重計算與 DOM 更新）。</li>
-          <li>停止錄製 → 觀察 <b>INP / TBT</b> 與 Long task 分布。</li>
-          <li>把 throttle 關掉或降低 → 再錄一次 → 比較指標差異。</li>
+          <li>打開 Performance 面板，在設定裡選擇 CPU Throttling = 6×，Network = Slow 3G。</li>
+          <li>開始錄製，操作頁面（例：連續點擊「互動測試」按鈕，觸發重計算與 DOM 更新）。</li>
+          <li>停止錄製後，觀察 INP / TBT 指標與 Long task 分布。</li>
+          <li>關閉或降低節流，再錄一次，比較指標的差異。</li>
         </ol>
       </section>
 

@@ -4,17 +4,27 @@ export default function PerfScreenshots() {
       <header>
         <h1 className="text-2xl font-bold">Screenshots / Filmstrip（對齊感知延遲）</h1>
         <p className="text-gray-700">
-          在 Performance 錄製時勾選 <b>Screenshots</b>，即可生成 Filmstrip 逐幀畫面，對齊 LCP/首屏時機。
-          當你覺得「數字看起來對，但畫面體感不對」時，用 Filmstrip 對齊關鍵幀即可釐清落差。
+          Performance 面板在錄製時可以勾選 Screenshots，生成逐幀的 Filmstrip。
+          這能讓你把效能指標（像 LCP）對齊到實際畫面，檢查「數字」和「體感」是否一致。
         </p>
       </header>
 
       <section>
-        <h2 className="text-xl font-semibold mb-2">操作步驟</h2>
+        <h2 className="text-xl font-semibold mb-2">為什麼要用？</h2>
+        <ul className="list-disc list-inside text-gray-700 space-y-1">
+          <li>數據顯示 LCP 已完成，但使用者卻覺得畫面還沒出來 → 用 Filmstrip 對齊關鍵幀來驗證。</li>
+          <li>想知道首屏元素到底「什麼時候真的畫出來」。</li>
+          <li>想用畫面逐幀比對，釐清效能數據和真實體驗的落差。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 className="text-xl font-semibold mb-2">怎麼用？</h2>
         <ol className="list-decimal list-inside text-gray-700 space-y-1">
-          <li>開啟下方示範頁 → 打開 Performance → 勾 <b>Screenshots</b> → <b>Start recording</b>。</li>
-          <li>點示範頁的「載入大型圖片」→ 等畫面穩定後 <b>Stop</b>。</li>
-          <li>在 Web Vitals 區找 LCP，並用 Filmstrip 對齊該幀，確認 LCP 元素畫面出現的實際時點。</li>
+          <li>打開 Performance 面板並勾選 Screenshots。</li>
+          <li>點 Start recording → 在頁面觸發載入動作（例：載入大型圖片）。</li>
+          <li>停止錄製後，檢查 Web Vitals 區塊中的 LCP。</li>
+          <li>用 Filmstrip 對齊該幀，確認 LCP 元素出現的實際畫面時間。</li>
         </ol>
       </section>
 

@@ -4,17 +4,27 @@ export default function PerfCls() {
       <header>
         <h1 className="text-2xl font-bold">Web Vitals Lane & Layout Shift Regions（CLS）</h1>
         <p className="text-gray-700">
-          在 Performance 錄製時，勾選 <b>Layout Shift Regions</b>，即可在畫面上標示造成 CLS 的元素區域；
-          時間軸的 Web Vitals Lane 也會標出每次 shift，幫你定位最大貢獻者。
+          Performance 面板在錄製時可以勾選 Layout Shift Regions，畫面上會標示出造成 CLS 的元素。
+          同時時間軸上的 Web Vitals Lane 也會標出每一次位移，幫助你找到 CLS 的主要來源。
         </p>
       </header>
 
       <section>
-        <h2 className="text-xl font-semibold mb-2">操作步驟</h2>
+        <h2 className="text-xl font-semibold mb-2">為什麼要用？</h2>
+        <ul className="list-disc list-inside text-gray-700 space-y-1">
+          <li>想知道 哪個元素 造成了版面跳動。</li>
+          <li>想確認 CLS 是來自橫幅、圖片還是延遲載入的內容。</li>
+          <li>想釐清哪一次位移對 CLS 貢獻最大。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 className="text-xl font-semibold mb-2">怎麼用？</h2>
         <ol className="list-decimal list-inside text-gray-700 space-y-1">
-          <li>開啟示範頁 → Performance → 勾 <b>Layout Shift Regions</b> → 錄製。</li>
-          <li>點「插入上方 banner」與「圖片晚到」造成位移。</li>
-          <li>停止錄製 → 在 Web Vitals Lane 觀察 CLS 標記；點擊某個 shift 以高亮責任元素。</li>
+          <li>打開 Performance 面板並勾選 Layout Shift Regions。</li>
+          <li>開始錄製，觸發會造成位移的操作（例：插入 banner、圖片延遲載入）。</li>
+          <li>停止錄製後，在 Web Vitals Lane 觀察 CLS 標記。</li>
+          <li>點擊某個 shift，畫面會高亮造成位移的元素。</li>
         </ol>
       </section>
 

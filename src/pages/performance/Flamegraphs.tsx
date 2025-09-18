@@ -4,20 +4,33 @@ export default function PerfFlamegraphs() {
       <header>
         <h1 className="text-2xl font-bold">Main / Bottom-Up / Call Tree 讀法</h1>
         <p className="text-gray-700">
-          Performance 錄製後，<b>Main</b> 顯示主執行緒的時間軸；<b>Bottom-Up</b> 以「最耗時的函式」排序；<b>Call Tree</b> 以「呼叫關係」呈現。
-          先在 Bottom-Up 找 Top 熱點，再用 Call Tree 回溯來源，最後在 Main 上對齊長任務（50ms以上）。
+          Performance 錄製後會有三種常用視角：
+          <br />
+          <b>Main</b>：主執行緒的時間軸，顯示程式執行的先後順序。
+          <br />
+          <b>Bottom-Up</b>：依照「最耗時的函式」排序，讓你快速找到效能熱點。
+          <br />
+          <b>Call Tree</b>：顯示函式的呼叫鏈，幫助追蹤熱點的來源。
         </p>
       </header>
 
       <section>
-        <h2 className="text-xl font-semibold mb-2">操作步驟</h2>
+        <h2 className="text-xl font-semibold mb-2">為什麼要用？</h2>
+        <ul className="list-disc list-inside text-gray-700 space-y-1">
+          <li>想快速找出整體效能瓶頸 → 先看 Bottom-Up。</li>
+          <li>想知道瓶頸是誰呼叫的 → 看 Call Tree 回溯來源。</li>
+          <li>想對照長任務（&gt;50ms）出現在頁面什麼時候 → 用 Main 對齊時間軸。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 className="text-xl font-semibold mb-2">怎麼用？</h2>
         <ol className="list-decimal list-inside text-gray-700 space-y-1">
-          <li>開啟示範頁 → Performance 錄製。</li>
-          <li>點「重計算」幾次，停止錄製。</li>
-          <li>切 <b>Bottom-Up</b>，按 <b>Total Time</b> 排序 → 找最熱函式。</li>
-          <li>切 <b>Call Tree</b>，查看熱點的上游呼叫鏈。</li>
-          <li>在 <b>Main</b> 軸上點長任務（50ms以上），評估切分/延後/Idle callback 的方案。</li>
-        </ol> 
+          <li>錄製一段 Performance 分析資料。</li>
+          <li>切到 Bottom-Up，按 Total Time 排序，找到最耗時的函式。</li>
+          <li>切到 Call Tree，查看這些熱點是從哪裡被呼叫的。</li>
+          <li>回到 Main 時間軸，點擊長任務（50ms 以上），評估是否能切分、延後，或改用 idle callback。</li>
+        </ol>
       </section>
 
       <section className="space-y-3">
