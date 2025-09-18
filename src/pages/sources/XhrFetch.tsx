@@ -3,14 +3,27 @@ export default function XhrFetch() {
     <div className="space-y-8">
       <header>
         <h1 className="text-2xl font-bold">XHR / Fetch Breakpoints</h1>
-        <p className="text-gray-700">在「發出請求前」就暫停，檢查 payload 或決定是否繼續。</p>
+        <p className="text-gray-700 leading-relaxed">
+          XHR / Fetch Breakpoints 可以在 發出網路請求前 先暫停，讓你檢查請求的網址、參數或 payload。
+          它就像是在網路呼叫的入口處設一個攔截器。
+        </p>
       </header>
       <section>
-        <h2 className="text-xl font-semibold mb-2">操作步驟</h2>
+        <h2 className="text-xl font-semibold mb-2">為什麼要用？</h2>
+        <ul className="list-disc list-inside text-gray-700 space-y-1">
+          <li>想在 API 發送前先看 payload 是否正確。</li>
+          <li>想針對特定請求（例如 /search）停下來檢查。</li>
+          <li>想找出是哪段程式碼觸發了某個請求。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 className="text-xl font-semibold mb-2">怎麼用？</h2>
         <ol className="list-decimal list-inside text-gray-700 space-y-1">
-          <li>Sources 右側「Breakpoints」區 → <b>XHR/fetch</b> → 新增關鍵字：<code>/search</code>。</li>
-          <li>在示範頁按「搜尋 hello」與「搜尋 error」；匹配 <code>/search</code> 的請求會在 <em>發送前</em> 暫停。</li>
-          <li>在暫停點檢查 <code>url</code>、<code>init.body</code>（或 XHR 的 <code>payload</code>）。</li>
+          <li>在 Sources 面板右側的 Breakpoints → XHR/fetch。</li>
+          <li>新增一個關鍵字（例：/search）。</li>
+          <li>回到頁面操作，當發出符合條件的請求時程式會暫停。</li>
+          <li>在暫停點檢查 url、init.body 或 XHR 的 payload。</li>
         </ol>
       </section>
       <section className="space-y-3">

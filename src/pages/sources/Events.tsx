@@ -3,15 +3,32 @@ export default function EventsBreakpoints() {
     <div className="space-y-8">
       <header>
         <h1 className="text-2xl font-bold">Event Listener Breakpoints</h1>
-        <p className="text-gray-700">在事件「被觸發」那一刻就停下（Keyboard/Timer/Animation…）。</p>
+        <p className="text-gray-700 leading-relaxed">
+          Event Listener Breakpoints 可以讓程式在 事件被觸發的那一刻 停下來。
+          像鍵盤輸入、計時器觸發、動畫開始等，都能即時中斷。
+        </p>
       </header>
 
       <section>
-        <h2 className="text-xl font-semibold mb-2">操作步驟</h2>
+        <h2 className="text-xl font-semibold mb-2">為什麼要用？</h2>
+        <ul className="list-disc list-inside text-gray-700 space-y-1">
+          <li>想確認「是哪個程式碼」在處理鍵盤輸入。</li>
+          <li>想追蹤計時器（setInterval / setTimeout）到底從哪裡來。</li>
+          <li>想鎖定動畫或滑鼠事件的觸發點。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 className="text-xl font-semibold mb-2">怎麼用？</h2>
         <ol className="list-decimal list-inside text-gray-700 space-y-1">
-          <li>開示範頁 → Sources 右側的 <b>Event Listener Breakpoints</b>。</li>
-          <li>展開「<b>Timer</b>」勾選 <b>setInterval</b>；展開「<b>Keyboard</b>」勾 <b>keydown</b>。</li>
-          <li>在頁面按「Start interval」，或聚焦輸入框打字 → 會在對應事件處停下。</li>
+          <li>在 Sources 面板右側找到 Event Listener Breakpoints。</li>
+          <li>展開類別並勾選要監看的事件（例：Timer → setInterval、Keyboard → keydown）。</li>
+          <li>回到頁面操作：<br/>
+            <span className="ml-4 block">
+              按「Start interval」→ 會在計時器事件觸發時停下。<br/>
+              在輸入框打字 → 會在鍵盤事件觸發時停下。
+            </span>
+          </li>
         </ol>
       </section>
 

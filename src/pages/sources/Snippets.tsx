@@ -2,16 +2,29 @@ export default function Snippets() {
   return (
     <div className="space-y-8">
       <header>
-        <h1 className="text-2xl font-bold">Snippets（常用腳本片段）</h1>
-        <p className="text-gray-700">把常用工具腳本存起來，一鍵執行（跨網域皆可，依 DevTools 權限）。</p>
+        <h1 className="text-2xl font-bold">Snippets</h1>
+        <p className="text-gray-700 leading-relaxed">
+          Snippets 就像 DevTools 裡的小型程式碼庫。
+          你可以把常用的工具腳本存起來，需要時一鍵執行，任何頁面都能用。
+        </p>
       </header>
 
       <section>
-        <h2 className="text-xl font-semibold mb-2">操作步驟</h2>
+        <h2 className="text-xl font-semibold mb-2">為什麼要用？</h2>
+        <ul className="list-disc list-inside text-gray-700 space-y-1">
+          <li>有些小工具（像收集所有 fetch 請求的網址）常常會用到。</li>
+          <li>不想每次都重新貼程式碼 → 存成 Snippet，一鍵執行即可。</li>
+          <li>不管在哪個網頁，只要 DevTools 開著就能跑。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 className="text-xl font-semibold mb-2">怎麼用？</h2>
         <ol className="list-decimal list-inside text-gray-700 space-y-1">
-          <li>Sources → <b>Snippets</b> → 新增。</li>
-          <li>貼上「收集 fetch URL」程式碼 → 右鍵 Run。</li>
-          <li>切換頁面互動 → 回到 Snippet 再次 Run 觀察結果。</li>
+          <li>在 Sources → Snippets 新增一個片段。</li>
+          <li>貼上要用的程式碼（例：收集所有 fetch URL）。</li>
+          <li>右鍵 → Run 執行。</li>
+          <li>換頁面互動後，再次回到 Snippet → Run → 觀察結果。</li>
         </ol>
       </section>
 
