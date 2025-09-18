@@ -3,36 +3,43 @@ export default function MonitorPage() {
     <div className="space-y-8">
       {/* 標題＋摘要 */}
       <header>
-        <h1 className="text-2xl font-bold">monitor / monitorEvents / unmonitor</h1>
+        <h1 className="text-2xl font-bold">Console Monitor</h1>
         <p className="text-gray-700 leading-relaxed">
-          Console 提供 <b>monitor(fn)</b> 來自動列印函式的呼叫（含引數），
-          <b>monitorEvents(target, types)</b> 來列印事件觸發（含 event 物件），
-          以及 <b>unmonitor(fn)</b> / <b>unmonitorEvents(target)</b> 來停止監看。
-          適合用於確認 handler 是否「被過度觸發」、或快速盤點某元素上發生了哪些事件。
+          Console 提供一些監看工具，可以自動幫你輸出函式呼叫或事件觸發。
+          像 monitor(fn) 會追蹤函式執行，monitorEvents(target, types) 會追蹤事件發生，搭配 unmonitor / unmonitorEvents 可以隨時停掉。
         </p>
       </header>
 
-      {/* 功能要點 */}
+      {/* 為什麼要用 */}
       <section>
-        <h2 className="text-xl font-semibold mb-2">功能要點</h2>
+        <h2 className="text-xl font-semibold mb-2">為什麼要用？</h2>
         <ul className="list-disc list-inside text-gray-700 space-y-1">
-          <li><b>monitor(fn)</b>：開始監看某個函式，只要被呼叫就會在 Console 印出 <em>函式名、引數</em>。</li>
-          <li><b>unmonitor(fn)</b>：停止監看該函式。</li>
-          <li><b>monitorEvents($0, 'scroll')</b>：監看目前選取節點（或 window）的事件，支援字串或陣列（如 <code>['scroll','wheel']</code>）。</li>
-          <li><b>unmonitorEvents($0)</b>：停止監看該目標的所有事件。</li>
+          <li>想檢查某個函式是不是「被呼叫太多次」。</li>
+          <li>想觀察某個元素上有哪些事件一直在觸發。</li>
+          <li>想快速比對不同模式下（例如 throttle / debounce）的差異。</li>
         </ul>
       </section>
 
-      {/* 操作步驟 */}
+      {/* 怎麼用 */}
       <section>
-        <h2 className="text-xl font-semibold mb-2">操作步驟</h2>
-        <ol className="list-decimal list-inside text-gray-700 space-y-1">
-          <li>開啟下方示範頁。</li>
-          <li>在 Console 執行 <code>monitor(window.heavyScrollHandler)</code>，觀察滾動時呼叫頻率。</li>
-          <li>切換示範頁的「原始 / throttle / debounce」模式，比較呼叫次數差異。</li>
-          <li>在 Elements 選取「可滾動容器」，回 Console 輸入 <code>monitorEvents($0, ['scroll','wheel'])</code>，觀察事件洪流。</li>
-          <li>使用 <code>unmonitor(window.heavyScrollHandler)</code> 與 <code>unmonitorEvents($0)</code> 停止監看。</li>
-        </ol>
+        <h2 className="text-xl font-semibold mb-2">怎麼用？</h2>
+        <div className="space-y-4">
+          <div>
+            <h3 className="font-medium mb-2">監看函式：</h3>
+            <ul className="list-disc list-inside text-gray-700 space-y-1 ml-4">
+              <li>monitor(fn) → 監看函式的呼叫與引數。</li>
+              <li>unmonitor(fn) → 停止監看該函式。</li>
+            </ul>
+          </div>
+          <div>
+            <h3 className="font-medium mb-2">監看事件：</h3>
+            <ul className="list-disc list-inside text-gray-700 space-y-1 ml-4">
+              <li>monitorEvents($0, 'scroll') → 監看目前選到的元素（或 window）的事件。</li>
+              <li>monitorEvents($0, ['scroll','wheel']) → 一次監看多種事件。</li>
+              <li>unmonitorEvents($0) → 停止監看該元素的所有事件。</li>
+            </ul>
+          </div>
+        </div>
       </section>
 
       {/* 互動練習 */}
@@ -58,15 +65,6 @@ export default function MonitorPage() {
         </div>
       </section>
 
-      {/* 小技巧 */}
-      <section>
-        <h2 className="text-xl font-semibold mb-2">使用小技巧</h2>
-        <ul className="list-disc list-inside text-gray-700 space-y-1">
-          <li>若只想看「誰在呼叫」而不想改動原始碼，<b>monitor()</b> 比在程式加 <code>console.log</code> 更乾淨。</li>
-          <li>用 <b>monitorEvents(window, 'resize')</b> 或 <b>monitorEvents(document, 'click')</b> 快速盤點全域事件。</li>
-          <li>搭配 <b>Live Expressions</b> 監看 <code>performance.now() - t0</code>，邊滾動邊觀察 handler 密度。</li>
-        </ul>
-      </section>
     </div>
   );
 }

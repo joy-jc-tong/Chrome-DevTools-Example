@@ -5,30 +5,29 @@ export default function LiveExpressions() {
       <header>
         <h1 className="text-2xl font-bold">Live Expressions</h1>
         <p className="text-gray-700 leading-relaxed">
-          Live Expressions 可在 Console 頂部固定顯示一個表達式的即時結果，用於長期監看變數或狀態，
-          不需要一直手動輸入。常見用途包括：持續觀察 FPS、某個全域變數、Redux state、或 DOM 元素屬性變化。
+          Live Expressions 可以在 Console 上方固定顯示一個程式表達式的結果，會隨著頁面變化自動更新。
+          就像是幫變數或狀態掛一個「即時監控器」。
         </p>
       </header>
 
-      {/* 功能要點 */}
+      {/* 為什麼要用 */}
       <section>
-        <h2 className="text-xl font-semibold mb-2">功能要點</h2>
+        <h2 className="text-xl font-semibold mb-2">為什麼要用？</h2>
         <ul className="list-disc list-inside text-gray-700 space-y-1">
-          <li>透過 Console 右上角的 <b>眼睛圖示（⋮ → Create live expression）</b> 新增。</li>
-          <li>輸入任何 JS 表達式（例如 <code>document.title</code>、<code>window.state.count</code>）。</li>
-          <li>結果會即時更新，並固定在 Console 頂部。</li>
-          <li>支援多個 Live Expressions 並排顯示。</li>
+          <li>想持續觀察 FPS 或效能指標，不用一直打指令。</li>
+          <li>想看某個全域變數（例如 window.state.count）是不是被改動。</li>
+          <li>想追蹤某個 DOM 元素的屬性（像 document.title）有沒有變化。</li>
         </ul>
       </section>
 
-      {/* 操作步驟 */}
+      {/* 怎麼用 */}
       <section>
-        <h2 className="text-xl font-semibold mb-2">操作步驟</h2>
+        <h2 className="text-xl font-semibold mb-2">怎麼用？</h2>
         <ol className="list-decimal list-inside text-gray-700 space-y-1">
-          <li>打開下方示範頁。</li>
-          <li>在 Console 面板右上，點擊「眼睛」圖示 → <b>Create live expression</b>。</li>
-          <li>輸入要監看的表達式，例如 <code>performance.now() - window.t0</code>。</li>
-          <li>頁面持續更新時，Console 頂部會即時顯示數值變化。</li>
+          <li>打開 Console 面板。</li>
+          <li>點右上角的「眼睛」圖示 → Create live expression。</li>
+          <li>輸入任何 JS 表達式（例：performance.now() - window.t0）。</li>
+          <li>結果會即時更新，並固定顯示在 Console 頂部，可以同時建立多個。</li>
         </ol>
       </section>
 
@@ -53,15 +52,6 @@ export default function LiveExpressions() {
         </div>
       </section>
 
-      {/* 小技巧 */}
-      <section>
-        <h2 className="text-xl font-semibold mb-2">使用小技巧</h2>
-        <ul className="list-disc list-inside text-gray-700 space-y-1">
-          <li>監控 <b>FPS</b> 或 <code>window.performance.memory.usedJSHeapSize</code>，快速觀察效能。</li>
-          <li>監看 Redux / Vuex / Zustand 等全域 state，取代臨時寫 <code>setInterval(console.log…)</code>。</li>
-          <li>可同時新增多個 Live Expressions，形成簡易「監控面板」。</li>
-        </ul>
-      </section>
     </div>
   );
 }
