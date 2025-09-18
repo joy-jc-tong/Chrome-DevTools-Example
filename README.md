@@ -1,15 +1,5 @@
 # DevTools 練功房 by 童
-網站: https://joy-jc-tong.github.io/Chrome-DevTools-Example/
-
-## 📑 功能目錄
-- [DOM Breakpoints](#1-dom-breakpoints)
-- [Event Listeners](#2-event-listeners)
-- [Layout Pane](#3-layout-pane)
-- [CSS Overview](#4-css-overview)
-- [Changes](#5-changes)
-- [Accessibility](#6-accessibility)
-
-
+https://joy-jc-tong.github.io/Chrome-DevTools-Example/
 
 ## 📘 Elements 功能說明
 ---
