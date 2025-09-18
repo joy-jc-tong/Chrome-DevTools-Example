@@ -4,17 +4,27 @@ export default function CoverageTool() {
       <header>
         <h1 className="text-2xl font-bold">Coverage（找未用 CSS / JS）</h1>
         <p className="text-gray-700">
-          透過 <b>Command Menu</b>（⌘/Ctrl+Shift+P）→ <b>Show Coverage</b> 開啟 Coverage 面板，
-          錄製期間統計「已執行/未使用」位元組，協助盤點可延後載入或分拆的模組。
+          Coverage 可以分析在頁面載入與操作過程中，哪些 CSS / JS 有被使用，哪些沒有。
+          結果會顯示「已執行 / 未使用」的位元組數，幫助你發現可以延後載入或拆分的程式碼。
         </p>
       </header>
 
       <section>
-        <h2 className="text-xl font-semibold mb-2">操作步驟</h2>
+        <h2 className="text-xl font-semibold mb-2">為什麼要用？</h2>
+        <ul className="list-disc list-inside text-gray-700 space-y-1">
+          <li>想找出哪些 CSS / JS 沒有被用到，避免浪費流量。</li>
+          <li>想規劃哪些模組可以改成延遲載入（lazy load）。</li>
+          <li>想優化效能，減少首次載入的資源體積。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 className="text-xl font-semibold mb-2">怎麼用？</h2>
         <ol className="list-decimal list-inside text-gray-700 space-y-1">
-          <li>開啟下方示範頁 → Coverage 面板點 <b>Start instrumenting coverage</b>。</li>
-          <li>點「載入延遲模組」與「套用延遲 CSS」。</li>
-          <li>停止錄製，依「Unused bytes」排序，列出可延後載入清單。</li>
+          <li>按 ⌘/Ctrl+Shift+P，輸入 Show Coverage 打開 Coverage 面板。</li>
+          <li>點 Start instrumenting coverage 開始錄製。</li>
+          <li>操作頁面（例：載入延遲模組、套用延遲 CSS）。</li>
+          <li>停止錄製後，依 Unused bytes 排序，找出可延後或拆分的資源清單。</li>
         </ol>
       </section>
 

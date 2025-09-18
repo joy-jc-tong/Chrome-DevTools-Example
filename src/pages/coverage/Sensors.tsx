@@ -4,16 +4,27 @@ export default function SensorsPage() {
       <header>
         <h1 className="text-2xl font-bold">Sensors（地理、方向、時區、裝置尺寸）</h1>
         <p className="text-gray-700">
-          於 <b>More tools → Sensors</b> 模擬地理位置、裝置方向與時區，也能套用各種行動裝置尺寸。
+          Sensors 面板可以模擬 地理位置、裝置方向、時區，還能切換不同的行動裝置尺寸。
+          用它可以測試網站在不同環境下的行為。
         </p>
       </header>
 
       <section>
-        <h2 className="text-xl font-semibold mb-2">操作步驟</h2>
+        <h2 className="text-xl font-semibold mb-2">為什麼要用？</h2>
+        <ul className="list-disc list-inside text-gray-700 space-y-1">
+          <li>想驗證網站在不同地點會回傳什麼數據（例如 Tokyo vs New York）。</li>
+          <li>想檢查網站的時間顯示是否會隨時區正確改變。</li>
+          <li>想測試 RWD 在不同螢幕尺寸與方向下的排版效果。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 className="text-xl font-semibold mb-2">怎麼用？</h2>
         <ol className="list-decimal list-inside text-gray-700 space-y-1">
-          <li>開示範頁 → Sensors 面板設定位置（例如 Tokyo）與時區。</li>
-          <li>點「取得定位」與「顯示當地時間」驗證數值。</li>
-          <li>切換裝置尺寸與方向，觀察 layout 反應。</li>
+          <li>打開 More tools → Sensors。</li>
+          <li>設定地理位置（例：Tokyo）與時區。</li>
+          <li>在頁面上觸發操作（例：取得定位、顯示當地時間），確認數值是否正確。</li>
+          <li>切換裝置尺寸與方向，觀察版面是否正常響應。</li>
         </ol>
       </section>
 
