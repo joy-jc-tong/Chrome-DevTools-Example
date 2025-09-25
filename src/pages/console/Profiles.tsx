@@ -45,9 +45,9 @@ export default function ProfilesPage() {
           </a>
 
           <ul className="list-decimal list-inside text-gray-700 mt-3 space-y-1">
-            <li>在 Console 輸入 <code>console.profile('heavy')</code>。</li>
+            <li>在 Console 輸入 <code>console.profile()</code>。</li>
             <li>點「執行 heavy work」→ 等待完成。</li>
-            <li>輸入 <code>console.profileEnd('heavy')</code>，然後去 Performance 面板檢查 CPU 熱點。</li>
+            <li>輸入 <code>console.profileEnd()</code>，然後去 Performance 面板檢查 CPU 熱點。</li>
             <li>修改程式（例如調小迴圈次數），再跑一次對照差異。</li>
           </ul>
         </div>

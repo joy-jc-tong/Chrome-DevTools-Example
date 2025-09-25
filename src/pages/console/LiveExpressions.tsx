@@ -26,7 +26,7 @@ export default function LiveExpressions() {
         <ol className="list-decimal list-inside text-gray-700 space-y-1">
           <li>打開 Console 面板。</li>
           <li>點右上角的「眼睛」圖示 → Create live expression。</li>
-          <li>輸入任何 JS 表達式（例：performance.now() - window.t0）。</li>
+          <li>輸入任何 JS 表達式（例：performance.now()。</li>
           <li>結果會即時更新，並固定顯示在 Console 頂部，可以同時建立多個。</li>
         </ol>
       </section>
@@ -45,7 +45,7 @@ export default function LiveExpressions() {
           </a>
 
           <ul className="list-decimal list-inside text-gray-700 mt-3 space-y-1">
-            <li>監看 <code>performance.now() - window.t0</code>：觀察自載入以來的經過時間。</li>
+            <li>監看 <code>performance.now()</code>：觀察自載入以來的經過時間。</li>
             <li>監看 <code>window.appState.count</code>：每秒增加的計數器。</li>
             <li>監看 <code>document.title</code>：點擊「改標題」按鈕後，觀察值是否即時更新。</li>
           </ul>
