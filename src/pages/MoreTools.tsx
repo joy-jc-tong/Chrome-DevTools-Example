@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 
-const Coverage = () => {
+const MoreTools = () => {
   return (
     <div className="flex-1 p-6">
       <Outlet />
@@ -8,4 +8,4 @@ const Coverage = () => {
   );
 };
 
-export default Coverage;
+export default MoreTools;

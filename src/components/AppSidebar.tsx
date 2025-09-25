@@ -92,15 +92,15 @@ const sidebarItems: SidebarItem[] = [
     ],
   },
   {
-    path: '/coverage',
-    label: 'Coverage',
-    description: '檢視程式碼覆蓋率、未使用的程式碼',
+    path: '/more-tools',
+    label: 'More tools',
+    description: '更多開發者工具功能',
     children: [
-      { path: '/coverage/tool', name: 'Coverage Tool' },
-      { path: '/coverage/rendering', name: 'Rendering' },
-      { path: '/coverage/sensors', name: 'Sensors' },
-      { path: '/coverage/recorder', name: 'Recorder' },
-      { path: '/coverage/security-issues', name: 'Security Issues' },
+      { path: '/more-tools/coverage', name: 'Coverage' },
+      { path: '/more-tools/rendering', name: 'Rendering' },
+      { path: '/more-tools/sensors', name: 'Sensors' },
+      { path: '/more-tools/recorder', name: 'Recorder' },
+      { path: '/more-tools/security-issues', name: 'Security Issues' },
     ],
   },
 ];

@@ -18,7 +18,7 @@ import Application from '../pages/Application';
 import Storage from '../pages/application/Storage';
 import Manifest from '../pages/application/Manifest';
 import Cookies from '../pages/application/Cookies';
-import Coverage from '../pages/Coverage';
+import MoreTools from '../pages/MoreTools';
 import CoverageTool from '../pages/coverage/CoverageTool';
 import Rendering from '../pages/coverage/Rendering';
 import Sensors from '../pages/coverage/Sensors';
@@ -231,15 +231,15 @@ export const router = createBrowserRouter([
         ],
       },
       {
-        path: 'coverage',
-        element: <Coverage />,
+        path: 'more-tools',
+        element: <MoreTools />,
         children: [
           {
             index: true,
             element: <CoverageTool />,
           },
           {
-            path: 'tool',
+            path: 'coverage',
             element: <CoverageTool />,
           },
           {
