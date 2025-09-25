@@ -35,7 +35,7 @@ export default function PerfThrottling() {
             開啟示範頁（INP/TBT 測試）
           </a>
           <ul className="list-decimal list-inside text-gray-700 mt-3 space-y-1">
-            <li>在 6× CPU 下測一次 INP；把重計算切分後（toggle 优化），再測一次，對比 INP/TBT。</li>
+            <li>在 6× CPU 下測一次 INP；把重計算切分後（toggle 優化），再測一次，對比 INP/TBT。</li>
             <li>同時開啟 Network 節流 → 觀察 LCP 與 INP 是否相互影響。</li>
           </ul>
         </div>

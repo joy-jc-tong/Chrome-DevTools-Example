@@ -57,9 +57,7 @@ const sidebarItems: SidebarItem[] = [
     label: 'Network',
     description: '監控網路請求、回應時間、資源載入',
     children: [
-      { path: '/network/initiator', name: 'Initiator / Dependencies' },
       { path: '/network/protocol-priority', name: 'Protocol / Priority' },
-      { path: '/network/websocket', name: 'WebSocket / Events' },
       { path: '/network/blocking-overrides', name: 'Blocking / Overrides' },
       { path: '/network/throttling', name: 'Throttling（自訂網路）' },
       { path: '/network/har', name: 'HAR 匯出 / 匯入' },
@@ -70,8 +68,6 @@ const sidebarItems: SidebarItem[] = [
     label: 'Performance',
     description: '分析頁面效能、載入時間、渲染效能',
     children: [
-      { path: '/performance/screenshots', name: 'Screenshots / Filmstrip' },
-      { path: '/performance/cls', name: 'Web Vitals Lane & Layout Shift Regions' },
       { path: '/performance/flamegraphs', name: 'Main / Bottom-Up / Call Tree 讀法' },
       { path: '/performance/throttling', name: 'CPU / Network 模擬' },
     ],
@@ -83,7 +79,6 @@ const sidebarItems: SidebarItem[] = [
     children: [
       { path: '/memory/heap-snapshot', name: 'Heap Snapshot' },
       { path: '/memory/allocation-sampling', name: 'Allocation Sampling' },
-      { path: '/memory/timeline', name: 'Timeline' },
     ],
   },
   {
@@ -92,7 +87,6 @@ const sidebarItems: SidebarItem[] = [
     description: '管理儲存空間、快取、服務工作者',
     children: [
       { path: '/application/storage', name: 'Storage' },
-      { path: '/application/service-workers', name: 'Service Workers' },
       { path: '/application/manifest', name: 'Manifest' },
       { path: '/application/cookies', name: 'Cookies' },
     ],

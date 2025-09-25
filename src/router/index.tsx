@@ -14,10 +14,8 @@ import Performance from '../pages/Performance';
 import Memory from '../pages/Memory';
 import HeapSnapshot from '../pages/memory/HeapSnapshot';
 import AllocationSampling from '../pages/memory/AllocationSampling';
-import Timeline from '../pages/memory/Timeline';
 import Application from '../pages/Application';
 import Storage from '../pages/application/Storage';
-import ServiceWorkers from '../pages/application/ServiceWorkers';
 import Manifest from '../pages/application/Manifest';
 import Cookies from '../pages/application/Cookies';
 import Coverage from '../pages/Coverage';
@@ -38,14 +36,10 @@ import LiveExpressions from '../pages/console/LiveExpressions';
 import UtilitiesApi from '../pages/console/UtilitiesApi';
 import Monitor from '../pages/console/Monitor';
 import Profiles from '../pages/console/Profiles';
-import Initiator from '../pages/network/Initiator';
 import ProtocolPriority from '../pages/network/ProtocolPriority';
-import WebSocket from '../pages/network/WebSocket';
 import BlockingOverrides from '../pages/network/BlockingOverrides';
 import Throttling from '../pages/network/Throttling';
 import HAR from '../pages/network/HAR';
-import Screenshots from '../pages/performance/Screenshots';
-import Cls from '../pages/performance/Cls';
 import Flamegraphs from '../pages/performance/Flamegraphs';
 import PerfThrottling from '../pages/performance/PerfThrottling';
 
@@ -158,19 +152,11 @@ export const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <Initiator />,
-          },
-          {
-            path: 'initiator',
-            element: <Initiator />,
+            element: <ProtocolPriority />,
           },
           {
             path: 'protocol-priority',
             element: <ProtocolPriority />,
-          },
-          {
-            path: 'websocket',
-            element: <WebSocket />,
           },
           {
             path: 'blocking-overrides',
@@ -192,15 +178,7 @@ export const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <Screenshots />,
-          },
-          {
-            path: 'screenshots',
-            element: <Screenshots />,
-          },
-          {
-            path: 'cls',
-            element: <Cls />,
+            element: <Flamegraphs />,
           },
           {
             path: 'flamegraphs',
@@ -228,10 +206,6 @@ export const router = createBrowserRouter([
             path: 'allocation-sampling',
             element: <AllocationSampling />,
           },
-          {
-            path: 'timeline',
-            element: <Timeline />,
-          },
         ],
       },
       {
@@ -245,10 +219,6 @@ export const router = createBrowserRouter([
           {
             path: 'storage',
             element: <Storage />,
-          },
-          {
-            path: 'service-workers',
-            element: <ServiceWorkers />,
           },
           {
             path: 'manifest',

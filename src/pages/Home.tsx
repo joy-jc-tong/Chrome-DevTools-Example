@@ -23,19 +23,19 @@ const Home: React.FC = () => {
         
         <div className="bg-white p-6 rounded-lg shadow-md border">
           <h2 className="text-xl font-semibold mb-3 text-purple-600">Sources</h2>
-          <p className="text-gray-600 mb-4">調試 JavaScript 代碼，設置斷點</p>
+          <p className="text-gray-600 mb-4">除錯 JavaScript 程式碼，設定中斷點</p>
           <Link to="/sources" className="text-purple-500 hover:text-purple-700">開始學習 →</Link>
         </div>
         
         <div className="bg-white p-6 rounded-lg shadow-md border">
           <h2 className="text-xl font-semibold mb-3 text-orange-600">Network</h2>
-          <p className="text-gray-600 mb-4">監控網路請求和響應</p>
+          <p className="text-gray-600 mb-4">監控網路請求和回應</p>
           <Link to="/network" className="text-orange-500 hover:text-orange-700">開始學習 →</Link>
         </div>
         
         <div className="bg-white p-6 rounded-lg shadow-md border">
           <h2 className="text-xl font-semibold mb-3 text-red-600">Performance</h2>
-          <p className="text-gray-600 mb-4">分析頁面性能和優化</p>
+          <p className="text-gray-600 mb-4">分析頁面效能和優化</p>
           <Link to="/performance" className="text-red-500 hover:text-red-700">開始學習 →</Link>
         </div>
         
